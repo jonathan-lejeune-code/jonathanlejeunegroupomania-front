@@ -1,61 +1,59 @@
 <template>
-<div id="app">
-
-  <header>
-    <div id="nav" class="bg-nav py-2">
-      <!-- User not connected -->
-      <div class="" v-if =" id === null " >
-        <router-link to="/signup">Inscription</router-link> |
-        <router-link to="/login">Connexion</router-link>  
+  <div id="app">
+    <header>
+      <div id="nav" class="bg-nav py-2">
+        <!-- User not connected -->
+        <div class="" v-if="id === null">
+          <router-link to="/signup">Inscription</router-link> |
+          <router-link to="/login">Connexion</router-link>
+        </div>
       </div>
-    </div>
-    <Header/>
-  </header>
+      <Header />
+    </header>
 
-  <body class="bg-body">
-    <router-view/>
-  </body>
+    <body class="bg-body">
+      <router-view />
+    </body>
 
-  <footer>
-    <Footer/>
-  </footer>
-
-</div>
+    <footer>
+      <Footer />
+    </footer>
+  </div>
 </template>
 
 <script>
-import Header from './components/Header'
-import Footer from './components/Footer'
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Header,
-    Footer
+    Footer,
   },
-  data(){
+  data() {
     return {
-      id: ''
-    }
+      id: "",
+    };
   },
   mounted() {
-    let idUser = localStorage.getItem('Id');
+    let idUser = localStorage.getItem("Id");
     console.log(idUser);
     this.id = idUser;
   },
   methods: {
-    exitUser (){
-       localStorage.removeItem('Id');
-       localStorage.removeItem('token');
-       localStorage.removeItem('isAdmin');
-       localStorage.removeItem('email');
-       location.replace(location.origin + "/signup#/signup");
-       location.reload();
-    }
-  }
-}
+    exitUser() {
+      localStorage.removeItem("Id");
+      localStorage.removeItem("token");
+      localStorage.removeItem("isAdmin");
+      localStorage.removeItem("email");
+      location.replace(location.origin + "/signup#/signup");
+      location.reload();
+    },
+  },
+};
 </script>
 
-<style lang="scss">
+<style lang="scss" >
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -63,22 +61,22 @@ export default {
   text-align: center;
   color: red;
 }
-#nav{
+#nav {
   background-color: #f0e8c7;
   a {
-    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-family: Georgia, "Times New Roman", Times, serif;
     font-weight: bold;
     font-size: 1.2rem;
-    color:#303030 ;
-      &:hover{
-        color:#000;
-      }
+    color: #303030;
+    &:hover {
+      color: #000;
+    }
     &.router-link-exact-active {
       color: red;
     }
   }
-  }
-.bg-body{
+}
+.bg-body {
   background-color: #f0e8c7;
 }
 </style>
