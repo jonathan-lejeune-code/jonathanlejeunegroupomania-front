@@ -1,82 +1,48 @@
 <template>
-  <div id="app">
-    <header>
-      <div id="nav" class="bg-nav py-2">
-        <!-- User not connected -->
-        <div class="" v-if="id === null">
-          <router-link to="/signup">Inscription</router-link> |
-          <router-link to="/login">Connexion</router-link>
-        </div>
+  <v-app>
+    <v-app-bar app color="primary" dark>
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          transition="scale-transition"
+          width="40"
+        />
+
+        <v-img
+          alt="Vuetify Name"
+          class="shrink mt-1 hidden-sm-and-down"
+          contain
+          min-width="100"
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
+          width="100"
+        />
       </div>
-      <Header />
-    </header>
 
-    <body class="bg-body">
-      <router-view />
-    </body>
+      <v-spacer></v-spacer>
 
-    <footer>
-      <Footer />
-    </footer>
-  </div>
+      <v-btn
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-main> <router-view></router-view> </v-main>
+  </v-app>
 </template>
 
 <script>
-import Header from "./components/Header";
-import Footer from "./components/Footer";
 export default {
   name: "App",
-  components: {
-    Header,
-    Footer,
-  },
-  data() {
-    return {
-      id: "",
-    };
-  },
-  mounted() {
-    let idUser = localStorage.getItem("Id");
-    console.log(idUser);
-    this.id = idUser;
-  },
-  methods: {
-    exitUser() {
-      localStorage.removeItem("Id");
-      localStorage.removeItem("token");
-      localStorage.removeItem("isAdmin");
-      localStorage.removeItem("email");
-      location.replace(location.origin + "/signup#/signup");
-      location.reload();
-    },
-  },
+
+  data: () => ({
+    //
+  }),
 };
 </script>
-
-<style lang="scss" >
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: red;
-}
-#nav {
-  background-color: #f0e8c7;
-  a {
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: #303030;
-    &:hover {
-      color: #000;
-    }
-    &.router-link-exact-active {
-      color: red;
-    }
-  }
-}
-.bg-body {
-  background-color: #f0e8c7;
-}
-</style>
