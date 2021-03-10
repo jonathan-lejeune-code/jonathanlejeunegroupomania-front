@@ -18,10 +18,5 @@ export default {
 
 
 <style scoped lang="scss">
-.subtitle{
-    font-size: 2rem;
-    font-weight: bold;
-    color:red;
-    font-family: Georgia, 'Times New Roman', Times, serif ;
-}
+
 </style>

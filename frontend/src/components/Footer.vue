@@ -1,38 +1,74 @@
 <template>
-  <div class="py-3 footer-bg d-flex flex-column align-items-center">
-    <div class="row d-flex justify-content-around w-100">
-      <a class="mx-2" href="#">Mentions légales</a> |
-      <a class="mx-2" href="mailto:groupomania@contact.com">Contact</a>
-    </div>
-    <div class="row d-flex justify-content-around mt-2 text-company w-100">
-      <p>Site internet créé par L-J</p>
-    </div>
-  </div>
+  <v-card height="400px">
+    <v-footer
+      v-bind="localAttrs"
+      :padless="padless"
+    >
+      <v-card
+        flat
+        tile
+        width="100%"
+        class="red lighten-1 text-center"
+      >
+        <v-card-text>
+          <v-btn
+            v-for="icon in icons"
+            :key="icon"
+            class="mx-4"
+            icon
+          >
+            <v-icon size="24px">
+              {{ icon }}
+            </v-icon>
+          </v-btn>
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-text class="white--text">
+          {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+        </v-card-text>
+      </v-card>
+    </v-footer>
+
+    <v-row
+      align="center"
+      justify="center"
+      class="ma-12"
+    >
+      <v-col
+        cols="12"
+        md="8"
+      >
+        <v-select
+          v-model="variant"
+          :items="items"
+          clearable
+          label="Variant"
+        ></v-select>
+
+        <v-checkbox
+          v-model="padless"
+          hide-details
+          label="Padless"
+        ></v-checkbox>
+      </v-col>
+    </v-row>
+  </v-card>
 </template>
 
 <script>
-export default {
-  name: "Footer",
-};
+  export default {
+    data: () => ({
+      links: [
+        'Home',
+        'About Us',
+        'Team',
+        'Services',
+        'Blog',
+        'Contact Us',
+      ],
+    }),
+  }
 </script>
 
-
-<style scoped lang="scss">
-a {
-  color: #fff;
-  &:hover {
-    text-decoration: underline;
-    font-weight: bold;
-  }
-}
-.footer-bg {
-  background-color: red;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
-.text-company {
-  font-size: 0.5rem;
-  color: #fff;
-}
-</style>
