@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="teal darken-4" dark>
       <div class="d-flex align-center">
 
         <v-img
@@ -9,12 +9,10 @@
           contain
           min-width="100"
           src="./assets/icon-left-font-monochrome-white.png"
-          width="400"
-          
-        />
+          width="400"/>
       </div>
 
-        <v-btn>
+        <v-btn >
         <span>Inscription</span>
 
        <v-icon>mdi-account</v-icon>
@@ -46,46 +44,55 @@
         />
 
     </v-main>
+
+   <v-footer
+    dark
+    padless
+  >
+    <v-card
+      class="flex"
+      flat
+      tile
+    >
+      <v-card-title class="teal darken-4">
+        <strong class="subheading">Gardez contact avec vos collégue ! </strong>
+
+        <v-spacer></v-spacer>
+
+        <v-btn
+          v-for="icon in icons"
+          :key="icon"
+          class="mx-4"
+          dark
+          icon
+        >
+          <v-icon size="24px">
+            {{ icon }}
+          
+          </v-icon>
+        </v-btn>
+      </v-card-title>
+
+      <v-card-text class="py-2 white--text text-center">
+        {{ new Date().getFullYear() }} — <strong>Grouposcord</strong>
+      </v-card-text>
+    </v-card>
+  </v-footer>
   </v-app>
 </template>
 
 <script>
 
-import Footer from './components/Footer'
-
 export default {
-  name: "App",
-
-  data: () => ({
-    value: 1,
-    icons: [
-        'mdi-home',
-        'mdi-email',
-        'mdi-calendar',
-        'mdi-delete',
+    data: () => ({
+      icons: [
+        'mdi-facebook',
+        'mdi-twitter',
+        'mdi-linkedin',
+        'mdi-instagram',
       ],
-      items: [
-        'default',
-        'absolute',
-        'fixed',
-      ],
-      padless: false,
-      variant: 'default',
-  }),
-    computed: {
-      localAttrs () {
-        const attrs = {}
-
-        if (this.variant === 'default') {
-          attrs.absolute = false
-          attrs.fixed = false
-        } else {
-          attrs[this.variant] = true
-        }
-        return attrs
-      },
-    },
-  };
+    }),
+  }
 
 </script>
 
