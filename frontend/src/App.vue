@@ -79,9 +79,10 @@
 </template>
 
 <script>
-
 export default {
-    data: () => ({
+  name: "App",
+
+  data: () => ({
       icons: [
         'mdi-facebook',
         'mdi-twitter',
@@ -89,10 +90,8 @@ export default {
         'mdi-instagram',
       ],
     }),
-  }
-
+};
 </script>
-
 
 <style lang="scss" scoped>
 
