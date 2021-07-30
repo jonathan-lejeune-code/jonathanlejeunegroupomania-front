@@ -11,20 +11,17 @@
           src="./assets/icon-left-font-monochrome-white.png"
           width="400"/>
       </div>
+      <div id="btn">
+        <v-btn class="button" >
+          <router-link class="lien" to="/signup">Inscription</router-link>
+          <v-icon>mdi-account</v-icon>
+        </v-btn>
 
-        <v-btn >
-        <span>Inscription</span>
-
-       <v-icon>mdi-account</v-icon>
-      
+       <v-btn  class="button">
+        <router-link class="lien" to="/login">Connexion</router-link>
+        <v-icon>mdi-lock-open-variant</v-icon>
        </v-btn>
-
-       <v-btn>
-       <span>Connexion</span>
-
-       <v-icon>mdi-lock-open-variant</v-icon>
-       </v-btn>
-      
+      </div>
     </v-app-bar>
     
     <v-main> 
@@ -100,14 +97,27 @@ export default {
 <style lang="scss" scoped>
 
 .logo{
-  display: block;
+    display: block;
     margin-left: auto;
     margin-right: auto
 }
 
-.v-btn{
+#btn{
+  margin-left:auto;
+  float: right;
+}
+.button{
   color: white;
   margin-left: 20px;
+  
+  
+}
+
+.lien{
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  margin-right: 5px;
 }
 
 h1{
