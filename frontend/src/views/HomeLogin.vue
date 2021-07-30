@@ -21,7 +21,7 @@ export default {
 .subtitle{
     font-size: 2rem;
     font-weight: bold;
-    color:red;
+    color:teal;
     font-family: Georgia, 'Times New Roman', Times, serif ;
 }
 </style>

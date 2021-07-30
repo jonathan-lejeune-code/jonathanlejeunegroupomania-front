@@ -57,13 +57,13 @@ export default {
 
 <style scoped lang="scss">
 .btn-submit-color{
-    background-color: red;
+    background-color: teal;
     color:#f0e8c7;
     font-weight: bold;
         &:hover{
             font-weight:bold;
             background-color: #f0e8c7;
-            color:red;
+            color:teal;
         }
 }
 </style>
