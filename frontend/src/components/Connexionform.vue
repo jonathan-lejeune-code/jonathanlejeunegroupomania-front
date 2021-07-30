@@ -1,12 +1,12 @@
 <template>
-<div class="w-50">
+<div class="Form">
     <form class="py-4">
     <div class="form-group">
-        <label for="email">Adresse mail</label>
+        <label for="email">Adresse mail : </label>
         <input type="email" class="form-control" id="email" v-model="email" required>
     </div>
     <div class="form-group">
-        <label for="password">Mot de passe</label>
+        <label for="password">Mot de passe : </label>
         <input type="password" class="form-control" id="password" v-model="password" required>
     </div>
     <button type="submit" class="btn btn-submit-color" v-on:click="loginUser">Connexion</button>
@@ -56,14 +56,24 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+.Form{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-control{
+    width: 400px;
+}
+
 .btn-submit-color{
-    background-color: teal;
-    color:#f0e8c7;
+    background-color: #546E7A;
+    color:white;
     font-weight: bold;
         &:hover{
             font-weight:bold;
-            background-color: #f0e8c7;
-            color:teal;
+            background-color:teal;
+            color:white;
         }
 }
 </style>
