@@ -31,7 +31,7 @@ export default {
   components: { 
     HeaderHome,
     Footer, },
-  name: "App",
+  name: "/",
 };
 </script>
 
