@@ -1,22 +1,21 @@
 <template>
-  <v-card height="400px">
+  <v-card height="auto">
     <v-footer
       v-bind="localAttrs"
-      :padless="padless"
-    >
+      :padless="padless">
+
       <v-card
         flat
         tile
         width="100%"
-        class="teal darken-4 text-center"
-      >
+        class="teal darken-4 text-center">
         <v-card-text>
           <v-btn
             v-for="icon in icons"
             :key="icon"
             class="mx-4"
-            icon
-          >
+            icon>
+
             <v-icon size="24px">
               {{ icon }}
             </v-icon>
@@ -30,17 +29,6 @@
         </v-card-text>
       </v-card>
     </v-footer>
-
-    <v-row
-      align="center"
-      justify="center"
-      class="ma-12"
-    >
-      <v-col
-        cols="12"
-        md="8">
-      </v-col>
-    </v-row>
   </v-card>
 </template>
 
@@ -67,8 +55,8 @@ export default {
         const attrs = {}
 
         if (this.variant === 'default') {
-          attrs.absolute = false
-          attrs.fixed = true
+          attrs.absolute = true
+          attrs.fixed = false
         } else {
           attrs[this.variant] = true
         }

@@ -13,7 +13,7 @@
             <label for="password">Mot de passe : </label>
             <input type="password" class="form-control" id="password" v-model="password" required>
         </div>
-        <button type="submit" class="btn btn-submit-color" v-on:click="signUpUser">Inscription</button>
+        <button type="submit" class=" btn-submit-color" v-on:click="signUpUser">Inscription</button>
     </form>
 </div>
 </template>
@@ -64,8 +64,17 @@ export default {
     margin-right: auto;
 }
 
+.form-group{
+    font-size: 20px;
+    border: solid teal 2px;
+    margin-bottom: 15px;
+}
+
 .form-control{
     width: 300px;
+    height: 30px;
+    
+    
 }
 
 .btn-submit-color{

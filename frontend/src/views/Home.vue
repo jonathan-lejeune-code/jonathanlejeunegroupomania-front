@@ -14,8 +14,8 @@
           contain
           min-width="100"
           src="../assets/group.jpg"
-          width="800px"
-          height="600px"
+          width="600px"
+          height="500px"
         />
 
     </v-main>
@@ -47,6 +47,7 @@ p{
   color: black;
   font-size: 30px;
   text-align: center;
+  margin: 0px;
 }
 
 .imggroupe{

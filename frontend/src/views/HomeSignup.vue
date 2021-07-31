@@ -1,16 +1,18 @@
 <template>
-<v-main>
-    <div class="d-flex flex-column align-items-center">
-        <HeaderForm></HeaderForm>
-        <h2 class="text-center subtitle pt-5 pb-4">Inscription</h2>
-        <p class="text-center font-italic">Inscription rapide et simple au forum !</p>
-        <InscriptionForm/>
-    </div>
-    <Footer></Footer>
-</v-main>    
-   
-   
+<v-app>
+    <HeaderForm></HeaderForm>
+    <v-main>
+        <div class="Form d-flex flex-column align-items-center ">
+            <h2 class=" H2 text-center subtitle pt-5 pb-4">Inscription</h2>
+            <p class="P text-center font-italic">Inscription rapide et simple au forum !</p>
+            <InscriptionForm/>
+        </div>
     
+    </v-main>    
+
+   <Footer></Footer>
+
+</v-app>    
 </template>
 
 <script>
@@ -29,10 +31,22 @@ export default {
 
 
 <style scoped lang="scss">
+
 .subtitle{
     font-size: 2rem;
     font-weight: bold;
     color:teal;
     font-family: Georgia, 'Times New Roman', Times, serif ;
+}
+
+.H2{
+    font-size: 50px;
+}
+
+.P{ 
+    font-size: 20px;
+}
+.Form{
+    height:700px;
 }
 </style>
