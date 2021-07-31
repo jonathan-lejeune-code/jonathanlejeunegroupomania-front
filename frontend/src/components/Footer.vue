@@ -1,38 +1,55 @@
 <template>
-  <div class="py-3 footer-bg d-flex flex-column align-items-center">
-    <div class="row d-flex justify-content-around w-100">
-      <a class="mx-2" href="#">Mentions légales</a> |
-      <a class="mx-2" href="mailto:groupomania@contact.com">Contact</a>
-    </div>
-    <div class="row d-flex justify-content-around mt-2 text-company w-100">
-      <p>Site internet créé par L-J</p>
-    </div>
-  </div>
+   <v-footer
+    dark
+    padless
+  >
+    <v-card
+      class="flex"
+      flat
+      tile
+    >
+      <v-card-title class="teal darken-4">
+        <strong class="subheading">Gardez contact avec vos collégue ! </strong>
+
+        <v-spacer></v-spacer>
+
+        <v-btn
+          v-for="icon in icons"
+          :key="icon"
+          class="mx-4"
+          dark
+          icon
+        >
+          <v-icon size="24px">
+            {{ icon }}
+          
+          </v-icon>
+        </v-btn>
+      </v-card-title>
+
+      <v-card-text class="py-2 white--text text-center">
+        {{ new Date().getFullYear() }} — <strong>Grouposcord</strong>
+      </v-card-text>
+    </v-card>
+  </v-footer>
 </template>
 
 <script>
 export default {
   name: "Footer",
+
+  data: () => ({
+      icons: [
+        'mdi-facebook',
+        'mdi-twitter',
+        'mdi-linkedin',
+        'mdi-instagram',
+      ],
+    }),
 };
 </script>
 
 
 <style scoped lang="scss">
-a {
-  color: #fff;
-  &:hover {
-    text-decoration: underline;
-    font-weight: bold;
-  }
-}
-.footer-bg {
-  background-color: red;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
-.text-company {
-  font-size: 0.5rem;
-  color: #fff;
-}
+
 </style>
