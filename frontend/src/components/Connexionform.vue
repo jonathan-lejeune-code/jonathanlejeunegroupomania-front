@@ -62,8 +62,17 @@ export default {
     margin-right: auto;
 }
 
+.form-group{
+    font-size: 20px;
+    border: solid teal 2px;
+    margin-bottom: 15px;
+}
+
 .form-control{
-    width: 400px;
+    width: 300px;
+    height: 30px;
+    
+    
 }
 
 .btn-submit-color{
