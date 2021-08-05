@@ -1,5 +1,5 @@
 <template>
-<v-app>
+<v-app id="main">
     <HeaderForm></HeaderForm>
     <v-main>
         <div class=" Form d-flex flex-column align-items-center">
@@ -7,10 +7,20 @@
             <p class="P text-center font-italic">Connectez-vous pour accéder au forum !</p>
             <ConnexionForm/>
         </div>
+
+        <v-img
+          alt="logo groupomania"
+          class="imggroupe"
+          contain
+          min-width="100"
+          src="../assets/desk.jpg"
+          width="600px"
+          height="500px"
+        />
     </v-main>
 
     <Footer></Footer>
-    
+
 </v-app>
 </template>
 
@@ -30,6 +40,10 @@ export default {
 
 
 <style scoped lang="scss">
+
+#main{
+    background-color:#A5D6A7;
+}
 .subtitle{
     font-size: 2rem;
     font-weight: bold;
@@ -45,6 +59,12 @@ export default {
     font-size: 20px;
 }
 .Form{
-    height:800px;
+    height:auto;
+}
+
+.imggroupe{
+  display: block;
+    margin-left: auto;
+    margin-right: auto
 }
 </style>
