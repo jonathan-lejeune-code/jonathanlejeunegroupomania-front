@@ -31,8 +31,8 @@ app.use((req, res, next)=>{
 let connectdb = mysql.createConnection({ 
     host: 'localhost', 
     user: 'root', 
-    password: '', 
-    database: '../groupomania_database', 
+    password: 'dragon29', 
+    database: './groupomania_database', 
 });
 
 connectdb.connect(function(err) { 
@@ -50,6 +50,7 @@ app.use('/api/moderation', routesMod);
 
 app.use (helmet());
 app.use(xss());
-app.use(mysql());
+
+
 
 module.exports = app;
