@@ -27,20 +27,6 @@ app.use((req, res, next)=>{
 	next();
 });
 
-// Connection à la base de donnée
-let connectdb = mysql.createConnection({ 
-    host: 'localhost', 
-    user: 'root', 
-    password: 'dragon29', 
-    database: './groupomania_database', 
-});
-
-connectdb.connect(function(err) { 
-    if (err) throw err;
-    console.log('Connecté!')
-});
-
-
 
 /////////////// Joining routes ///////////////////////
 app.use('/api/posts', routesPosts);
