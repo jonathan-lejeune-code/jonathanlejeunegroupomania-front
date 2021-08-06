@@ -3,7 +3,7 @@ const bodyParser = require('body-parser'); // Extraire les objets au format Json
 const xss = require('xss-clean'); // Nettoyage des entrées des utilisateurs
 const helmet = require("helmet");// Utilisation helmet pour protéger notre application de certaines vulnérabilités
 const path = require('path'); // Traiter les requêtes image
-const mysql = require('mysql'); // Utilisation bdd 
+
 
 // Routes vers les éléments
 const routesPosts = require('./routes/Post');

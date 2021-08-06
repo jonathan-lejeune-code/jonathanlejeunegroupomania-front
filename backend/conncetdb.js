@@ -1,13 +1,5 @@
-let connectdb = mysql.createConnection({ 
-    host: 'localhost', 
-    user: 'root', 
-    password: 'dragon29', 
-    database: '../groupomania_database', 
-    
-});
-
-
-connectdb.connect(function(err) { 
-    if (err) throw err;
-    console.log('Connecté!')
-});
+DB_NAME = 'groupomania_database'
+DB_HOST = 'localhost'
+DB_USER = '[db_user_name]'
+DB_PASSWORD = '[db_user_password]'
+JWT = '[random_string_to_encode_tokens]'
