@@ -1,5 +1,0 @@
-DB_NAME = 'groupomania_database'
-DB_HOST = 'localhost'
-DB_USER = '[db_user_name]'
-DB_PASSWORD = '[db_user_password]'
-JWT = '[random_string_to_encode_tokens]'
