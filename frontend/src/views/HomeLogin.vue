@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import HeaderForm from '../components/HeaderForm.vue'
 import ConnexionForm from '../components/ConnexionForm'
 import Footer from '../components/Footer.vue'
@@ -34,7 +35,36 @@ export default {
     HeaderForm,
   ConnexionForm,
   Footer
+    },
+    data() {
+    return {
+      dataLogin: {
+        email: null,
+        password: null,
+      },
+      msg:""
+    };
+  },
+  methods: {
+    logIn() {
+  
+    if (
+        this.dataLogin.email ==null ||
+        this.dataLogin.password ==null 
+      )
+      { this.msg ="ERREUR DE SAISIE"}
+      {
+        axios
+          .post("http://localhost:3000/api/auth/login", this.dataLogin)
+          .then(response => {
+              console.log(response);
+              localStorage.setItem('token',response.data.token)
+              document. location. href="http://localhost:8080/message"; 
+          })
+          .catch(error => console.log(error));
+      } 
     }
+  }
 }
 </script>
 

@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import HeaderForm from '../components/HeaderForm.vue'
 import InscriptionForm from '../components/InscriptionForm'
 import Footer from '../components/Footer.vue'
@@ -25,7 +26,54 @@ export default {
     HeaderForm,
     InscriptionForm,
     Footer,
-    }
+    },
+    data() {
+    return {
+      email: "",
+      username: "",
+      password: "",
+    };
+  },
+  
+  methods: {
+    /**
+     * Permet de poster les donnees saisie par utilisateur
+     */
+    createUser() {
+      this.submited = true;
+      this.$v.$touch();
+      if (!this.$v.$invalid) {
+        const email = document.querySelector("#email").value;
+        const password = document.querySelector("#password").value;
+        const username = document.querySelector("#username").value;
+        let users = {
+          email: email,
+          password: password,
+          username: username,
+        };
+        
+        // Verifie que utilisateur a bien remplie tout les champs
+        if (users.email == "" || users.password == "" || users.username == "") {
+          users = {
+            userVerification: false,
+          };
+        }
+         // Permet d'envoyer les information pour la creation d'un profil
+        axios
+          .post(this.$localhost + "api/auth/signup", users)
+          .then((res) => {
+            console.log(res);
+            this.$router.push("/login");
+          })
+          .catch((error) => {
+            console.log(error);
+            document.getElementById("notfound").innerHTML =
+              "Une erreur est survenue, veuillez réessayer ultérieurement";
+          });
+      }
+    },
+  },
+    
 }
 </script>
 

@@ -13,23 +13,17 @@
           src="../assets/icon-left-font-monochrome-white.png"
           width="400"/>
 
-      <v-avatar
-        :color="$vuetify.breakpoint.smAndDown ? 'grey darken-1' : 'transparent'"
-        size="32"
-      ></v-avatar>
+      
 
       <v-tabs
         centered
         class="ml-n9"
         color="white"
       >
-        <v-tab
-          v-for="link in links"
-          :key="link"
-        >
-          {{ link }}
-        </v-tab>
+      
       </v-tabs>
+
+      <div class="BoutonDisconect"> <disconectbtn/> </div>
 
       <v-avatar
         class="hidden-sm-and-down"
@@ -40,16 +34,14 @@
 </template>
 
 <script>
+import disconectbtn from '@/components/disconectbtn.vue'; //j'appel ma fonction déconnexion
 export default {
   name: "Headerprofil",
+   components :{disconectbtn,
+   },
 
    data: () => ({
-      links: [
-        'Dashboard',
-        'Messages',
-        'Profile',
-        'Deconnexion',
-      ],
+     
     }),
 };
 </script>
@@ -60,6 +52,12 @@ export default {
     display: block;
     margin-left: auto;
     margin-right: auto
+}
+
+.BoutonDisconect{
+  position: absolute;
+  right: 12px;
+  top: 1px;
 }
 
 

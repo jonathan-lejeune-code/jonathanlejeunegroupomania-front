@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import HomeSignup from '../views/HomeSignup.vue'
 import HomeLogin from '../views/HomeLogin.vue'
 import profil from '../views/Profil.vue'
+import Message from '../views/Message.vue'
 
 Vue.use(VueRouter);
 
@@ -29,6 +30,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: HomeLogin
+  },
+  {
+  path: '/message',
+  name: 'Message',
+  component: Message
   },
   
 ];
