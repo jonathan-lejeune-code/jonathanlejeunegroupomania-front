@@ -71,9 +71,8 @@ export default {
 
 <style scoped lang="scss">
 
-#main{
-    background-color:#A5D6A7;
-}
+
+   
 .subtitle{
     font-size: 2rem;
     font-weight: bold;
