@@ -92,23 +92,22 @@ export default {
 
 
 <style scoped lang="scss">
-.photoprofil{
+.photoprofil {
   height: 200px;
   width: 200px;
 }
-main{
+main {
   background-color: whitesmoke;
   background-position: center;
   justify-content: center;
   font-family: Arial, Helvetica, sans-serif;
 }
-span{
+span {
   font-weight: bold;
   color: white;
   margin-left: 200px;
-  
 }
-.btndelete{
+.btndelete {
   border: white solid 2px;
   background-color: white;
   margin-left: 200px;
