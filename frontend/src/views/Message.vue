@@ -3,121 +3,86 @@
     <HeaderProfil />
 
     <v-main>
-      <!--  -->
-      <div class="form-group">
-        <label for="inputTitle"><span>Titre</span> </label><br />
-        <input
-          type="text"
-          class="form-control"
-          id="inputTitle"
-          v-model="dataMessage.title"
-        />
-      </div>
+      <div class="container1">
+        <div class="form-group">
+          <label for="inputTitle"><span>Titre</span> </label><br />
+          <input
+            type="text"
+            class="form-control"
+            id="inputTitle"
+            v-model="dataMessage.title"
+          />
+        </div>
 
-      <div class="form-group">
-        <label for="inputContent"><span>Exprimez-vous</span></label
-        ><br />
-        <textarea
-          id="inputContent"
-          v-model="dataMessage.content"
-          style="height: 100px"
-        ></textarea>
-      </div>
-      <label for="inputFile"><span class="cacher">aaaa</span></label>
-      <div class="btn-upload">
-        <input
-          name="inputFile"
-          type="file"
-          class="upload"
-          id="inputFile"
-          @change="onFileChanged"
-        />
-      </div>
+        <div class="form-group">
+          <label for="inputContent"><span>Exprimez-vous</span></label
+          ><br />
+          <textarea
+            id="inputContent"
+            v-model="dataMessage.content"
+            style="height: 100px"
+          ></textarea>
+        </div>
+        <label for="inputFile"><span class="cacher">aaaa</span></label>
+        <div class="btn-upload">
+          <input
+            name="inputFile"
+            type="file"
+            class="upload"
+            id="inputFile"
+            @change="onFileChanged"
+          />
+        </div>
 
-      <v-btn @click.prevent="SendMessage" type="submit" class="btn-publier" large >
-        <span class="cacher">aaaa</span>
-        <v-icon class="mdi-pencil">mdi-pencil</v-icon>
-      </v-btn>
+        <v-btn
+          @click.prevent="SendMessage"
+          type="submit"
+          class="btn-publier"
+          large
+        >
+          <span class="cacher">aaaa</span>
+          <v-icon class="mdi-pencil">mdi-pencil</v-icon>
+        </v-btn>
+      </div>
 
       <div class="container2">
         <div class="test">
           <h1>Fil d'actualité</h1>
-          <ul id="example-1">
-            <li v-for="item in posts" :key="item.id">
-              <span>{{ item.title }}<br /></span>
-              <p v-if="item.User.attachementuser">
-                <img
-                  class="photoprofil"
-                  :src="item.User.attachementuser"
-                  alt="..."
-                /><br />
-              </p>
-              <i
-                >Publié par <strong>{{ item.User.username }}</strong> le
-                {{ item.createdAt.split("T")[0] }} à
-                {{ item.createdAt.slice(11, 16) }}<br /><br
-              /></i>
-              <div class="contenu">{{ item.content }} <br /></div>
-              <!-- Id du posteur : {{ item.userId }} -->
-              <p v-if="item.attachement">
-                <img :src="item.attachement" alt="..." />
-              </p>
-              <!-- j'affiche l'image uniquement si il y en a une-->
-              <p v-if="member.id == item.userId || member.isAdmin">
-                <button
-                  @click.prevent="DeleMessage(item.id, item.userId)"
-                  id="btn-sup"
-                  type="submit"
-                  class="btn btn-primary"
-                >
-                  <span class="cacher">aaaa</span
-                  ><i class="fas fa-trash-alt"></i>
-                </button>
-              </p>
-              <!--le bouton Supprimer s'affiche uniquement si la personne connectée est la personne qui a publié le message ou un admin-->
-              <!--partie création commentaire -->
+          <v-card class="mx-auto" color="teal" dark min-width="350">
+            <v-card-title>
+              <v-icon large left> mdi-message</v-icon>
+              <span class="text-h6 font-weight-light">Groupi</span>
+            </v-card-title>
 
-              <textarea
-                type="text"
-                id="comment"
-                name="comment"
-                class="form-control"
-                v-model="dataComment.content"
-                placeholder="Insérer votre commentaire..."
-              ></textarea>
-              <a v-on:click="createComment(item.id)"
-                ><i class="fas fa-comment" title="Envoyer"></i
-              ></a>
-              <div class="container3">
-                <ul id="example-2">
-                  <!--partie affichage commentaire -->
-                  <li v-for="comment in item.Comments" :key="comment.id">
-                    <i
-                      ><strong>{{ comment.User.username }}</strong> le
-                      {{ comment.createdAt.split("T")[0] }} à
-                      {{ comment.createdAt.slice(11, 16) }}</i
-                    ><br />
-                    {{ comment.content }}<br />
-                    <p v-if="member.id == comment.userId || member.isAdmin">
-                      <button
-                        @click.prevent="
-                          DeleteComment(comment.id, comment.userId)
-                        "
-                        id="btn-sup"
-                        type="submit"
-                        class="btn btn-primary"
-                      >
-                        <span class="cacher">aaaa</span
-                        ><i class="fas fa-trash-alt"></i>
-                      </button>
-                    </p>
-                  </li>
-                  <!--le bouton Supprimer s'affiche uniquement si la personne connectée est la personne qui a publié le commentaire ou un admin-->
-                </ul>
-                -
-              </div>
-            </li>
-          </ul>
+            <v-card-text class="text-h5 font-weight-bold"> "" </v-card-text>
+
+            <v-card-actions>
+              <v-list-item class="grow">
+                <v-list-item-avatar color="grey darken-3">
+                  <v-img
+                    class="elevation-6"
+                    alt=""
+                    src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+                  ></v-img>
+                </v-list-item-avatar>
+
+                <v-list-item-content>
+                  <v-list-item-title>MJ</v-list-item-title>
+                </v-list-item-content>
+
+                <v-row align="center" justify="end">
+                  <v-btn class="ma-9" text icon color="blue lighten-2">
+                    <v-icon class="mr-1">mdi-thumb-up </v-icon>
+                    <span class="subheading mr-2">256</span>
+                  </v-btn>
+                  <v-btn class="ma-2" text icon color="red lighten-2">
+                    <v-icon class="mr-1"> mdi-thumb-down </v-icon>
+                    <span class="subheading mr-2"></span>
+                  </v-btn>
+                </v-row>
+              </v-list-item>
+            </v-card-actions>
+          </v-card>
         </div>
       </div>
     </v-main>
@@ -277,22 +242,38 @@ export default {
 
 <style lang="scss" scoped>
 main {
-  
   background-color: white;
   background-position: center;
   justify-content: center;
   font-family: Arial, Helvetica, sans-serif;
-  margin-left: auto;
-  margin-right: auto;
 }
 
+.container1{
+  margin-left: 30px;
+  margin-right: auto;
+  width: 400px;
+  border: solid 5px black;
+  border-radius: 10px;
+  background-color: white;
+}
 .profilsansphoto {
   color: blue;
   position: absolute;
   right: 60px;
 }
+.container2 {
+  margin-left: auto;
+  width: 600px;
+background-color: purple;
 
-.container2 .photoprofil {
+}
+
+.form-group{
+  width: 200px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.photoprofil {
   /*photo profil de la personne qui poste le message*/
   height: 65px;
   width: 65px;
@@ -324,39 +305,14 @@ span {
   background-position: center;
   background-size: 25%;
 }
-.test li {
-  /*liste contenant les contenus, titre...*/
-  background-color: #f2f2f2;
-  margin-bottom: 30px;
-  margin-left: auto;
-  margin-right: auto;
-  border: 2px solid none;
-  border-radius: 8px;
-  box-shadow: 1px 1px 2px #555;
-  list-style: none;
-  font-family: Arial, Helvetica, sans-serif;
-  width: 60%;
-}
 
 .mdi-pencil {
   font-size: 30px;
 }
 
-.container3 li {
-  margin-top: 10px;
-  background-color: white;
-}
-
-.container2 img {
-  /*image publié par les utilisateurs */
-  width: 350px;
-  height: 340px;
-  border: 2px solid none;
-  border-radius: 20px;
-}
-
 #btn-sup,
 .btn-publier {
+  margin-top: 10px;
   padding: 5px;
   font-size: 15px;
   background: linear-gradient(black, teal);
