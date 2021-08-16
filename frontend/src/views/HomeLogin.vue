@@ -1,99 +1,92 @@
 <template>
-<v-app id="main">
+  <v-app id="main">
     <HeaderForm></HeaderForm>
     <v-main>
-        <div class=" Form d-flex flex-column align-items-center">
-            <h2 class="H2 text-center subtitle pt-5 pb-4">Connexion</h2>
-            <p class="P text-center font-italic">Connectez-vous pour accéder au forum !</p>
-            <ConnexionForm/>
-        </div>
+      <div class="Form d-flex flex-column align-items-center">
+        <h2 class="H2 text-center subtitle pt-5 pb-4">Connexion</h2>
+        <p class="P text-center font-italic">
+          Connectez-vous pour accéder au forum !
+        </p>
+        <ConnexionForm />
+      </div>
 
-        <v-img
-          alt="logo groupomania"
-          class="imggroupe"
-          contain
-          min-width="100"
-          src="../assets/desk.jpg"
-          width="600px"
-          height="500px"
-        />
+      <v-img
+        alt="image bureau"
+        class="imggroupe"
+        src="../assets/desk.jpg"
+        max-height="500"
+          max-width="500"
+      />
     </v-main>
 
     <Footer></Footer>
-
-</v-app>
+  </v-app>
 </template>
 
 <script>
 import axios from "axios";
-import HeaderForm from '../components/HeaderForm.vue'
-import ConnexionForm from '../components/ConnexionForm'
-import Footer from '../components/Footer.vue'
+import HeaderForm from "../components/HeaderForm.vue";
+import ConnexionForm from "../components/ConnexionForm";
+import Footer from "../components/Footer.vue";
 export default {
-  name: 'HomeLogin',
+  name: "HomeLogin",
   components: {
     HeaderForm,
-  ConnexionForm,
-  Footer
-    },
-    data() {
+    ConnexionForm,
+    Footer,
+  },
+  data() {
     return {
       dataLogin: {
         email: null,
         password: null,
       },
-      msg:""
+      msg: "",
     };
   },
   methods: {
     logIn() {
-  
-    if (
-        this.dataLogin.email ==null ||
-        this.dataLogin.password ==null 
-      )
-      { this.msg ="ERREUR DE SAISIE"}
+      if (this.dataLogin.email == null || this.dataLogin.password == null) {
+        this.msg = "ERREUR DE SAISIE";
+      }
       {
         axios
           .post("http://localhost:3000/api/auth/login", this.dataLogin)
-          .then(response => {
-              console.log(response);
-              localStorage.setItem('token',response.data.token)
-              document. location. href="http://localhost:8080/message"; 
+          .then((response) => {
+            console.log(response);
+            localStorage.setItem("token", response.data.token);
+            document.location.href = "http://localhost:8080/message";
           })
-          .catch(error => console.log(error));
-      } 
-    }
-  }
-}
+          .catch((error) => console.log(error));
+      }
+    },
+  },
+};
 </script>
 
 
 <style scoped lang="scss">
-
-
-   
-.subtitle{
-    font-size: 2rem;
-    font-weight: bold;
-    color:teal;
-    font-family: Georgia, 'Times New Roman', Times, serif ;
+.subtitle {
+  font-size: 2rem;
+  font-weight: bold;
+  color: teal;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
-.H2{
-    font-size: 50px;
+.H2 {
+  font-size: 50px;
 }
 
-.P{ 
-    font-size: 20px;
+.P {
+  font-size: 20px;
 }
-.Form{
-    height:auto;
+.Form {
+  height: auto;
 }
 
-.imggroupe{
+.imggroupe {
   display: block;
-    margin-left: auto;
-    margin-right: auto
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

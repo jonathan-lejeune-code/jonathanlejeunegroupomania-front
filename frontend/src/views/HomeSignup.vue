@@ -7,7 +7,15 @@
             <p class="P text-center font-italic">Inscription rapide et simple au forum !</p>
             <InscriptionForm/>
         </div>
-    
+     <v-img
+          alt="image bureau"
+          class="imggroupe"
+          contain
+          max-height="500"
+          max-width="500"
+          src="../assets/unnamed.jpg"
+          
+        />
     </v-main>    
 
    <Footer></Footer>
@@ -95,6 +103,13 @@ export default {
     font-size: 20px;
 }
 .Form{
-    height:700px;
+    height:auto;
+}
+
+.imggroupe{
+  display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
 }
 </style>

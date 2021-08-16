@@ -1,27 +1,9 @@
 <template>
-  <main>
-    <form>
-      <HeaderProfil></HeaderProfil>
+  <v-app id="inspire">
+    <HeaderProfil />
 
-      <p>
-        <small>
-          Bienvenue {{ member.username }} 😃
-          <router-link class="redirection-profil" to="/profil"
-            ><span class="cacher">aaaa</span>
-            <p v-if="member.attachementuser">
-              <img
-                class="photoprofil"
-                :src="member.attachementuser"
-                alt="..."
-              />
-            </p>
-            <p class="profilsansphoto" v-else>MON PROFIL</p>
-          </router-link>
-        </small>
-        <router-link class="redirection-allprofil" to="/allprofil"
-          ><span class="cacher">aaaa</span><i class="fas fa-users"></i
-        ></router-link>
-      </p>
+    <v-main>
+      <!--  -->
       <div class="form-group">
         <label for="inputTitle"><span>Titre</span> </label><br />
         <input
@@ -31,6 +13,7 @@
           v-model="dataMessage.title"
         />
       </div>
+
       <div class="form-group">
         <label for="inputContent"><span>Exprimez-vous</span></label
         ><br />
@@ -51,9 +34,10 @@
         />
       </div>
 
-      <button @click.prevent="SendMessage" type="submit" class="btn-publier">
-        <span class="cacher">aaaa</span><i class="fas fa-arrow-circle-up"></i>
-      </button>
+      <v-btn @click.prevent="SendMessage" type="submit" class="btn-publier" large >
+        <span class="cacher">aaaa</span>
+        <v-icon class="mdi-pencil">mdi-pencil</v-icon>
+      </v-btn>
 
       <div class="container2">
         <div class="test">
@@ -136,18 +120,21 @@
           </ul>
         </div>
       </div>
-    </form>
+    </v-main>
     <Footer />
-  </main>
+  </v-app>
 </template>
 
 <script>
-import HeaderProfil from "../components/HeaderProfil.vue";
-import Footer from "@/components/Footer.vue";
 import axios from "axios";
+import HeaderProfil from "../components/HeaderProfil.vue";
+import Footer from "../components/Footer.vue";
 export default {
   name: "Message",
-  components: { HeaderProfil, Footer },
+  components: {
+    HeaderProfil,
+    Footer,
+  },
   data() {
     return {
       dataMessage: {
@@ -288,21 +275,23 @@ export default {
 };
 </script>
 
-<style scoped>
-.container1 {
-  /*contient les inputs*/
-  background-color: #f2f2f2; /*rgba(255,192,203,0.5);*/
+<style lang="scss" scoped>
+main {
+  
+  background-color: white;
+  background-position: center;
+  justify-content: center;
   font-family: Arial, Helvetica, sans-serif;
-  border: 2px solid none;
-  border-radius: 8px;
-  box-shadow: 1px 1px 2px #555;
+  margin-left: auto;
+  margin-right: auto;
 }
-.container1 .photoprofil {
-  /*photo profil de la page profil perso*/
-  height: 50px;
-  width: 50px;
-  border-radius: 50px;
+
+.profilsansphoto {
+  color: blue;
+  position: absolute;
+  right: 60px;
 }
+
 .container2 .photoprofil {
   /*photo profil de la personne qui poste le message*/
   height: 65px;
@@ -310,18 +299,21 @@ export default {
   border-radius: 50px;
   margin-top: 8px;
 }
-.cacher {
-  /*je cache le texte du bouton pour WAVE*/
-  display: none;
+
+#inputContent,
+#inputTitle,
+textarea {
+  border: 2px solid none;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  box-shadow: 1px 1px 1px black;
 }
+
 span {
   /*titre, contenu... en gras */
   font-weight: bold;
   font-size: 25px;
-}
-.contenu {
-  /*texte des messages*/
-  font-size: 20px;
 }
 .test {
   /*contient le fil d'actualités et le reste des infos*/
@@ -331,22 +323,6 @@ span {
   /*background-image: url("../assets/icon.png");*/
   background-position: center;
   background-size: 25%;
-}
-.profilsansphoto {
-  color: blue;
-  position: absolute;
-  right: 60px;
-}
-.fa-arrow-circle-up {
-  font-size: 30px;
-}
-.fas-fa-users {
-  size: 40px;
-}
-.BoutonDisconect {
-  position: absolute;
-  right: 18px;
-  top: 45px;
 }
 .test li {
   /*liste contenant les contenus, titre...*/
@@ -361,17 +337,16 @@ span {
   font-family: Arial, Helvetica, sans-serif;
   width: 60%;
 }
+
+.mdi-pencil {
+  font-size: 30px;
+}
+
 .container3 li {
   margin-top: 10px;
   background-color: white;
 }
-.container1 img {
-  /*logo principal*/
-  width: 250px;
-  height: 50px;
-  position: absolute;
-  left: 10px;
-}
+
 .container2 img {
   /*image publié par les utilisateurs */
   width: 350px;
@@ -379,45 +354,12 @@ span {
   border: 2px solid none;
   border-radius: 20px;
 }
-small {
-  /*redirection vers la page profil*/
-  position: absolute;
-  right: 10px;
-  top: 26px;
-}
-.redirection-allprofil {
-  position: absolute;
-  right: 150px;
-  top: 66px;
-  font-size: 35px;
-}
-#inputContent,
-#inputTitle,
-textarea {
-  border: 2px solid none;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  box-shadow: 1px 1px 1px black;
-}
-.fa-trash-alt {
-  /*logo corbeille*/
-  font-size: 30px;
-}
-.fa-comment {
-  /*envoie de commentaire*/
-  font-size: 30px;
-  margin-left: 10px;
-  cursor: pointer;
-}
-#btn-sup {
-  margin-bottom: 10px;
-}
+
 #btn-sup,
 .btn-publier {
   padding: 5px;
   font-size: 15px;
-  background: linear-gradient(#9356dc, #f26896);
+  background: linear-gradient(black, teal);
   text-decoration: none;
   color: white;
   border: 0px solid;
@@ -438,45 +380,9 @@ textarea {
   box-shadow: 2px 2px 2px black;
   transition-duration: 0.15s;
 }
-@media (max-width: 767px) {
-  .container1 img {
-    width: 250px;
-    height: 50px;
-    position: static;
-  }
-  .container2 img {
-    width: 150px;
-    height: 140px;
-    border: 2px solid none;
-    border-radius: 20px;
-  }
-  #example-1,
-  #example-2 {
-    margin: auto;
-    margin-right: auto;
-    margin-left: auto;
-    padding: 0px;
-  }
-  .test li {
-    width: 100%;
-  }
-  .profilsansphoto {
-    position: static;
-  }
-  .redirection-allprofil {
-    position: static;
-    right: 150px;
-    top: 66px;
-    font-size: 35px;
-  }
-  .BoutonDisconect {
-    position: static;
-  }
-  small {
-    position: static;
-  }
-  Footer {
-    width: 92%;
-  }
+
+.cacher {
+  /*je cache le texte du bouton pour WAVE*/
+  display: none;
 }
-</style>
+</style>>
