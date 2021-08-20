@@ -1,90 +1,13 @@
 <template>
   <v-app id="inspire">
     <HeaderProfil />
-
-    <v-main>
-      <div class="container1">
-        <div class="form-group">
-          <label for="inputTitle"><span>Titre</span> </label><br />
-          <input
-            type="text"
-            class="form-control"
-            id="inputTitle"
-            v-model="dataMessage.title"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="inputContent"><span>Exprimez-vous</span></label
-          ><br />
-          <textarea
-            id="inputContent"
-            v-model="dataMessage.content"
-            style="height: 100px"
-          ></textarea>
-        </div>
-        <label for="inputFile"><span class="cacher">aaaa</span></label>
-        <div class="btn-upload">
-          <input
-            name="inputFile"
-            type="file"
-            class="upload"
-            id="inputFile"
-            @change="onFileChanged"
-          />
-        </div>
-
-        <v-btn
-          @click.prevent="SendMessage"
-          type="submit"
-          class="btn-publier"
-          large
-        >
-          <span class="cacher">aaaa</span>
-          <v-icon class="mdi-pencil">mdi-pencil</v-icon>
-        </v-btn>
-      </div>
-
-      <div class="container2">
-        <div class="test">
-          <h1>Fil d'actualité</h1>
-          <v-card class="mx-auto" color="teal" dark min-width="350">
-            <v-card-title>
-              <v-icon large left> mdi-message</v-icon>
-              <span class="text-h6 font-weight-light">Groupi</span>
-            </v-card-title>
-
-            <v-card-text class="text-h5 font-weight-bold"> "" </v-card-text>
-
-            <v-card-actions>
-              <v-list-item class="grow">
-                <v-list-item-avatar color="grey darken-3">
-                  <v-img
-                    class="elevation-6"
-                    alt=""
-                    src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-                  ></v-img>
-                </v-list-item-avatar>
-
-                <v-list-item-content>
-                  <v-list-item-title>MJ</v-list-item-title>
-                </v-list-item-content>
-
-                <v-row align="center" justify="end">
-                  <v-btn class="ma-9" text icon color="blue lighten-2">
-                    <v-icon class="mr-1">mdi-thumb-up </v-icon>
-                    <span class="subheading mr-2">256</span>
-                  </v-btn>
-                  <v-btn class="ma-2" text icon color="red lighten-2">
-                    <v-icon class="mr-1"> mdi-thumb-down </v-icon>
-                    <span class="subheading mr-2"></span>
-                  </v-btn>
-                </v-row>
-              </v-list-item>
-            </v-card-actions>
-          </v-card>
-        </div>
-      </div>
+    <v-main class="pt-5 ml-5">
+      <v-row >
+        <v-col>
+          <CardProfil />
+        </v-col>
+      </v-row>
+    
     </v-main>
     <Footer />
   </v-app>
@@ -93,11 +16,13 @@
 <script>
 import axios from "axios";
 import HeaderProfil from "../components/HeaderProfil.vue";
+import CardProfil from "../components/CardProfil.vue";
 import Footer from "../components/Footer.vue";
 export default {
   name: "Message",
   components: {
     HeaderProfil,
+    CardProfil,
     Footer,
   },
   data() {
