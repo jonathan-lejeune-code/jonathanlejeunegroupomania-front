@@ -2,7 +2,7 @@
   <v-card class="" max-width="200" tile > 
     <v-img
       height="100%"
-      src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg"
+      src="../assets/black.jpg"
     >
       <v-row align="end" class="fill-height" >
         <v-col align-self="start" class="pa-0" cols="12">
@@ -21,7 +21,7 @@
             </v-list-item-content>
           </v-list-item>
           <v-divider class="my-3"></v-divider>
-          <v-btn depressed rounded text color="white"> Crée Message </v-btn>
+          <v-btn depressed rounded text @click.prevent="createMessage" color="white"> Crée Message </v-btn>
           <v-divider class="my-3"></v-divider>
           <v-btn depressed rounded text @click.prevent="disconect" color="white" class="mb-10">
             déconnection
@@ -38,6 +38,10 @@ export default {
     
   }),
   methods: {
+    createMessage(){
+      localStorage.clear();
+      document.location.href = "http://localhost:8080/createMessage";
+    },
     disconect() {
       localStorage.clear();
       document.location.href = "http://localhost:8080/";

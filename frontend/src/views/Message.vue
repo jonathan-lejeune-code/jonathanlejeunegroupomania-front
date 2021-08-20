@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
     <HeaderProfil />
-    <v-main class="pt-5 ml-5">
+    <v-main class="pt-4 ml-4">
       <v-row >
         <v-col>
           <CardProfil />

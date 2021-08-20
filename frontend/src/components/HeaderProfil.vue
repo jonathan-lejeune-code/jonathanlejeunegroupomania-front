@@ -15,11 +15,10 @@
 </template>
 
 <script>
-//import disconectbtn from "@/components/disconectbtn.vue"; //j'appel ma fonction déconnexion
+
 export default {
   name: "Headerprofil",
-  components: { //disconectbtn\\
-   },
+  
 
   data: () => ({}),
 };
@@ -33,9 +32,4 @@ export default {
   margin-right: auto;
 }
 
-.BoutonDisconect {
-  position: absolute;
-  right: 12px;
-  top: 1px;
-}
 </style>
