@@ -5,8 +5,8 @@
       src="../assets/black.jpg"
     >
       <v-row align="end" class="fill-height" >
-        <v-col align-self="start" class="pa-0" cols="12">
-          <v-avatar class="profile" color="grey" size="60%" tile>
+        <v-col align-self="start" class="pa-0 mt-6 ml-6" cols="12" >
+          <v-avatar class="profile" color="grey" size="80%" tile>
             <v-img
               src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"
             ></v-img>

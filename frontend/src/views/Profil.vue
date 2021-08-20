@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import HeaderProfil from "../components/HeaderProfil.vue";
-import Footer from "../components/Footer.vue";
+import HeaderProfil from "../components/Header/HeaderProfil.vue";
+import Footer from "../components/Footer/Footer.vue";
 import axios from "axios";
 export default {
   name: "HomeSignup",

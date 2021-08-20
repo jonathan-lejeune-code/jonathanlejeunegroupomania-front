@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import HeaderHome from '../components/HeaderHome.vue';
-import Footer from '../components/Footer.vue';
+import HeaderHome from '../components/Header/HeaderHome.vue';
+import Footer from '../components/Footer/Footer.vue';
 
 export default {
   components: { 

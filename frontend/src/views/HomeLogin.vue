@@ -25,9 +25,9 @@
 
 <script>
 import axios from "axios";
-import HeaderForm from "../components/HeaderForm.vue";
-import ConnexionForm from "../components/ConnexionForm";
-import Footer from "../components/Footer.vue";
+import HeaderForm from "../components/Header/HeaderForm.vue";
+import ConnexionForm from "../components/Form/ConnexionForm";
+import Footer from "../components/Footer/Footer.vue";
 export default {
   name: "HomeLogin",
   components: {

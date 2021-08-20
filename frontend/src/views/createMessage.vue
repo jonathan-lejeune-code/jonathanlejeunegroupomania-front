@@ -4,6 +4,7 @@
     <v-main class="pt-4 ml-4" fluid>
       <v-row>
         <v-col>
+          
           <CardProfil />
         
          <createM/>
@@ -18,10 +19,10 @@
 
 <script>
 import axios from "axios";
-import HeaderProfil from "../components/HeaderProfil.vue";
+import HeaderProfil from "../components/Header/HeaderProfil.vue";
 import CardProfil from "../components/CardProfil.vue";
-import createM from "../components/CreateM.vue";
-import Footer from "../components/Footer.vue";
+import createM from "../components/Form/CreateM.vue";
+import Footer from "../components/Footer/Footer.vue";
 export default {
   name: "Message",
   components: {
@@ -30,6 +31,7 @@ export default {
     createM,
     Footer,
   },
+  
 
 };
 </script>

@@ -4,7 +4,8 @@
     v-model="valid"
     lazy-validation
   >
-  <label for="inputContent" ><span>Exprimez-vous</span></label><br>
+  <v-col class="mt-9">
+  <span >Exprimez-vous</span><br>
     <v-text-field
       v-model="name"
       :counter="30"
@@ -45,6 +46,7 @@
     >
       Reset Validation
     </v-btn>
+  </v-col>
   </v-form>
 </template>
 

@@ -3,8 +3,62 @@
     <HeaderProfil />
     <v-main class="pt-4 ml-4">
       <v-row >
-        <v-col>
+        <v-col >
           <CardProfil />
+        </v-col>
+        <v-col>
+        <h1>Fil d'actualité</h1>
+         <v-card
+    color="#26c6da"
+    dark
+    max-width="400"
+  >
+    <v-card-title>
+      <v-icon
+        large
+        left
+        color="white"
+      >
+        mdi-google
+      </v-icon>
+      <span class="text-h6 font-weight-light">Groupi</span>
+    </v-card-title>
+
+    <v-card-text class="text-h5 font-weight-bold">
+      "Turns out semicolon-less style is easier and safer in TS because most gotcha edge cases are type invalid as well."
+    </v-card-text>
+
+    <v-card-actions>
+      <v-list-item class="grow">
+        <v-list-item-avatar color="grey darken-3">
+          <v-img
+            class="elevation-6"
+            alt=""
+            src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+          ></v-img>
+        </v-list-item-avatar>
+
+        <v-list-item-content>
+          <v-list-item-title>Evan You</v-list-item-title>
+        </v-list-item-content>
+
+        <v-row
+          align="center"
+          justify="end"
+        >
+          <v-icon class="mr-1" color="teal">
+            mdi-heart
+          </v-icon>
+          <span class="subheading mr-2">256</span>
+          <span class="mr-1">·</span>
+          <v-icon class="mr-1" color="red">
+            mdi-heart-broken
+          </v-icon>
+          <span class="subheading">45</span>
+        </v-row>
+      </v-list-item>
+    </v-card-actions>
+  </v-card>
         </v-col>
       </v-row>
     
@@ -15,9 +69,9 @@
 
 <script>
 import axios from "axios";
-import HeaderProfil from "../components/HeaderProfil.vue";
+import HeaderProfil from "../components/Header/HeaderProfil.vue";
 import CardProfil from "../components/CardProfil.vue";
-import Footer from "../components/Footer.vue";
+import Footer from "../components/Footer/Footer.vue";
 export default {
   name: "Message",
   components: {
@@ -166,104 +220,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-main {
-  background-color: white;
-  background-position: center;
-  justify-content: center;
-  font-family: Arial, Helvetica, sans-serif;
-}
 
-.container1{
-  margin-left: 30px;
-  margin-right: auto;
-  width: 400px;
-  border: solid 5px black;
-  border-radius: 10px;
-  background-color: white;
-}
-.profilsansphoto {
-  color: blue;
-  position: absolute;
-  right: 60px;
-}
-.container2 {
-  margin-left: auto;
-  width: 600px;
-background-color: purple;
-
-}
-
-.form-group{
-  width: 200px;
-  margin-right: auto;
-  margin-left: auto;
-}
-.photoprofil {
-  /*photo profil de la personne qui poste le message*/
-  height: 65px;
-  width: 65px;
-  border-radius: 50px;
-  margin-top: 8px;
-}
-
-#inputContent,
-#inputTitle,
-textarea {
-  border: 2px solid none;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  box-shadow: 1px 1px 1px black;
-}
-
-span {
-  /*titre, contenu... en gras */
-  font-weight: bold;
-  font-size: 25px;
-}
-.test {
-  /*contient le fil d'actualités et le reste des infos*/
-  display: flex;
-  flex-direction: column;
-  background-color: #fffafa;
-  /*background-image: url("../assets/icon.png");*/
-  background-position: center;
-  background-size: 25%;
-}
-
-.mdi-pencil {
-  font-size: 30px;
-}
-
-#btn-sup,
-.btn-publier {
-  margin-top: 10px;
-  padding: 5px;
-  font-size: 15px;
-  background: linear-gradient(black, teal);
-  text-decoration: none;
-  color: white;
-  border: 0px solid;
-  border-radius: 20px;
-  cursor: pointer;
-}
-#btn-sup:hover {
-  opacity: 0.8;
-  background: linear-gradient(black, red);
-  text-shadow: 2px 2px 2px black;
-  box-shadow: 2px 2px 2px black;
-  transition-duration: 0.15s;
-}
-.btn-publier:hover {
-  opacity: 0.8;
-  background: linear-gradient(green, black);
-  text-shadow: 2px 2px 2px black;
-  box-shadow: 2px 2px 2px black;
-  transition-duration: 0.15s;
-}
-
-.cacher {
-  /*je cache le texte du bouton pour WAVE*/
-  display: none;
-}
 </style>>

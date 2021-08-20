@@ -5,7 +5,7 @@
       class="logo"
       contain
       min-width="100"
-      src="../assets/icon-left-font-monochrome-white.png"
+       src="\src\assets\icon-left-font-monochrome-white.png"
       width="300px"
     />
 

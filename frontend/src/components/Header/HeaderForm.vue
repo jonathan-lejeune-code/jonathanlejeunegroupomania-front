@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app color="teal darken-4" dark>
+     <v-app-bar app color="teal darken-4" dark>
       <div class="d-flex align-center">
 
         <v-img
@@ -7,26 +7,21 @@
           class="logo"
           contain
           min-width="100"
-          src="../assets/icon-left-font-monochrome-white.png"
+           src="\src\assets\icon-left-font-monochrome-white.png"
           width="400"/>
       </div>
       <div id="btn">
         <v-btn class="button" >
-          <router-link class="lien" to="/signup">Inscription</router-link>
+          <router-link class="lien" to="/">Accueil</router-link>
           <v-icon>mdi-account</v-icon>
         </v-btn>
-
-       <v-btn  class="button">
-        <router-link class="lien" to="/login">Connexion</router-link>
-        <v-icon>mdi-lock-open-variant</v-icon>
-       </v-btn>
-      </div>
+     </div>
     </v-app-bar>
 </template>
 
 <script>
 export default {
-  name: "HeaderHome",
+  name: "HeaderForm",
 };
 </script>
 

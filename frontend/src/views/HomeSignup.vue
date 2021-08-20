@@ -25,9 +25,9 @@
 
 <script>
 import axios from "axios";
-import HeaderForm from '../components/HeaderForm.vue'
-import InscriptionForm from '../components/InscriptionForm'
-import Footer from '../components/Footer.vue'
+import HeaderForm from '../components/Header/HeaderForm.vue'
+import InscriptionForm from '../components/Form/InscriptionForm.vue'
+import Footer from '../components/Footer/Footer.vue'
 export default {
     name: 'HomeSignup',
     components: {
