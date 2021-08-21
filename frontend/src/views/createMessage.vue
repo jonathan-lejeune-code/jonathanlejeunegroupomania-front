@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <HeaderProfil />
-    <v-main class="pt-4 ml-4" fluid>
+    <v-main class="pt-4 ml-4" fluid src="https://picsum.photos/1920/1080?random" >
       <v-row>
         <v-col>
           
@@ -39,4 +39,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 </style>
