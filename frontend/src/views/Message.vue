@@ -25,7 +25,7 @@
     </v-card-title>
 
     <v-card-text class="text-h5 font-weight-bold">
-      "Turns out semicolon-less style is easier and safer in TS because most gotcha edge cases are type invalid as well."
+      "{{title}}"
     </v-card-text>
 
     <v-card-actions>
@@ -39,7 +39,7 @@
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title>Evan You</v-list-item-title>
+          <v-list-item-title>{{userid}}</v-list-item-title>
         </v-list-item-content>
 
         <v-row
@@ -112,7 +112,7 @@ export default {
     //},
     axios
       .get(
-        "http://localhost:3000/api/messages", //je récupère les messages postés
+        "http://localhost:3000/api/posts", //je récupère les messages postés
 
         {
           headers: {

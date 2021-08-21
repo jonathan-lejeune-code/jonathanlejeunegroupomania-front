@@ -7,9 +7,9 @@
   <v-col class="mt-9">
   <span >Exprimez-vous</span><br>
     <v-text-field
-      v-model="name"
+      v-model="title"
       :counter="30"
-      :rules="nameRules"
+      :rules="titleRules"
       label="titre"
        prepend-icon="mdi-pencil"
       required
@@ -54,10 +54,10 @@
   export default {
     data: () => ({
       valid: true,
-      name: '',
-      nameRules: [
-        v => !!v || 'Name is required',
-        v => (v && v.length <= 10) || 'Name must be less than 10 characters',
+      Title: '',
+       titleRules: [
+        v => !!v ,
+        v => (v && v.length <= 10) ,
       ],
       
       
