@@ -101,7 +101,7 @@ import axios from "axios";
           min: v => v.length >= 8 || 'Minimum 8 caractére',
           emailMatch: () => (`L'email et le mot de passe que vous avez entrés ne correspondent pas`),
         },
-         photo: '',
+          selectedFile: '',
 
           }
     },
@@ -109,7 +109,7 @@ import axios from "axios";
          methods: {
       sendSignup () {
         const formData = new FormData();
-  formData.append('username', this.name);
+  formData.append('name', this.name);
   formData.append('email', this.email);
   formData.append('password', this.password);
   formData.append('inputFile', this.selectedFile);
