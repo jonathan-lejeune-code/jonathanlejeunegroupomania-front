@@ -31,9 +31,9 @@
       color="teal"
       outlined
       class="mr-4"
-      @click="validate"
+      @click="SendMessage"
     >
-      Validate
+      Envoyé
       <v-icon
           dark
           right
@@ -63,7 +63,7 @@
 
 <script>
 
-
+import axios from "axios";
   export default {
     data: () => ({
       DataMessage: {
@@ -74,21 +74,38 @@
       Title: '',
        titleRules: [
         v => !!v ,
-        v => (v && v.length <= 10) ,
+        v => (v && v.length <= 30) ,
       ],
       
       
     }),
 
     methods: {
-      validate () {
-        this.$refs.form.validate()
-      },
+       SendMessage() { //je récupère est envoie ce dont j'ai besoin pour créer un message
+  const formData = new FormData();
+  formData.append('title', this.DataMessage.title); //.append créé une clé de valeur en récupérant la valeur des inputs (name = 'title' value='this.DataMessage...')
+  formData.append('content', this.DataMessage.content);
+if (formData.get("title") !== null && formData.get("content") !== null
+     //.get renvoie la valeur associé a une clé créé précédement (ex: valeur de 'title' est le resulat de this.datamessage.title)   
+      ) {
+        axios
+          .post("http://localhost:3000/api/messages", formData,{ //je récupère les éléments que je souhaite poster
+            headers: {
+              Authorization: "Bearer " + window.localStorage.getItem("token") //je récupère la clé présent dans le local storage
+            }
+          })
+          .then(response => {
+              console.log(response);
+              document. location. href="http://localhost:8080/message"; //si tout est ok je recharge la page et j'affiche ensuite mon message
+          })
+          .catch(error => console.log(error));
+      }  else {
+        console.log("oops !");
+      }
+    },
+
       reset () {
         this.$refs.form.reset()
-      },
-      resetValidation () {
-        this.$refs.form.resetValidation()
       },
     },
   }
