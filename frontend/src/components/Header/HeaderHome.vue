@@ -7,7 +7,7 @@
           class="logo"
           contain
           min-width="100"
-          src="\src\assets\icon-left-font-monochrome-white.png"
+          src="/src/assets/icon-left-font-monochrome-white.png"
           width="400"/>
       </div>
       <div id="btn">
