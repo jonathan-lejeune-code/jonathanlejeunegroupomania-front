@@ -33,7 +33,7 @@ exports.signup = (req, res, next) => {
 
   if (name.length >= 13 ||name.length <= 4) {
     return res.status(400).json({
-      error: "erreur saisiename (nombres de caractères requis 2 - 12)",
+      error: "erreur saisie name (nombres de caractères requis 2 - 12)",
     });
   }
 
@@ -80,7 +80,7 @@ exports.signup = (req, res, next) => {
         let newUser = models.User.create({
           //si tout est on créé le nouvel utilisateur en récupérant les paramètres utilisé avant
           email: email,
-         name:name,
+          name:name,
           password: bcryptedPassword,
           isAdmin: 0,
           attachementuser: attachmentURL,

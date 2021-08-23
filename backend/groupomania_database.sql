@@ -7,8 +7,7 @@
 
 CREATE TABLE `users` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,/* INT (nombre entier) UNSIGNED (on commence à partir de ) NOT NULL (Toujours renseigné) AUTO_INCREMENT (incrémentation automatique)*/
-  `lastName` VARCHAR(255) NOT NULL,         /* VARCHAR (Nombre de caractères)*/
-  `firstName` VARCHAR(255) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,         /* VARCHAR (Nombre de caractères)*/
   `email` VARCHAR(50) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `moderation` INT UNSIGNED DEFAULT NULL,   /* NOUS METTONS EN PLACE UNE COLONNE POUR LA VALIDATION PAR LE MODERATEUR*/
