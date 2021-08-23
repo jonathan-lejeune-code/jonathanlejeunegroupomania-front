@@ -1,8 +1,7 @@
 //lieu on place l'application express
 const express = require("express"); //on importe express qu'on a installer via le terminal
 const bodyParser = require("body-parser"); //permet d'extraire l'objet JSON de la demande (Post) on importe body parser qu'on a installé via la terminal
-const messagesroutes = require("./routes/messages"); //on importe les routeurs sur notre application
-const userroutes = require("./routes/user");
+
 
 const path = require("path"); // permet de créer la route affichant les images, on donne accès à un chemin permettant de gérer les fichiers (images)
 const helmet = require("helmet"); //, permet d'éviter les attaques de type cross-site  scripting(qui consiste à pouvoir modifier le contenu d'une page html et trompé l'utilisateur) configure de manière appropriée des en-têtes HTTP.
@@ -52,7 +51,6 @@ app.use(bodyParser.json()); //permettra de traduire le corps de la reqûete reç
 app.use(helmet()); //collection de middleware pour Express qui aide à sécuriser les applications en définissant certaines headers HTTP
 app.use(limiter); // application du package pour éviter attaque de force brute (permet de tester plusieurs mdp pour un utilisateur)
 app.use("/images", express.static(path.join(__dirname, "images"))); //permet de charger les fichiers qui sont dans le repertoire images, gère les images de façon statique
-app.use("/api/messages", messagesroutes); //on définit l'url/chemin principal qu'utilisera notre routeur (user.js)
-app.use("/api/auth", userroutes);
+
 
 module.exports = app;
