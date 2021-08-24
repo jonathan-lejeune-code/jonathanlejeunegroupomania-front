@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
           foreignKey: "userId",
           onDelete: "CASCADE",
         });
-      return User;
+      
     };
     User.hasMany(
       models.Comment,
@@ -36,5 +36,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'User',
   });
+  return User;
 };
 
