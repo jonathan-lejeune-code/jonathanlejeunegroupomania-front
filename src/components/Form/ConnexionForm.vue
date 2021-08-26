@@ -2,17 +2,15 @@
   <v-row justify="center">
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-text-field
-        v-model="email"
-        :rules="emailRules"
+        v-model="dataLogin.email"
         label="E-mail"
         prepend-icon="mdi-email-edit-outline"
         required
       ></v-text-field>
 
       <v-text-field
-        v-model="password"
+        v-model="dataLogin.password"
         :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-        :rules="[rules.required, rules.min]"
         :type="show1 ? 'text' : 'password'"
         name="input-15-5"
         label="Mot de passe"
@@ -49,36 +47,28 @@ export default {
   name: "ConnexionForm",
   data() {
     return {
+      dataLogin: {
+        email: null,
+        password: null,
+      },
       email: "",
-      emailRules: [
-        (v) => !!v || "E-mail est obligatoire",
-        (v) => /.+@.+\..+/.test(v) || "L'email doit être valide",
-      ],
       show1: false,
       password: "",
-      rules: {
-        required: (value) => !!value || "Obligatoire",
-        min: (v) => v.length >= 8 || "Minimum 8 caractére",
-        emailMatch: () =>
-          `L'email et le mot de passe que vous avez entrés ne correspondent pas`,
-      },
     };
   },
   methods: {
     Vlogin() {
-      if (this.email == null || this.password == null) {
+      if (this.dataLogin.email !== null || this.dataLogin.password !== null) {
         axios
-          .post("http://localhost:3000/api/auth/login")
+          .post("http://localhost:3000/api/auth/login", this.dataLogin)
           .then((response) => {
-            console.log(response);
             localStorage.setItem("token", response.data.token);
             document.location.href = "http://localhost:8080/message";
           })
           .catch((error) => console.log(error));
+      } else {
+        console.log("Erreur est survenue !");
       }
-    },
-    reset() {
-      this.$refs.form.reset();
     },
   },
 };
