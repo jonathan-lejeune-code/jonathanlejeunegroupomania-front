@@ -57,6 +57,7 @@ export default {
       msgError: "",
     };
   },
+
   methods: {
     createPublication() {
       if (this.contentPublication.content && contentPublication.title) {

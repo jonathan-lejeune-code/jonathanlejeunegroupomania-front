@@ -20,14 +20,7 @@
         @click:append="show1 = !show1"
       ></v-text-field>
 
-      <v-btn
-        :loading="loading"
-        :disabled="loading"
-        color="teal"
-        outlined
-        class="mr-4"
-        @click="Vlogin"
-      >
+      <v-btn color="teal" outlined class="mr-4" @click="Vlogin">
         Connexion
         <v-icon dark right> mdi-checkbox-marked-circle </v-icon>
       </v-btn>
