@@ -1,5 +1,5 @@
 <template>
-  <v-card class="" max-width="200">
+  <v-card class="" max-width="200" tile>
     <v-img height="100%" src="../assets/black.jpg">
       <v-row align="end" class="fill-height">
         <v-col align-self="start" class="pa-0 mt-6 ml-6" cols="12">
@@ -21,14 +21,8 @@
             </v-list-item-content>
           </v-list-item>
           <v-divider class="my-1"></v-divider>
-          <v-btn
-            depressed
-            rounded
-            text
-            @click.prevent="createMessage"
-            color="white"
-          >
-            Crée Message
+          <v-btn depressed rounded text @click.prevent="Message" color="white">
+            Fil d'actualité
           </v-btn>
           <v-divider class="my-1"></v-divider>
           <v-btn
@@ -64,9 +58,9 @@ export default {
       .catch((err) => console.log(err));
   },
   methods: {
-    createMessage() {
+    Message() {
       localStorage.clear();
-      document.location.href = "http://localhost:8080/createMessage";
+      document.location.href = "http://localhost:8080/message";
     },
     disconect() {
       localStorage.clear();

@@ -1,120 +1,132 @@
 <template>
-  <v-form
-    ref="form"
-    v-model="valid"
-    lazy-validation
-  >
-  <v-col class="mt-9">
-  <span >Exprimez-vous</span><br>
-    <v-text-field
-      v-model="DataMessage.title"
-      :counter="30"
-      :rules="titleRules"
-      label="titre"
-       prepend-icon="mdi-pencil"
-      required
-    ></v-text-field>
+  <div>
+    <h3>Ecrivez quelque chose :</h3>
+    <br />
+    <div class="field">
+      <form @submit.prevent="createPublication">
+        <div class="control">
+          <textarea
+            class="textarea"
+            cols="55"
+            rows="1"
+            v-model="contentPublication.title"
+            placeholder="Titre"
+          ></textarea>
+          <br />
 
-    <v-textarea
-          class="mx-2"
-          label="Message"
-          v-model="DataMessage.content"
-          rows="1"
-          :counter="250"
-          prepend-icon="mdi-comment"
-        ></v-textarea>
+          <textarea
+            class="textarea"
+            cols="55"
+            rows="5"
+            v-model="contentPublication.content"
+            placeholder="Votre message"
+          ></textarea>
+          <br />
+        </div>
 
-    <v-btn
-     
-      :loading="loading"
-      :disabled="loading"
-      color="teal"
-      outlined
-      class="mr-4"
-      @click="SendMessage"
-    >
-      Envoyé
-      <v-icon
-          dark
-          right
-        >
-          mdi-checkbox-marked-circle
-        </v-icon>
-    </v-btn>
-
-    <v-btn
-      color="indigo"
-      class="mr-4"
-      outlined
-      @click="$refs.form.reset()"
-    >
-      Reset Formulaire
-
-      <v-icon>
-          dark
-          right
-          mdi-reload
-      </v-icon>
-    </v-btn>
-
-  </v-col>
-  </v-form>
+        <input type="submit" class="btnS" value="Envoyer" />
+      </form>
+    </div>
+    <div class="field" id="pubForm">
+      <div
+        class="card"
+        v-for="contentPublication in contentPublications"
+        :key="contentPublication.id"
+      >
+        <div class="content"></div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-
 import axios from "axios";
-  export default {
-    data: () => ({
-      DataMessage: {
-        title: null,
-        content: null,
+export default {
+  name: "CreatePublication",
+  props: {
+    submit: Function,
+  },
+  data() {
+    return {
+      wallCount: 0,
+      contentPublications: [],
+      contentPublication: {
+        content: "",
+        title: "",
       },
-      valid: true,
-      Title: '',
-       titleRules: [
-        v => !!v ,
-        v => (v && v.length <= 30) ,
-      ],
-      
-      
-    }),
-
-    methods: {
-       SendMessage() { //je récupère est envoie ce dont j'ai besoin pour créer un message
-  const formData = new FormData();
-  formData.append('title', this.DataMessage.title); //.append créé une clé de valeur en récupérant la valeur des inputs (name = 'title' value='this.DataMessage...')
-  formData.append('content', this.DataMessage.content);
-if (formData.get("title") !== null && formData.get("content") !== null
-     //.get renvoie la valeur associé a une clé créé précédement (ex: valeur de 'title' est le resulat de this.datamessage.title)   
-      ) {
+      msgError: "",
+    };
+  },
+  methods: {
+    createPublication() {
+      if (this.contentPublication.content && contentPublication.title) {
+        this.wallCount++;
+        const fd = new FormData();
+        fd.append("title", this.contentPublication.title);
+        fd.append("content", this.contentPublication.content);
         axios
-          .post("http://localhost:3000/api/messages", formData,{ //je récupère les éléments que je souhaite poster
+          .post("http://localhost:3000/api/publications", fd, {
             headers: {
-              Authorization: "Bearer " + window.localStorage.getItem("token") //je récupère la clé présent dans le local storage
-            }
+              Authorization: "Bearer " + window.localStorage.getItem("token"),
+            },
           })
-          .then(response => {
-              console.log(response);
-              document. location. href="http://localhost:8080/message"; //si tout est ok je recharge la page et j'affiche ensuite mon message
-          })
-          .catch(error => console.log(error));
-      }  else {
-        console.log("oops !");
+          .then(() => this.submit())
+          .catch((error) => (this.msgError = error));
+        this.contentPublications.unshift({
+          id: this.wallCount,
+          content: this.contentPublication.content,
+          title: this.contentPublication.title,
+        });
+        this.contentPublication.content = "";
+        this.contentPublication.title = "";
       }
     },
-
-      reset () {
-        this.$refs.form.reset()
-      },
-    },
-  }
+  },
+};
 </script>
 
-<style lang="scss" scoped>
-span { /*titre, contenu... en gras */
-  
+<style>
+h3 {
   font-weight: bold;
-  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  font-size: 35px;
+  color: teal;
 }
-</style>
+.field {
+  display: flex;
+  justify-content: center;
+}
+.button {
+  margin-top: 10px;
+}
+.card {
+  text-align: justify;
+  width: 400px;
+  margin-top: 50px;
+}
+#pubForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  margin-right: 30px;
+  margin-left: 30px;
+  justify-content: center;
+  align-items: center;
+}
+.postImg {
+  width: 150px;
+}
+.btnS {
+  background-color: teal;
+  color: #ffff;
+  margin-top: 10px;
+  width: 100px;
+  height: 50px;
+  font-size: 1.3em;
+}
+</style>zzz
