@@ -9,7 +9,7 @@ Vue.use(Vuex)
 
 Vue.config.productionTip = false;
 
-import store from "./store/store";
+import store from "./store";
 
 new Vue({
   router,

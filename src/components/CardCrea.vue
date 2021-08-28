@@ -1,5 +1,5 @@
 <template>
-  <v-card class="" max-width="200" tile>
+  <v-card class="mr-" max-width="200" tile>
     <v-img height="100%" src="../assets/black.jpg">
       <v-row align="end" class="fill-height">
         <v-col align-self="start" class="pa-0 mt-6 ml-6" cols="12">
@@ -13,10 +13,10 @@
           <v-list-item color="rgba(0, 0, 0, .4)" dark>
             <v-list-item-content>
               <v-list-item-title class="text-h6 mb-5">
-                bonjour: {{ user.username }}
+                bonjour:{{ user.username }}
               </v-list-item-title>
               <v-list-tile-sub-title
-                >mail : {{ user.email }}</v-list-tile-sub-title
+                >mail :{{ user.email }}</v-list-tile-sub-title
               >
             </v-list-item-content>
           </v-list-item>
@@ -42,21 +42,17 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import axios from "axios";
 export default {
   data() {
-    return {
-      user: "",
-    };
+    return {};
   },
-  created() {
-    axios
-      .get("http://localhost:3000/api/auth", {
-        headers: { Authorization: "Bearer " + localStorage.token },
-      })
-      .then((response) => (this.user = response.data.user))
-      .catch((err) => console.log(err));
+
+  computed: {
+    ...mapState(["user"]),
   },
+
   methods: {
     Message() {
       localStorage.clear();

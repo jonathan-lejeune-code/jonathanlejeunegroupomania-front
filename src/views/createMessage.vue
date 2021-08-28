@@ -1,12 +1,8 @@
 <template>
   <v-app>
     <HeaderProfil />
-    <v-main
-      class="pt-4 ml-4"
-      fluid
-      src="https://picsum.photos/1920/1080?random"
-    >
-      <v-row>
+    <v-main class="pt-4 ml-4">
+      <v-row class="">
         <v-col>
           <CardCrea />
 
