@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import axios from "axios";
 export default {
   name: "ConnexionForm",
@@ -49,6 +50,11 @@ export default {
       password: "",
     };
   },
+
+  computed: {
+    ...mapState(["user"]),
+  },
+
   methods: {
     Vlogin() {
       if (this.dataLogin.email !== null || this.dataLogin.password !== null) {

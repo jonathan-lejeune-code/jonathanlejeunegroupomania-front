@@ -48,20 +48,25 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import axios from "axios";
 export default {
   data() {
-    return {};
+    return {
+      user: "",
+    };
   },
 
-  computed: {
-    ...mapState(["user"]),
+  created() {
+    axios
+      .get("http://localhost:3000/api/auth/", {
+        headers: { Authorization: "Bearer " + localStorage.token },
+      })
+      .then((response) => (this.user = response.data.user))
+      .catch((err) => console.log(err));
   },
 
   methods: {
     createMessage() {
-      localStorage.clear();
       document.location.href = "http://localhost:8080/createMessage";
     },
     disconect() {
