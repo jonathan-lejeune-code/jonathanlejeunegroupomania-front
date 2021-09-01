@@ -9,17 +9,19 @@
             ></v-img>
           </v-avatar>
         </v-col>
-        <v-col class="py-0">
-          <v-list-item color="rgba(0, 0, 0, .4)" dark>
+        <v-col class="py-0 text-center">
+          <v-list-item color="white" dark>
             <v-list-item-content>
               <v-list-item-title class="text-h6 mb-5">
-                bonjour: {{ user.username }}
+                {{ user.username }}
               </v-list-item-title>
-              <v-list-tile-sub-title
-                >mail : {{ user.email }}</v-list-tile-sub-title
-              >
+              <v-list-tile-sub-title> {{ user.email }}</v-list-tile-sub-title>
             </v-list-item-content>
           </v-list-item>
+          <v-divider class="my-1"></v-divider>
+          <v-btn depressed rounded text @click.prevent="MyProfil" color="white">
+            Mon profil
+          </v-btn>
           <v-divider class="my-1"></v-divider>
           <v-btn
             depressed
@@ -66,6 +68,9 @@ export default {
   },
 
   methods: {
+    MyProfil() {
+      document.location.href = "http://localhost:8080/profil";
+    },
     createMessage() {
       document.location.href = "http://localhost:8080/createMessage";
     },

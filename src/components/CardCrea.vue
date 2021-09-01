@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mr-" max-width="200" tile>
+  <v-card class="" max-width="200" tile>
     <v-img height="100%" src="../assets/black.jpg">
       <v-row align="end" class="fill-height">
         <v-col align-self="start" class="pa-0 mt-6 ml-6" cols="12">
@@ -9,19 +9,17 @@
             ></v-img>
           </v-avatar>
         </v-col>
-        <v-col class="py-0">
-          <v-list-item color="rgba(0, 0, 0, .4)" dark>
+        <v-col class="py-0 text-center">
+          <v-list-item color="white" dark>
             <v-list-item-content>
               <v-list-item-title class="text-h6 mb-5">
-                bonjour:{{ user.username }}
+                {{ user.username }}
               </v-list-item-title>
-              <v-list-tile-sub-title
-                >mail :{{ user.email }}</v-list-tile-sub-title
-              >
+              <v-list-tile-sub-title>{{ user.email }}</v-list-tile-sub-title>
             </v-list-item-content>
           </v-list-item>
           <v-divider class="my-1"></v-divider>
-          <v-btn depressed rounded text @click.prevent="Message" color="white">
+          <v-btn depressed rounded text @click.prevent="Actual" color="white">
             Fil d'actualité
           </v-btn>
           <v-divider class="my-1"></v-divider>
@@ -60,7 +58,7 @@ export default {
   },
 
   methods: {
-    Message() {
+    Actual() {
       document.location.href = "http://localhost:8080/message";
     },
     disconect() {

@@ -42,7 +42,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "CreatePublication",
+  name: "CreateM",
   props: {
     submit: Function,
   },
@@ -54,7 +54,6 @@ export default {
         content: "",
         title: "",
       },
-      msgError: "",
     };
   },
 

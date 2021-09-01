@@ -5,7 +5,6 @@
       <v-row class="">
         <v-col>
           <CardCrea />
-
           <createM />
         </v-col>
       </v-row>
@@ -23,7 +22,7 @@ import CardCrea from "../components/CardCrea.vue";
 import createM from "../components/Form/CreateM.vue";
 import Footer from "../components/Footer/Footer.vue";
 export default {
-  name: "Message",
+  name: "CreateMessage",
   components: {
     HeaderProfil,
     CardCrea,
