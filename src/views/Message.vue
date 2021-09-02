@@ -3,51 +3,59 @@
     <HeaderProfil />
     <v-main class="pt-4 ml-4">
       <v-row>
-        <v-col>
+        <v-col md="4">
           <CardProfil />
         </v-col>
-        <v-col>
-          <h1>Fil d'actualité</h1>
-          <v-card color="#26c6da" dark max-width="400" class="">
-            <v-card-title>
-              <v-icon large left color="white"> mdi-google</v-icon>
-              <span class="text-h6 font-weight-light">
-                : {{ publication.title }}</span
-              >
-            </v-card-title>
+        <div id="wall" class="wall">
+          <h1 class="titre title">Partager les publications :</h1>
 
-            <v-card-text class="text-h5 font-weight-bold">
-              " {{ publication.content }}"
-            </v-card-text>
+          <div class="field" id="pubForm">
+            <div
+              class="card"
+              v-for="publication in allPublications"
+              :key="publication.id"
+            >
+              <div class="ContentPost">
+                <H4>{{ publication.title }} </H4>
 
-            <v-card-actions>
-              <v-list-item class="grow">
-                <v-list-item-content>
-                  <v-list-item-title
-                    >Groupi de :{{
-                      publication.User.username
-                    }}</v-list-item-title
-                  >
-                </v-list-item-content>
-
-                <v-row align="center" justify="end">
-                  <v-icon class="mr-1" color="teal"> mdi-heart </v-icon>
-                  <span class="subheading mr-2">256</span>
+                {{ publication.content }}
+                <div class="FooterPost">
+                  Publié par <em>{{ publication.User.username }}</em> le
+                  <em>{{ publication.createdAt.split(" ")[0] }}</em> à
+                  <em>{{ publication.updatedAt }}</em>
+                </div>
+                <footer class="card-footer">
                   <v-btn
-                    class="ma-2"
-                    text
                     icon
-                    color="red "
-                    alt="supprimer"
+                    color="red"
+                    href="#"
+                    class="card-footer-item"
+                    v-if="publication.UserId == user.id || user.isAdmin == true"
+                    ><router-link
+                      :to="{
+                        name: 'UpdatePost',
+                        params: { id: publication.id },
+                      }"
+                    >
+                      <v-icon>mdi-pencil</v-icon>
+                    </router-link>
+                  </v-btn>
+
+                  <v-btn
+                    icon
+                    color="red"
+                    href="#"
+                    class="card-footer-item"
+                    v-if="publication.UserId == user.id || user.isAdmin == true"
                     @click.prevent="() => deletePost(publication.id)"
                   >
                     <v-icon>mdi-delete-sweep</v-icon>
                   </v-btn>
-                </v-row>
-              </v-list-item>
-            </v-card-actions>
-          </v-card>
-        </v-col>
+                </footer>
+              </div>
+            </div>
+          </div>
+        </div>
       </v-row>
     </v-main>
     <Footer />
@@ -134,4 +142,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-</style>>
+.titre {
+  color: #122442;
+  font-size: 2em;
+  @media screen and (max-width: 1000px) {
+    font-size: 1em;
+  }
+}
+.wall {
+  width: 700px;
+  background-color: #bdbdbd;
+  min-height: auto;
+  padding: 6rem 0 3rem 0;
+  @media screen and (max-width: 1000px) {
+    margin-top: 50px;
+  }
+}
+h1 {
+  display: flex;
+  justify-content: center;
+}
+
+.ContentPost {
+  background-color: #64b5f6;
+  width: 100%;
+  height: auto;
+}
+
+.FooterPost {
+  color: white;
+  font-size: 12px;
+}
+</style>
