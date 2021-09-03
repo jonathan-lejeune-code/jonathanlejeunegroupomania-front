@@ -24,6 +24,26 @@
           <br />
         </div>
 
+        <div class="file">
+          <label class="file-label">
+            <input
+              class="file-input"
+              type="file"
+              name="inputFile"
+              id="inputFile"
+              aria-describedby="inputFileAddon"
+              @change="uploadImage"
+            />
+
+            <span class="file-cta">
+              <span class="file-icon">
+                <i class="fas fa-upload"></i>
+              </span>
+              <span class="file-label" for="inputFile">Choisir le fichier</span>
+            </span>
+          </label>
+        </div>
+
         <input type="submit" class="btnS" value="Envoyer" />
       </form>
     </div>
@@ -53,6 +73,7 @@ export default {
       contentPublication: {
         content: "",
         title: "",
+        attachment: "",
       },
     };
   },
@@ -64,6 +85,7 @@ export default {
         const fd = new FormData();
         fd.append("title", this.contentPublication.title);
         fd.append("content", this.contentPublication.content);
+        fd.append("inputFile", this.contentPublication.attachment);
         axios
           .post("http://localhost:3000/api/publications", fd, {
             headers: {
@@ -76,10 +98,23 @@ export default {
           id: this.wallCount,
           content: this.contentPublication.content,
           title: this.contentPublication.title,
+          attachment: this.contentPublication.attachment,
         });
         this.contentPublication.content = "";
         this.contentPublication.title = "";
+        this.contentPublication.attachment = "";
       }
+    },
+    uploadImage(evt) {
+      const files = evt.target.files;
+      if (!files.length) return;
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onload = (evt) => {
+        this.contentPublication.attachment = evt.target.result;
+      };
+      // To enable reuploading of same files in Chrome
+      document.querySelector("#inputFile").value = "";
     },
   },
 };

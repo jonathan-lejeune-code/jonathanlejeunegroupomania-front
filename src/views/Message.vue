@@ -18,6 +18,7 @@
               <div class="ContentPost">
                 <H4>{{ publication.title }} </H4>
 
+                <BlobImage :blob="publication.attachment.data" />
                 {{ publication.content }}
                 <div class="FooterPost">
                   Publié par <em>{{ publication.User.username }}</em> le
@@ -66,12 +67,14 @@
 import axios from "axios";
 import HeaderProfil from "../components/Header/HeaderProfil.vue";
 import CardProfil from "../components/CardProfil.vue";
+import BlobImage from "../components/BlobImage.vue";
 import Footer from "../components/Footer/Footer.vue";
 export default {
   name: "Message",
   components: {
     HeaderProfil,
     CardProfil,
+    BlobImage,
     Footer,
   },
   data() {
@@ -80,13 +83,17 @@ export default {
       publication: {
         User: "",
         id: "",
-        title: "",
         content: "",
+        attachment: "",
         UserId: "",
       },
       allPublications: [],
       likes: 0,
       hasBeenLiked: false,
+      props: {
+        default: true,
+        publication: (route) => ({ search: route.query.q }),
+      },
     };
   },
   created() {
