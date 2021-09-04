@@ -51,6 +51,17 @@
                   >
                     <v-icon>mdi-delete-sweep</v-icon>
                   </v-btn>
+
+                  <v-btn
+                    class="mx-1"
+                    icon
+                    dark
+                    small
+                    color="pink"
+                    @click.prevent="() => likes()"
+                  >
+                    <v-icon dark> mdi-heart </v-icon>{{ likes }}
+                  </v-btn>
                 </footer>
               </div>
             </div>
