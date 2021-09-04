@@ -17,7 +17,7 @@
             >
               <div class="ContentPost">
                 <H4>{{ publication.title }} </H4>
-
+                <BlobImage :blob="publication.attachment" />
                 {{ publication.content }}
                 <div class="FooterPost">
                   Publié par <em>{{ publication.User.username }}</em> le
@@ -60,7 +60,7 @@
                     color="pink"
                     @click.prevent="() => likes()"
                   >
-                    <v-icon dark> mdi-heart </v-icon>{{ likes }}
+                    <v-icon dark> mdi-heart </v-icon> : {{ likes }}
                   </v-btn>
                 </footer>
               </div>
@@ -77,12 +77,14 @@
 import axios from "axios";
 import HeaderProfil from "../components/Header/HeaderProfil.vue";
 import CardProfil from "../components/CardProfil.vue";
+import BlobImage from "../components/BlobImage.vue";
 import Footer from "../components/Footer/Footer.vue";
 export default {
   name: "Message",
   components: {
     HeaderProfil,
     CardProfil,
+    BlobImage,
     Footer,
   },
   data() {
@@ -92,12 +94,17 @@ export default {
         User: "",
         id: "",
         title: "",
+        attachment: "",
         content: "",
         UserId: "",
       },
       allPublications: [],
       likes: 0,
       hasBeenLiked: false,
+      props: {
+        default: true,
+        publication: (route) => ({ search: route.query.q }),
+      },
     };
   },
   created() {
@@ -163,8 +170,11 @@ export default {
 .wall {
   width: 700px;
   background-color: #bdbdbd;
-  min-height: auto;
+  height: 800px;
   padding: 6rem 0 3rem 0;
+  overflow-y: scroll;
+  scrollbar-color: auto;
+
   @media screen and (max-width: 1000px) {
     margin-top: 50px;
   }
@@ -177,7 +187,6 @@ h1 {
 .ContentPost {
   background-color: #64b5f6;
   width: 100%;
-  height: auto;
 }
 
 .FooterPost {
