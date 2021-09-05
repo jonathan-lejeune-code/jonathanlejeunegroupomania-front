@@ -17,7 +17,13 @@
             >
               <div class="ContentPost">
                 <H4>{{ publication.title }} </H4>
-                <BlobImage :blob="publication.attachment" />
+                <v-img
+                  contain
+                  lazy-src=""
+                  max-height="300"
+                  max-width="500"
+                  src="../images/Arrow_season_7.jpg"
+                ></v-img>
                 {{ publication.content }}
                 <div class="FooterPost">
                   Publié par <em>{{ publication.User.username }}</em> le
@@ -52,16 +58,16 @@
                     <v-icon>mdi-delete-sweep</v-icon>
                   </v-btn>
 
-                  <v-btn
+                  <!-- <v-btn
                     class="mx-1"
                     icon
                     dark
                     small
                     color="pink"
-                    @click.prevent="() => likes()"
+                    @click="like {{publication.likes}} "
                   >
-                    <v-icon dark> mdi-heart </v-icon> : {{ likes }}
-                  </v-btn>
+                    <v-icon dark> mdi-heart </v-icon> : {{ publication.likes }}
+                  </v-btn> -->
                 </footer>
               </div>
             </div>
@@ -77,14 +83,14 @@
 import axios from "axios";
 import HeaderProfil from "../components/Header/HeaderProfil.vue";
 import CardProfil from "../components/CardProfil.vue";
-import BlobImage from "../components/BlobImage.vue";
+//import BlobImage from "../components/BlobImage.vue";
 import Footer from "../components/Footer/Footer.vue";
 export default {
   name: "Message",
   components: {
     HeaderProfil,
     CardProfil,
-    BlobImage,
+    //BlobImage,
     Footer,
   },
   data() {
@@ -97,6 +103,7 @@ export default {
         attachment: "",
         content: "",
         UserId: "",
+        likes: "",
       },
       allPublications: [],
       likes: 0,
@@ -137,6 +144,21 @@ export default {
     onSubmit() {
       this.loadPosts();
     },
+
+    like(id_post) {
+      this.$axios
+        .post(`http://localhost:3000/api/publications/${id_post}/like`, {
+          token_user: this.token_user,
+        })
+        .then((response) => {
+          location.reload();
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
     deletePost(id) {
       const post_id = this.allPublications.findIndex(
         (publication) => publication.id === id
@@ -171,9 +193,8 @@ export default {
   width: 700px;
   background-color: #bdbdbd;
   height: 800px;
-  padding: 6rem 0 3rem 0;
+  padding: 10px;
   overflow-y: scroll;
-  scrollbar-color: auto;
 
   @media screen and (max-width: 1000px) {
     margin-top: 50px;
