@@ -19,11 +19,19 @@
             </v-list-item-content>
           </v-list-item>
           <v-divider class="my-1"></v-divider>
-          <v-btn depressed rounded text @click.prevent="MyProfil" color="white">
+          <v-btn
+            class="button"
+            depressed
+            rounded
+            text
+            @click.prevent="MyProfil"
+            color="white"
+          >
             Mon profil
           </v-btn>
           <v-divider class="my-1"></v-divider>
           <v-btn
+            class="button"
             depressed
             rounded
             text
@@ -39,7 +47,7 @@
             text
             @click.prevent="disconect"
             color="white"
-            class="mb-10"
+            class="mb-10 button"
           >
             déconnection
           </v-btn>

@@ -17,13 +17,7 @@
             >
               <div class="ContentPost">
                 <H4>{{ publication.title }} </H4>
-                <v-img
-                  contain
-                  lazy-src=""
-                  max-height="300"
-                  max-width="500"
-                  src="../images/Arrow_season_7.jpg"
-                ></v-img>
+                <BlobImage :blob="publication.attachment.data" />
                 {{ publication.content }}
                 <div class="FooterPost">
                   Publié par <em>{{ publication.User.username }}</em> le
@@ -83,14 +77,14 @@
 import axios from "axios";
 import HeaderProfil from "../components/Header/HeaderProfil.vue";
 import CardProfil from "../components/CardProfil.vue";
-//import BlobImage from "../components/BlobImage.vue";
+import BlobImage from "../components/BlobImage.vue";
 import Footer from "../components/Footer/Footer.vue";
 export default {
   name: "Message",
   components: {
     HeaderProfil,
     CardProfil,
-    //BlobImage,
+    BlobImage,
     Footer,
   },
   data() {
@@ -145,19 +139,19 @@ export default {
       this.loadPosts();
     },
 
-    like(id_post) {
-      this.$axios
-        .post(`http://localhost:3000/api/publications/${id_post}/like`, {
-          token_user: this.token_user,
-        })
-        .then((response) => {
-          location.reload();
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
+    // like(id_post) {
+    //   this.$axios
+    //     .post(`http://localhost:3000/api/publications/${id_post}/like`, {
+    //       token_user: this.token_user,
+    //     })
+    //     .then((response) => {
+    //       location.reload();
+    //       console.log(response);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // },
 
     deletePost(id) {
       const post_id = this.allPublications.findIndex(

@@ -1,5 +1,5 @@
 <template>
-  <v-card class="" max-width="200" tile>
+  <v-card class="" max-width="200">
     <v-img height="100%" src="../assets/black.jpg">
       <v-row align="end" class="fill-height">
         <v-col align-self="start" class="pa-0 mt-6 ml-6" cols="12">
@@ -19,7 +19,14 @@
             </v-list-item-content>
           </v-list-item>
           <v-divider class="my-1"></v-divider>
-          <v-btn depressed rounded text @click.prevent="Actual" color="white">
+          <v-btn
+            class="button"
+            depressed
+            rounded
+            text
+            @click.prevent="Actual"
+            color="white"
+          >
             Fil d'actualité
           </v-btn>
           <v-divider class="my-1"></v-divider>
@@ -29,7 +36,7 @@
             text
             @click.prevent="disconect"
             color="white"
-            class="mb-10"
+            class="mb-10 button"
           >
             déconnection
           </v-btn>

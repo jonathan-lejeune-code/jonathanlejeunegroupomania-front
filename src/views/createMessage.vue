@@ -3,10 +3,10 @@
     <HeaderProfil />
     <v-main class="pt-4 ml-4">
       <v-row class="">
-        <v-col>
+        <v-col md="5">
           <CardCrea />
-          <createM />
         </v-col>
+        <createM class="mt-15" />
       </v-row>
     </v-main>
 

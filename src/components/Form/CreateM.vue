@@ -81,6 +81,11 @@ export default {
         this.contentPublication.title = "";
       }
     },
+    onFileChange(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.createImage(files[0]);
+    },
   },
 };
 </script>
@@ -97,8 +102,15 @@ h3 {
   display: flex;
   justify-content: center;
 }
+
+.textarea {
+  border: solid teal 2px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
 .button {
   margin-top: 10px;
+  background-color: teal;
 }
 .card {
   text-align: justify;
@@ -129,4 +141,4 @@ h3 {
   height: 50px;
   font-size: 1.3em;
 }
-</style>zzz
+</style>
