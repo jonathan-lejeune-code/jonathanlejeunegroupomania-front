@@ -24,6 +24,20 @@
           <br />
         </div>
 
+        <div class="file">
+          <label class="file-label">
+            <input
+              class="file-input"
+              type="url"
+              name="inputFile"
+              id="inputFile"
+              aria-describedby="inputFileAddon"
+              @change="uploadImage"
+            />
+            URL IMAGE
+          </label>
+        </div>
+
         <input type="submit" class="btnS" value="Envoyer" />
       </form>
     </div>
@@ -51,8 +65,9 @@ export default {
       wallCount: 0,
       contentPublications: [],
       contentPublication: {
-        content: "",
         title: "",
+        content: "",
+        attachment: "",
       },
     };
   },
@@ -64,6 +79,7 @@ export default {
         const fd = new FormData();
         fd.append("title", this.contentPublication.title);
         fd.append("content", this.contentPublication.content);
+        fd.append("inputFile", this.contentPublication.attachment);
         axios
           .post("http://localhost:3000/api/publications", fd, {
             headers: {
@@ -74,17 +90,25 @@ export default {
           .catch((error) => (this.msgError = error));
         this.contentPublications.unshift({
           id: this.wallCount,
-          content: this.contentPublication.content,
           title: this.contentPublication.title,
+          content: this.contentPublication.content,
+          attachment: this.contentPublication.attachment,
         });
-        this.contentPublication.content = "";
         this.contentPublication.title = "";
+        this.contentPublication.content = "";
+        this.contentPublication.attachment = "";
       }
     },
-    onFileChange(e) {
-      var files = e.target.files || e.dataTransfer.files;
+    uploadImage(evt) {
+      const files = evt.target.files;
       if (!files.length) return;
-      this.createImage(files[0]);
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onload = (evt) => {
+        this.contentPublication.attachment = evt.target.result;
+      };
+      // To enable reuploading of same files in Chrome
+      document.querySelector("#inputFile").value = "";
     },
   },
 };
@@ -103,7 +127,8 @@ h3 {
   justify-content: center;
 }
 
-.textarea {
+.textarea,
+.file-input {
   border: solid teal 2px;
   border-radius: 10px;
   margin-bottom: 10px;

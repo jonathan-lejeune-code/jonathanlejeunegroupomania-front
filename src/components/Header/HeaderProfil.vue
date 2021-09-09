@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app color="teal darken-4" dark flat>
+  <v-app-bar app color="teal darken-2" dark flat>
     <v-img
       alt="logo groupomania"
       class="logo"

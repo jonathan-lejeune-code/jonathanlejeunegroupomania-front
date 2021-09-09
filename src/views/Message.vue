@@ -17,8 +17,11 @@
             >
               <div class="ContentPost">
                 <H4>{{ publication.title }} </H4>
-                <BlobImage :blob="publication.attachment.data" />
-                {{ publication.content }}
+                <BlobImage
+                  class="Imgpost"
+                  :blob="publication.attachment.data"
+                />
+                <p>{{ publication.content }}</p>
                 <div class="FooterPost">
                   Publié par <em>{{ publication.User.username }}</em> le
                   <em>{{ publication.createdAt.split(" ")[0] }}</em> à
@@ -27,7 +30,7 @@
                 <footer class="card-footer">
                   <v-btn
                     icon
-                    color="red"
+                    color=""
                     href="#"
                     class="card-footer-item"
                     v-if="publication.UserId == user.id || user.isAdmin == true"
@@ -37,7 +40,7 @@
                         params: { id: publication.id },
                       }"
                     >
-                      <v-icon>mdi-pencil</v-icon>
+                      <v-icon color="white">mdi-pencil-circle</v-icon>
                     </router-link>
                   </v-btn>
 
@@ -52,16 +55,9 @@
                     <v-icon>mdi-delete-sweep</v-icon>
                   </v-btn>
 
-                  <!-- <v-btn
-                    class="mx-1"
-                    icon
-                    dark
-                    small
-                    color="pink"
-                    @click="like {{publication.likes}} "
-                  >
+                  <v-btn class="mx-1" icon dark small color="pink">
                     <v-icon dark> mdi-heart </v-icon> : {{ publication.likes }}
-                  </v-btn> -->
+                  </v-btn>
                 </footer>
               </div>
             </div>
@@ -139,20 +135,6 @@ export default {
       this.loadPosts();
     },
 
-    // like(id_post) {
-    //   this.$axios
-    //     .post(`http://localhost:3000/api/publications/${id_post}/like`, {
-    //       token_user: this.token_user,
-    //     })
-    //     .then((response) => {
-    //       location.reload();
-    //       console.log(response);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // },
-
     deletePost(id) {
       const post_id = this.allPublications.findIndex(
         (publication) => publication.id === id
@@ -185,7 +167,7 @@ export default {
 }
 .wall {
   width: 700px;
-  background-color: #bdbdbd;
+  background-color: #e0e0e0;
   height: 800px;
   padding: 10px;
   overflow-y: scroll;
@@ -199,9 +181,34 @@ h1 {
   justify-content: center;
 }
 
+h4 {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  color: white;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: white;
+}
+
+.Imgpost {
+  width: 90%;
+  height: auto;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 .ContentPost {
-  background-color: #64b5f6;
+  background-color: #00796b;
   width: 100%;
+  height: auto;
 }
 
 .FooterPost {
