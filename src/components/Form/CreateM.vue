@@ -10,7 +10,7 @@
             cols="55"
             rows="1"
             v-model="contentPublication.title"
-            placeholder="Titre"
+            placeholder="   titre"
           ></textarea>
           <br />
 
@@ -19,7 +19,7 @@
             cols="55"
             rows="5"
             v-model="contentPublication.content"
-            placeholder="Votre message"
+            placeholder="   Votre message"
           ></textarea>
           <br />
         </div>
@@ -28,13 +28,12 @@
           <label class="file-label">
             <input
               class="file-input"
-              type="url"
-              name="inputFile"
+              type="file"
               id="inputFile"
-              aria-describedby="inputFileAddon"
+              name="inputFile"
+              accept=".png, .jpg, .jpeg"
               @change="uploadImage"
             />
-            URL IMAGE
           </label>
         </div>
 
@@ -56,7 +55,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "CreateM",
+  name: "CreatePublication",
   props: {
     submit: Function,
   },
@@ -69,12 +68,12 @@ export default {
         content: "",
         attachment: "",
       },
+      msgError: "",
     };
   },
-
   methods: {
     createPublication() {
-      if (this.contentPublication.content && contentPublication.title) {
+      if (this.contentPublication.content) {
         this.wallCount++;
         const fd = new FormData();
         fd.append("title", this.contentPublication.title);
@@ -94,7 +93,6 @@ export default {
           content: this.contentPublication.content,
           attachment: this.contentPublication.attachment,
         });
-        this.contentPublication.title = "";
         this.contentPublication.content = "";
         this.contentPublication.attachment = "";
       }
@@ -108,7 +106,7 @@ export default {
         this.contentPublication.attachment = evt.target.result;
       };
       // To enable reuploading of same files in Chrome
-      document.querySelector("#inputFile").value = "";
+      document.querySelector("#input-File").value = "";
     },
   },
 };
@@ -119,23 +117,15 @@ h3 {
   font-weight: bold;
   display: flex;
   justify-content: center;
-  font-size: 35px;
   color: teal;
+  font-size: 30px;
 }
 .field {
   display: flex;
   justify-content: center;
 }
-
-.textarea,
-.file-input {
-  border: solid teal 2px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
 .button {
   margin-top: 10px;
-  background-color: teal;
 }
 .card {
   text-align: justify;
@@ -165,5 +155,12 @@ h3 {
   width: 100px;
   height: 50px;
   font-size: 1.3em;
+}
+
+.textarea,
+.file-input {
+  border: solid teal 2px;
+  border-radius: 10px;
+  padding: 5px;
 }
 </style>
