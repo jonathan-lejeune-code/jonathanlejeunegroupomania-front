@@ -34,6 +34,10 @@
               accept=".png, .jpg, .jpeg"
               @change="uploadImage"
             />
+            <p class="browse"><strong>Taille maximale :</strong> 2 GB.</p>
+            <p class="browse">
+              <strong>Formats supportés : .png, .jpg, .jpeg</strong>.
+            </p>
           </label>
         </div>
 
@@ -95,6 +99,7 @@ export default {
         });
         this.contentPublication.content = "";
         this.contentPublication.attachment = "";
+        document.location.href = "http://localhost:8080/message";
       }
     },
     uploadImage(evt) {
@@ -105,8 +110,6 @@ export default {
       reader.onload = (evt) => {
         this.contentPublication.attachment = evt.target.result;
       };
-      // To enable reuploading of same files in Chrome
-      document.querySelector("#input-File").value = "";
     },
   },
 };

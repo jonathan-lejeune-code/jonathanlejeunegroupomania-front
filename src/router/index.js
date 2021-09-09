@@ -6,6 +6,7 @@ import HomeLogin from '../views/HomeLogin.vue'
 import profil from '../views/Profil.vue'
 import Message from '../views/Message.vue'
 import createMessage from '../views/createMessage.vue'
+import ModifyMessage from '../views/ModifyMessage.vue'
 Vue.use(VueRouter);
 
 const routes = [{
@@ -35,9 +36,16 @@ const routes = [{
     name: 'Message',
     component: Message
   },
-  { path: '/createMessage',
+  {
+    path: '/createMessage',
     name: 'createMessage',
     component: createMessage
+  },
+
+  {
+    path: '/modifyMessage',
+    name: 'modifyMessage',
+    component: ModifyMessage
   },
 
 ];

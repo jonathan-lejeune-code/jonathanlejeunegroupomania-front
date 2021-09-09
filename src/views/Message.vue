@@ -36,7 +36,7 @@
                     v-if="publication.UserId == user.id || user.isAdmin == true"
                     ><router-link
                       :to="{
-                        name: 'UpdatePost',
+                        name: 'modifyMessage',
                         params: { id: publication.id },
                       }"
                     >
@@ -93,7 +93,6 @@ export default {
         attachment: "",
         content: "",
         UserId: "",
-        likes: "",
       },
       allPublications: [],
       likes: 0,
