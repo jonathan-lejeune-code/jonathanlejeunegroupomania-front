@@ -18,10 +18,15 @@
           <input
             class="file-input"
             type="file"
-            name="inputFile"
             id="inputFile"
+            name="inputFile"
+            accept=".png, .jpg, .jpeg"
             @change="selectFile"
           />
+          <p class="browse"><strong>Taille maximale :</strong> 2 GB.</p>
+          <p class="browse">
+            <strong>Formats supportés : .png, .jpg, .jpeg</strong>.
+          </p>
         </label>
       </div>
 
@@ -74,7 +79,7 @@ export default {
           )
           .then(() => {
             this.message === "";
-            this.$router.push("/wall");
+            this.$router.push("/message");
           })
           .catch(() => {
             console.log("erreur de modification");
