@@ -212,5 +212,6 @@ p {
 .FooterPost {
   color: white;
   font-size: 12px;
+  margin-left: 20px;
 }
 </style>
