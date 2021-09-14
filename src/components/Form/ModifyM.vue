@@ -1,37 +1,44 @@
 <template>
-  <div class="field">
-    <form @submit.prevent="editPost">
-      <div class="control">
-        <textarea
-          class="textarea"
-          id="newText"
-          cols="55"
-          rows="5"
-          v-model="editedPost.content"
-          placeholder="Modifiez votre message"
-        ></textarea>
-        <br />
-      </div>
+  <div>
+    <h3>Modifier quelque chose :</h3>
+    <br />
+    <div class="field">
+      <form @submit.prevent="editPost">
+        <div class="control">
+          <textarea
+            class="textarea"
+            id="newText"
+            cols="55"
+            rows="5"
+            v-model="editedPost.content"
+            placeholder="Modifiez votre message"
+          ></textarea>
+          <br />
+        </div>
 
-      <div class="file">
-        <label class="file-label">
-          <input
-            class="file-input"
-            type="file"
-            id="inputFile"
-            name="inputFile"
-            accept=".png, .jpg, .jpeg"
-            @change="selectFile"
-          />
-          <p class="browse"><strong>Taille maximale :</strong> 2 GB.</p>
-          <p class="browse">
-            <strong>Formats supportés : .png, .jpg, .jpeg</strong>.
-          </p>
-        </label>
-      </div>
+        <div class="file">
+          <label class="file-label">
+            <input
+              class="file-input"
+              type="file"
+              id="inputFile"
+              name="inputFile"
+              accept=".png, .jpg, .jpeg"
+              @change="selectFile"
+            />
 
-      <input type="submit" class="button button is-dark" value="Envoyer" />
-    </form>
+            <span class="file-cta">
+              <span class="file-icon">
+                <i class="fas fa-upload"></i>
+              </span>
+              <span class="file-label" for="inputFile">Choisir le fichier</span>
+            </span>
+          </label>
+        </div>
+
+        <input type="submit" class="button button is-dark" value="Envoyer" />
+      </form>
+    </div>
   </div>
 </template>
 <script>
@@ -96,13 +103,28 @@ export default {
       reader.onload = (evt) => {
         this.editedPost.attachment = evt.target.result;
       };
-      // To enable reuploading of same files in Chrome
-      document.querySelector("#inputFile").value = "";
     },
   },
 };
 </script>
 <style scoped>
+h3 {
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  color: teal;
+  font-size: 30px;
+}
+
+.button {
+  background-color: teal;
+  color: #ffff;
+  margin-top: 10px;
+  width: 100px;
+  height: 50px;
+  font-size: 1.3em;
+}
+
 .field {
   margin-top: 100px;
   margin-bottom: 50px;

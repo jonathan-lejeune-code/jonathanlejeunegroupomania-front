@@ -30,7 +30,6 @@
                 <footer class="card-footer">
                   <v-btn
                     icon
-                    color=""
                     href="#"
                     class="card-footer-item"
                     v-if="publication.UserId == user.id || user.isAdmin == true"
