@@ -54,7 +54,7 @@
                     <v-icon>mdi-delete-sweep</v-icon>
                   </v-btn>
 
-                  <v-btn class="mx-1" icon dark small color="pink">
+                  <v-btn class="mx-1" icon dark color="pink">
                     <v-icon dark> mdi-heart </v-icon> : {{ publication.likes }}
                   </v-btn>
                 </footer>
@@ -157,10 +157,11 @@ export default {
 
 <style lang="scss" scoped>
 .titre {
-  color: #122442;
-  font-size: 2em;
+  font-weight: bold;
+  color: #00796b;
+
   @media screen and (max-width: 1000px) {
-    font-size: 1em;
+    font-size: 10px;
   }
 }
 .wall {
@@ -177,6 +178,12 @@ export default {
 h1 {
   display: flex;
   justify-content: center;
+  margin-bottom: 0px;
+}
+
+.card {
+  margin-top: 15px;
+  margin-bottom: 20px;
 }
 
 h4 {
@@ -184,6 +191,7 @@ h4 {
   display: flex;
   justify-content: center;
   color: white;
+  padding-top: 10px;
   margin-bottom: 20px;
 }
 
@@ -213,5 +221,9 @@ p {
   color: white;
   font-size: 12px;
   margin-left: 20px;
+}
+
+footer {
+  margin-left: 10px;
 }
 </style>
