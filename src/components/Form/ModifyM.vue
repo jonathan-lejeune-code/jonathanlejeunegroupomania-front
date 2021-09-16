@@ -2,17 +2,21 @@
   <div>
     <h3>Modifier quelque chose :</h3>
     <br />
-    <div class="field">
+    <v-container class="field">
       <form @submit.prevent="editPost">
         <div class="control">
-          <textarea
+          <v-textarea
             class="textarea"
             id="newText"
             cols="55"
             rows="5"
+            auto-grow
+            outlined
+            color="teal darken-2"
+            counter
             v-model="editedPost.content"
-            placeholder="Modifiez votre message"
-          ></textarea>
+            label="Modifiez votre message"
+          ></v-textarea>
           <br />
         </div>
 
@@ -26,19 +30,12 @@
               accept=".png, .jpg, .jpeg"
               @change="selectFile"
             />
-
-            <span class="file-cta">
-              <span class="file-icon">
-                <i class="fas fa-upload"></i>
-              </span>
-              <span class="file-label" for="inputFile">Choisir le fichier</span>
-            </span>
           </label>
         </div>
 
         <input type="submit" class="button button is-dark" value="Envoyer" />
       </form>
-    </div>
+    </v-container>
   </div>
 </template>
 <script>
@@ -112,12 +109,12 @@ h3 {
   font-weight: bold;
   display: flex;
   justify-content: center;
-  color: teal;
+  color: #00796b;
   font-size: 30px;
 }
 
 .button {
-  background-color: teal;
+  background-color: #00796b;
   color: #ffff;
   margin-top: 10px;
   width: 100px;
@@ -133,6 +130,12 @@ h3 {
   max-width: 600px;
   margin: 100px auto;
 }
+/* .textarea,
+.file-input {
+  border: solid teal 2px;
+  border-radius: 10px;
+  padding: 5px;
+} */
 @media screen and (min-width: 320px) and (max-width: 500px) {
   .card {
     margin: 10px;

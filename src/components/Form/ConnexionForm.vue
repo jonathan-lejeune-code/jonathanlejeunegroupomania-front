@@ -20,7 +20,7 @@
         @click:append="show1 = !show1"
       ></v-text-field>
 
-      <v-btn color="teal" outlined class="mr-4" @click="Vlogin">
+      <v-btn color="teal darken-2" outlined class="mr-4" @click="Vlogin">
         Connexion
         <v-icon dark right> mdi-checkbox-marked-circle </v-icon>
       </v-btn>
@@ -81,7 +81,7 @@ export default {
 
 .form-group {
   font-size: 20px;
-  border: solid teal 2px;
+  border: solid #00796b 2px;
   margin-bottom: 15px;
 }
 
@@ -96,7 +96,7 @@ export default {
   font-weight: bold;
   &:hover {
     font-weight: bold;
-    background-color: teal;
+    background-color: #00796b;
     color: white;
   }
 }

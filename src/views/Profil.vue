@@ -5,7 +5,7 @@
       <v-container>
         <v-row>
           <v-col>
-            <v-sheet color="teal  darken-4" class="pa-5">
+            <v-sheet color="teal darken-2" class="pa-5">
               <h2 class="H2 text-center subtitle pt-5 pb-4">Mon Profil</h2>
               <v-card class="mx-auto pa-2" max-width="50%" min-height="600">
                 <v-img
@@ -104,7 +104,7 @@ p {
   padding-bottom: 5px;
   font-size: 20px;
   margin: 0;
-  color: teal;
+  color: #00796b;
 }
 
 .subtitle {
@@ -116,7 +116,7 @@ p {
 
 .btn {
   font-size: 16px;
-  border: solid teal 5px;
+  border: solid #00796b 5px;
   border-radius: 30px;
   margin-left: auto;
   margin-right: auto;

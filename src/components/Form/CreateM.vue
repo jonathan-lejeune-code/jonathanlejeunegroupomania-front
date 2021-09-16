@@ -2,25 +2,32 @@
   <div>
     <h3>Ecrivez quelque chose :</h3>
     <br />
-    <div class="field">
+    <container class="field">
       <form @submit.prevent="createPublication">
         <div class="control">
-          <textarea
+          <v-textarea
             class="textarea"
             cols="55"
+            auto-grow
+            outlined
+            color="teal darken-2"
             rows="1"
             v-model="contentPublication.title"
-            placeholder="   titre"
-          ></textarea>
+            label="titre"
+          ></v-textarea>
           <br />
 
-          <textarea
+          <v-textarea
             class="textarea"
+            auto-grow
+            outlined
+            color="teal darken-2"
+            counter
             cols="55"
             rows="5"
             v-model="contentPublication.content"
-            placeholder="   Votre message"
-          ></textarea>
+            label="Votre Message"
+          ></v-textarea>
           <br />
         </div>
 
@@ -42,7 +49,7 @@
 
         <input type="submit" class="btnS" value="Envoyer" />
       </form>
-    </div>
+    </container>
     <div class="field" id="pubForm">
       <div
         class="card"
@@ -114,12 +121,12 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 h3 {
   font-weight: bold;
   display: flex;
   justify-content: center;
-  color: teal;
+  color: #00796b;
   font-size: 30px;
 }
 .field {
@@ -151,7 +158,7 @@ h3 {
   width: 150px;
 }
 .btnS {
-  background-color: teal;
+  background-color: #00796b;
   color: #ffff;
   margin-top: 10px;
   width: 100px;
@@ -159,10 +166,10 @@ h3 {
   font-size: 1.3em;
 }
 
-.textarea,
-.file-input {
-  border: solid teal 2px;
-  border-radius: 10px;
-  padding: 5px;
-}
+// .textarea,
+// .file-input {
+//   border: solid teal 2px;
+//   border-radius: 10px;
+//   padding: 5px;
+// }
 </style>

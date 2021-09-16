@@ -15,7 +15,7 @@
         class="imggroupe"
         src="../assets/desk.jpg"
         max-height="600"
-          max-width="600"
+        max-width="600"
       />
     </v-main>
 
@@ -36,11 +36,8 @@ export default {
     Footer,
   },
   data() {
-    return {
-      
-    };
+    return {};
   },
- 
 };
 </script>
 
@@ -49,7 +46,7 @@ export default {
 .subtitle {
   font-size: 2rem;
   font-weight: bold;
-  color: teal;
+  color: #00796b;
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 
@@ -60,7 +57,6 @@ export default {
 .P {
   font-size: 20px;
 }
-
 
 .imggroupe {
   display: block;
