@@ -35,10 +35,23 @@
             depressed
             rounded
             text
+            v-if="user.isAdmin == true"
             @click.prevent="Users"
             color="white"
           >
             Tous les profil
+          </v-btn>
+          <v-divider class="my-1"></v-divider>
+          <v-btn
+            class="button"
+            depressed
+            rounded
+            text
+            v-if="user.isAdmin == true"
+            @click.prevent="Actual"
+            color="white"
+          >
+            Fil d'actualité
           </v-btn>
           <v-divider class="my-1"></v-divider>
 
@@ -93,6 +106,9 @@ export default {
     },
     createMessage() {
       document.location.href = "http://localhost:8080/createMessage";
+    },
+    Actual() {
+      document.location.href = "http://localhost:8080/message";
     },
     disconect() {
       localStorage.clear();

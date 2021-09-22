@@ -171,7 +171,7 @@ export default {
 .wall {
   width: 700px;
   background-color: #e0e0e0;
-  height: 870px;
+  height: 800px;
   padding: 10px;
   overflow-y: scroll;
 
