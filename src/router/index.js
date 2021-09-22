@@ -7,6 +7,8 @@ import profil from '../views/Profil.vue'
 import Message from '../views/Message.vue'
 import createMessage from '../views/createMessage.vue'
 import ModifyMessage from '../views/ModifyMessage.vue'
+import Users from '../views/Users.vue'
+
 
 Vue.use(VueRouter);
 
@@ -47,6 +49,12 @@ const routes = [{
     path: '/modifyMessage',
     name: 'modifyMessage',
     component: ModifyMessage
+  },
+  {
+    path: '/users',
+    name: 'Users',
+    component: Users
+
   },
 
 

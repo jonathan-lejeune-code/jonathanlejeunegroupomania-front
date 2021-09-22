@@ -4,6 +4,7 @@
       <v-text-field
         v-model="dataSignup.username"
         :counter="10"
+        :rules="[rules.required]"
         label="Pseudo"
         prepend-icon="mdi-format-text-variant-outline"
         required
@@ -12,6 +13,7 @@
       <v-text-field
         v-model="dataSignup.email"
         label="E-mail"
+        :rules="[rules.required, rules.email]"
         prepend-icon="mdi-email-edit-outline"
         required
       ></v-text-field>
@@ -19,6 +21,8 @@
       <v-text-field
         v-model="dataSignup.password"
         :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+        :rules="[rules.required, rules.min]"
+        :type="show1 ? 'text' : 'password'"
         name="input-15-5"
         label="Mot de passe"
         hint="Minimum 8 caractére au moins une lettre minuscule, une lettre majuscule, un chiffre et un de ces caractères spéciaux: $ @ % * + - _ !"
@@ -26,17 +30,6 @@
         counter
         @click:append="show1 = !show1"
       ></v-text-field>
-
-      <v-file-input
-        class="file-input"
-        show-size
-        counter
-        type="file"
-        id="inputFile"
-        name="inputFile"
-        accept=".png, .jpg, .jpeg"
-        @change="uploadImage"
-      ></v-file-input>
 
       <v-btn
         :loading="loading"
@@ -73,6 +66,17 @@ export default {
         avatar: null,
       },
       msg: "",
+      show1: false,
+      rules: {
+        email: (value) => {
+          const pattern =
+            /^[a-z0-9!#$ %& '*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&' * +/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/g;
+          return pattern.test(value) || "E-Mail invalide.";
+        },
+        required: (value) => !!value || "Obligatoire.",
+        min: (v) => v.length >= 8 || "Min 8 characters",
+        emailMatch: () => `The email and password you entered don't match`,
+      },
     };
   },
   methods: {

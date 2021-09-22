@@ -3,6 +3,7 @@
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-text-field
         v-model="dataLogin.email"
+        :rules="[rules.required, rules.email]"
         label="E-mail"
         prepend-icon="mdi-email-edit-outline"
         required
@@ -11,6 +12,7 @@
       <v-text-field
         v-model="dataLogin.password"
         :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+        :rules="[rules.required, rules.min]"
         :type="show1 ? 'text' : 'password'"
         name="input-15-5"
         label="Mot de passe"
@@ -35,7 +37,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import axios from "axios";
 export default {
   name: "ConnexionForm",
@@ -48,11 +49,16 @@ export default {
       email: "",
       show1: false,
       password: "",
+      rules: {
+        email: (value) => {
+          const pattern =
+            /^[a-z0-9!#$ %& '*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&' * +/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/g;
+          return pattern.test(value) || "E-Mail invalide.";
+        },
+        required: (value) => !!value || "Obligatoire.",
+        min: (v) => v.length >= 8 || "Min 8 characters",
+      },
     };
-  },
-
-  computed: {
-    ...mapState(["user"]),
   },
 
   methods: {

@@ -35,6 +35,18 @@
             depressed
             rounded
             text
+            @click.prevent="Users"
+            color="white"
+          >
+            Tous les profil
+          </v-btn>
+          <v-divider class="my-1"></v-divider>
+
+          <v-btn
+            class="button"
+            depressed
+            rounded
+            text
             @click.prevent="createMessage"
             color="white"
           >
@@ -85,6 +97,9 @@ export default {
     disconect() {
       localStorage.clear();
       document.location.href = "http://localhost:8080/";
+    },
+    Users() {
+      document.location.href = "http://localhost:8080/users";
     },
   },
 };

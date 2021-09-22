@@ -5,14 +5,6 @@
       <v-row>
         <v-col md="4">
           <CardProfil />
-
-          <v-date-picker
-            class="mt-5"
-            v-model="picker"
-            color="teal darken-2"
-            elevation="15"
-            locale="fr"
-          ></v-date-picker>
         </v-col>
 
         <div id="wall" class="wall">
@@ -213,6 +205,7 @@ p {
   justify-content: center;
   margin-left: 20px;
   margin-right: 20px;
+  margin-top: 10px;
   color: white;
 }
 
