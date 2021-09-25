@@ -62,7 +62,7 @@
               </div>
               <v-expansion-panels>
                 <v-expansion-panel>
-                  <v-expansion-panel-header color="grey">
+                  <v-expansion-panel-header color="grey lighten-1 black--text">
                     Voir les commentaire
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
@@ -80,16 +80,37 @@
                     <v-divider></v-divider>
                     <div class="container3">
                       <v-list id="example-2"
-                        ><v-list-item>
+                        ><v-list-item
+                          class="com"
+                          v-for="comment in comments"
+                          :key="comment.id"
+                        >
                           <v-list-item-content>
-                            <v-list-item-title
-                              >Commentaire de: john</v-list-item-title
+                            <v-list-item-title class="titlecom black--text"
+                              >{{ comments.username }} a dit:</v-list-item-title
                             >
-                            <v-list-item-subtitle>
-                              cj,dsopkfjv,cpodsjfvpoidsjpvj,pisdjvpiqj,ipojvpdf,jvpijsdqp</v-list-item-subtitle
-                            >
-                            <v-list-item-subtitle>
-                              Publié le 25/09/2021</v-list-item-subtitle
+                            <v-list-item-subtitle class="pcom black--text">
+                              {{ comments.content }}
+                            </v-list-item-subtitle>
+                            <v-list-item-subtitle class="pcom1 black--text">
+                              Publié le {{ comments.createdAt.split("T")[0] }} à
+                              {{ comments.createdAt.slice(11, 16) }}
+                              <v-btn
+                                @click.prevent="
+                                  DeleteComment(comments.id, comments.userId)
+                                "
+                                icon
+                                v-if="
+                                  user.id == comments.userId ||
+                                  user.isAdmin == true
+                                "
+                                color="red"
+                                id="btn-sup"
+                                type="submit"
+                                class="btn"
+                              >
+                                <v-icon>mdi-delete-sweep</v-icon>
+                              </v-btn></v-list-item-subtitle
                             >
                           </v-list-item-content>
                         </v-list-item>
@@ -142,8 +163,6 @@ export default {
       picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
-
-      comments: [],
 
       dataComment: {
         content: null,
@@ -320,8 +339,31 @@ textarea {
   border-radius: 10px;
   border: none;
   outline: none;
-  margin-top: 5px;
-  box-shadow: 1px 1px 1px 2px black;
+  margin-top: 7px;
+  box-shadow: 1px 2px 2px 2px #00796b;
+}
+
+.com {
+  border: #00796b 3px solid;
+  border-radius: 10px;
+  background-color: #bdbdbd;
+}
+
+.titlecom {
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.pcom {
+  font-weight: 500;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.pcom1 {
+  font-weight: 900;
+  font-size: 9px;
 }
 
 footer {
