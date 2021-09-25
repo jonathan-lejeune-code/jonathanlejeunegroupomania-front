@@ -60,6 +60,44 @@
                   </v-btn>
                 </footer>
               </div>
+              <v-expansion-panels>
+                <v-expansion-panel>
+                  <v-expansion-panel-header color="grey">
+                    Voir les commentaire
+                  </v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <textarea
+                      type="text"
+                      id="comment"
+                      name="comment"
+                      class="form-control"
+                      v-model="dataComment.content"
+                      placeholder="  Insérer votre commentaire..."
+                    ></textarea>
+                    <v-btn icon v-on:click="createComment(item.id)"
+                      ><v-icon color="teal">mdi-send</v-icon>
+                    </v-btn>
+                    <v-divider></v-divider>
+                    <div class="container3">
+                      <v-list id="example-2"
+                        ><v-list-item>
+                          <v-list-item-content>
+                            <v-list-item-title
+                              >Commentaire de: john</v-list-item-title
+                            >
+                            <v-list-item-subtitle>
+                              cj,dsopkfjv,cpodsjfvpoidsjpvj,pisdjvpiqj,ipojvpdf,jvpijsdqp</v-list-item-subtitle
+                            >
+                            <v-list-item-subtitle>
+                              Publié le 25/09/2021</v-list-item-subtitle
+                            >
+                          </v-list-item-content>
+                        </v-list-item>
+                      </v-list>
+                    </div>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
             </div>
           </div>
         </div>
@@ -104,6 +142,12 @@ export default {
       picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
+
+      comments: [],
+
+      dataComment: {
+        content: null,
+      },
     };
   },
   created() {
@@ -151,6 +195,48 @@ export default {
           })
           .catch((error) => console.log(error));
       }
+    },
+
+    createComment(publicationId) {
+      if (this.dataComment.comment !== null) console.log(this.dataComment);
+      {
+        axios
+          .post(
+            "http://localhost:3000/api/publications/comments",
+            {
+              content: this.dataComment.content,
+              publicationId: publicationId,
+            },
+
+            {
+              //je récupère les éléments que je souhaite poster
+              headers: {
+                Authorization: "Bearer " + window.localStorage.getItem("token"), //je récupère la clé présent dans le local storage
+              },
+            }
+          )
+          .then((response) => {
+            console.log(response);
+            document.location.href = "http://localhost:8080/message"; //si tout est ok je recharge la page et j'affiche ensuite le fil d'actualité
+          })
+          .catch((error) => console.log(error));
+      }
+    },
+
+    DeleteComment(id, userIdOrder) {
+      //'jenvoie l'id du commentaire selectionné ainsi que l'id de la personne qui a créé le commentaire
+      if (window.confirm("Voulez vous vraiment supprimer le commentaire?"))
+        axios
+          .delete("http://localhost:3000/api/publications/comments/" + id, {
+            data: { userIdOrder }, //je récupère les éléments que je souhaite poster
+            headers: {
+              Authorization: "Bearer " + window.localStorage.getItem("token"), //je récupère la clé présent dans le local storage
+            },
+          })
+          .then(() => {
+            window.location.reload();
+          })
+          .catch((error) => console.log(error));
     },
   },
   mounted() {
@@ -226,6 +312,16 @@ p {
   color: white;
   font-size: 12px;
   margin-left: 20px;
+}
+
+textarea {
+  width: 90%;
+  border: 2px solid none;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  margin-top: 5px;
+  box-shadow: 1px 1px 1px 2px black;
 }
 
 footer {
