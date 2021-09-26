@@ -10,7 +10,6 @@
             id="newText"
             cols="55"
             rows="5"
-            auto-grow
             outlined
             color="teal darken-2"
             counter

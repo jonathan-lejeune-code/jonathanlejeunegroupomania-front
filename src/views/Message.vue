@@ -22,7 +22,7 @@
                   class="Imgpost"
                   :blob="publication.attachment.data"
                 />
-                <p>{{ publication.content }}</p>
+                <p class="pcontent">{{ publication.content }}</p>
                 <div class="FooterPost">
                   Publié par <em>{{ publication.User.username }}</em> le
                   <em>{{ publication.createdAt.split(" ")[0] }}</em> à
@@ -211,8 +211,8 @@ export default {
       }
     },
 
-    createComment(publicationId) {
-      if (this.dataComment.comment !== null) console.log(this.dataComment);
+    createComment() {
+      if (this.dataComment.content !== null) console.log(this.dataComment);
       {
         axios
           .post(
@@ -299,10 +299,10 @@ h4 {
   margin-bottom: 20px;
 }
 
-p {
+.pcontent {
   padding: 5px;
+  overflow-wrap: break-word;
   font-size: 18px;
-  display: flex;
   justify-content: center;
   margin-left: 20px;
   margin-right: 20px;
