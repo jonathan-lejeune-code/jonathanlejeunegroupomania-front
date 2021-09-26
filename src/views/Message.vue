@@ -87,17 +87,17 @@
                         >
                           <v-list-item-content>
                             <v-list-item-title class="titlecom black--text"
-                              >{{ comments.username }} a dit:</v-list-item-title
+                              >{{ comment.username }} a dit:</v-list-item-title
                             >
                             <v-list-item-subtitle class="pcom black--text">
-                              {{ comments.content }}
+                              {{ comment.content }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle class="pcom1 black--text">
-                              Publié le {{ comments.createdAt.split("T")[0] }} à
-                              {{ comments.createdAt.slice(11, 16) }}
+                              Publié le {{ comment.createdAt.split("T")[0] }} à
+                              {{ comment.createdAt.slice(11, 16) }}
                               <v-btn
                                 @click.prevent="
-                                  DeleteComment(comments.id, comments.userId)
+                                  DeleteComment(comment.id, comment.userId)
                                 "
                                 icon
                                 v-if="
@@ -145,15 +145,10 @@ export default {
   data() {
     return {
       user: "",
-      publication: {
-        User: "",
-        id: "",
-        title: "",
-        attachment: "",
-        content: "",
-        UserId: "",
-      },
+
       allPublications: [],
+      comments: [],
+
       likes: 0,
       hasBeenLiked: false,
       props: {
@@ -165,7 +160,7 @@ export default {
         .substr(0, 10),
 
       dataComment: {
-        content: null,
+        content: "",
       },
     };
   },
@@ -305,6 +300,7 @@ h4 {
 }
 
 p {
+  padding: 5px;
   font-size: 18px;
   display: flex;
   justify-content: center;

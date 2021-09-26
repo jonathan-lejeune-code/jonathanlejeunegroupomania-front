@@ -8,7 +8,6 @@
           <v-textarea
             class="textarea"
             cols="55"
-            auto-grow
             outlined
             color="teal darken-2"
             rows="1"
@@ -19,7 +18,6 @@
 
           <v-textarea
             class="textarea"
-            auto-grow
             outlined
             color="teal darken-2"
             counter
