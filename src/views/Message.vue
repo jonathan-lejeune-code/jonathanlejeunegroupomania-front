@@ -74,7 +74,7 @@
                       v-model="dataComment.content"
                       placeholder="  Insérer votre commentaire..."
                     ></textarea>
-                    <v-btn icon v-on:click="createComment(item.id)"
+                    <v-btn icon v-on:click="createComment(comment.id)"
                       ><v-icon color="teal">mdi-send</v-icon>
                     </v-btn>
                     <v-divider></v-divider>
@@ -87,14 +87,14 @@
                         >
                           <v-list-item-content>
                             <v-list-item-title class="titlecom black--text"
-                              >{{ comment.username }} a dit:</v-list-item-title
+                              >john a dit:</v-list-item-title
                             >
                             <v-list-item-subtitle class="pcom black--text">
-                              {{ comment.content }}
+                              oui charline JTM
                             </v-list-item-subtitle>
                             <v-list-item-subtitle class="pcom1 black--text">
-                              Publié le {{ comment.createdAt.split("T")[0] }} à
-                              {{ comment.createdAt.slice(11, 16) }}
+                              Publié le à
+
                               <v-btn
                                 @click.prevent="
                                   DeleteComment(comment.id, comment.userId)
@@ -145,10 +145,11 @@ export default {
   data() {
     return {
       user: "",
-
+      newCom: {
+        comments: "",
+      },
       allPublications: [],
       comments: [],
-
       likes: 0,
       hasBeenLiked: false,
       props: {
@@ -211,48 +212,58 @@ export default {
       }
     },
 
-    createComment() {
-      if (this.dataComment.content !== null) console.log(this.dataComment);
-      {
-        axios
-          .post(
-            "http://localhost:3000/api/publications/comments",
-            {
-              content: this.dataComment.content,
-              publicationId: publicationId,
-            },
-
-            {
-              //je récupère les éléments que je souhaite poster
-              headers: {
-                Authorization: "Bearer " + window.localStorage.getItem("token"), //je récupère la clé présent dans le local storage
-              },
-            }
-          )
-          .then((response) => {
-            console.log(response);
-            document.location.href = "http://localhost:8080/message"; //si tout est ok je recharge la page et j'affiche ensuite le fil d'actualité
-          })
-          .catch((error) => console.log(error));
-      }
+    getCom(id) {
+      fetch(`http://localhost:3000/api/publications/${id}/comments`, {
+        method: "GET",
+        headers: { Authorization: authHeader() },
+      })
+        .then(function (res) {
+          if (res.ok) {
+            return res.json();
+          }
+        })
+        .then((response) => {
+          this.messages = response.message;
+          console.log(response.message);
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
     },
+    // postCom(id) {
+    //   axios
+    //     .post(
+    //       `http://localhost:3000/api/publications/${id}/comment`,
+    //       this.newCom,
+    //       {
+    //         headers: { Authorization: authHeader() },
+    //       }
+    //     )
+    //     .then(
+    //       (response) => console.log(response),
+    //       alert("Message envoyé"),
+    //       window.location.reload()
+    //     )
+    //     .catch((error) => console.log(error));
+    // },
 
-    DeleteComment(id, userIdOrder) {
-      //'jenvoie l'id du commentaire selectionné ainsi que l'id de la personne qui a créé le commentaire
-      if (window.confirm("Voulez vous vraiment supprimer le commentaire?"))
-        axios
-          .delete("http://localhost:3000/api/publications/comments/" + id, {
-            data: { userIdOrder }, //je récupère les éléments que je souhaite poster
-            headers: {
-              Authorization: "Bearer " + window.localStorage.getItem("token"), //je récupère la clé présent dans le local storage
-            },
-          })
-          .then(() => {
-            window.location.reload();
-          })
-          .catch((error) => console.log(error));
-    },
+    // DeleteComment(id, userIdOrder) {
+    //   //'jenvoie l'id du commentaire selectionné ainsi que l'id de la personne qui a créé le commentaire
+    //   if (window.confirm("Voulez vous vraiment supprimer le commentaire?"))
+    //     axios
+    //       .delete("http://localhost:3000/api/publications/comments/" + id, {
+    //         data: { userIdOrder }, //je récupère les éléments que je souhaite poster
+    //         headers: {
+    //           Authorization: "Bearer " + window.localStorage.getItem("token"), //je récupère la clé présent dans le local storage
+    //         },
+    //       })
+    //       .then(() => {
+    //         window.location.reload();
+    //       })
+    //       .catch((error) => console.log(error));
+    // },
   },
+
   mounted() {
     this.loadPosts();
   },
@@ -271,7 +282,7 @@ export default {
 .wall {
   width: 700px;
   background-color: #e0e0e0;
-  height: 800px;
+  height: 750px;
   padding: 10px;
   overflow-y: scroll;
 
