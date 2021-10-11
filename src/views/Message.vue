@@ -11,17 +11,10 @@
           <h1 class="titre title">Partager les publications :</h1>
 
           <div class="field" id="pubForm">
-            <div
-              class="card"
-              v-for="publication in allPublications"
-              :key="publication.id"
-            >
+            <div class="card" v-for="publication in allPublications" :key="publication.id">
               <div class="ContentPost">
                 <H4>{{ publication.title }} </H4>
-                <BlobImage
-                  class="Imgpost"
-                  :blob="publication.attachment.data"
-                />
+                <BlobImage class="Imgpost" :blob="publication.attachment.data" />
                 <p class="pcontent">{{ publication.content }}</p>
                 <div class="FooterPost">
                   Publié par <em>{{ publication.User.username }}</em> le
@@ -37,7 +30,7 @@
                     ><router-link
                       :to="{
                         name: 'modifyMessage',
-                        params: { id: publication.id },
+                        params: { id: publication.id }
                       }"
                     >
                       <v-icon color="white">mdi-pencil-circle</v-icon>
@@ -74,17 +67,11 @@
                       v-model="dataComment.content"
                       placeholder="  Insérer votre commentaire..."
                     ></textarea>
-                    <v-btn icon v-on:click="createComment(comment.id)"
-                      ><v-icon color="teal">mdi-send</v-icon>
-                    </v-btn>
+                    <v-btn icon><v-icon color="teal">mdi-send</v-icon> </v-btn>
                     <v-divider></v-divider>
                     <div class="container3">
                       <v-list id="example-2"
-                        ><v-list-item
-                          class="com"
-                          v-for="comment in comments"
-                          :key="comment.id"
-                        >
+                        ><v-list-item class="com">
                           <v-list-item-content>
                             <v-list-item-title class="titlecom black--text"
                               >john a dit:</v-list-item-title
@@ -96,14 +83,9 @@
                               Publié le à
 
                               <v-btn
-                                @click.prevent="
-                                  DeleteComment(comment.id, comment.userId)
-                                "
+                                @click.prevent="DeleteComment(comment.id, comment.userId)"
                                 icon
-                                v-if="
-                                  user.id == comments.userId ||
-                                  user.isAdmin == true
-                                "
+                                v-if="user.id == comments.userId || user.isAdmin == true"
                                 color="red"
                                 id="btn-sup"
                                 type="submit"
@@ -140,38 +122,36 @@ export default {
     HeaderProfil,
     CardProfil,
     BlobImage,
-    Footer,
+    Footer
   },
   data() {
     return {
       user: "",
-      newCom: {
-        comments: "",
-      },
+
       allPublications: [],
       comments: [],
       likes: 0,
       hasBeenLiked: false,
       props: {
         default: true,
-        publication: (route) => ({ search: route.query.q }),
+        publication: route => ({ search: route.query.q })
       },
       picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
 
       dataComment: {
-        content: "",
-      },
+        content: ""
+      }
     };
   },
   created() {
     axios
       .get("http://localhost:3000/api/auth", {
-        headers: { Authorization: "Bearer " + localStorage.token },
+        headers: { Authorization: "Bearer " + localStorage.token }
       })
-      .then((response) => (this.user = response.data.user))
-      .catch((err) => console.log(err));
+      .then(response => (this.user = response.data.user))
+      .catch(err => console.log(err));
   },
   methods: {
     setInfos(payload) {
@@ -181,14 +161,14 @@ export default {
       axios
         .get("http://localhost:3000/api/publications", {
           headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
+            Authorization: "Bearer " + localStorage.getItem("token")
+          }
         })
-        .then((response) => {
+        .then(response => {
           console.log("publication", response.data);
           this.allPublications = response.data;
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -197,76 +177,23 @@ export default {
     },
 
     deletePost(id) {
-      const post_id = this.allPublications.findIndex(
-        (publication) => publication.id === id
-      );
+      const post_id = this.allPublications.findIndex(publication => publication.id === id);
       if (post_id !== -1) {
         this.allPublications.splice(post_id, 1);
         axios
           .delete("http://localhost:3000/api/publications/" + id, {
             headers: {
-              Authorization: "Bearer " + localStorage.getItem("token"),
-            },
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
           })
-          .catch((error) => console.log(error));
+          .catch(error => console.log(error));
       }
-    },
-
-    getCom(id) {
-      fetch(`http://localhost:3000/api/publications/${id}/comments`, {
-        method: "GET",
-        headers: { Authorization: authHeader() },
-      })
-        .then(function (res) {
-          if (res.ok) {
-            return res.json();
-          }
-        })
-        .then((response) => {
-          this.messages = response.message;
-          console.log(response.message);
-        })
-        .catch(function (err) {
-          console.log(err);
-        });
-    },
-    // postCom(id) {
-    //   axios
-    //     .post(
-    //       `http://localhost:3000/api/publications/${id}/comment`,
-    //       this.newCom,
-    //       {
-    //         headers: { Authorization: authHeader() },
-    //       }
-    //     )
-    //     .then(
-    //       (response) => console.log(response),
-    //       alert("Message envoyé"),
-    //       window.location.reload()
-    //     )
-    //     .catch((error) => console.log(error));
-    // },
-
-    // DeleteComment(id, userIdOrder) {
-    //   //'jenvoie l'id du commentaire selectionné ainsi que l'id de la personne qui a créé le commentaire
-    //   if (window.confirm("Voulez vous vraiment supprimer le commentaire?"))
-    //     axios
-    //       .delete("http://localhost:3000/api/publications/comments/" + id, {
-    //         data: { userIdOrder }, //je récupère les éléments que je souhaite poster
-    //         headers: {
-    //           Authorization: "Bearer " + window.localStorage.getItem("token"), //je récupère la clé présent dans le local storage
-    //         },
-    //       })
-    //       .then(() => {
-    //         window.location.reload();
-    //       })
-    //       .catch((error) => console.log(error));
-    // },
+    }
   },
 
   mounted() {
     this.loadPosts();
-  },
+  }
 };
 </script>
 
