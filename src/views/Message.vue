@@ -53,54 +53,6 @@
                   </v-btn>
                 </footer>
               </div>
-              <v-expansion-panels>
-                <v-expansion-panel>
-                  <v-expansion-panel-header color="grey lighten-1 black--text">
-                    Voir les commentaire
-                  </v-expansion-panel-header>
-                  <v-expansion-panel-content>
-                    <textarea
-                      type="text"
-                      id="comment"
-                      name="comment"
-                      class="form-control"
-                      v-model="dataComment.content"
-                      placeholder="  Insérer votre commentaire..."
-                    ></textarea>
-                    <v-btn icon><v-icon color="teal">mdi-send</v-icon> </v-btn>
-                    <v-divider></v-divider>
-                    <div class="container3">
-                      <v-list id="example-2"
-                        ><v-list-item class="com">
-                          <v-list-item-content>
-                            <v-list-item-title class="titlecom black--text"
-                              >john a dit:</v-list-item-title
-                            >
-                            <v-list-item-subtitle class="pcom black--text">
-                              oui charline JTM
-                            </v-list-item-subtitle>
-                            <v-list-item-subtitle class="pcom1 black--text">
-                              Publié le à
-
-                              <v-btn
-                                @click.prevent="DeleteComment(comment.id, comment.userId)"
-                                icon
-                                v-if="user.id == comments.userId || user.isAdmin == true"
-                                color="red"
-                                id="btn-sup"
-                                type="submit"
-                                class="btn"
-                              >
-                                <v-icon>mdi-delete-sweep</v-icon>
-                              </v-btn></v-list-item-subtitle
-                            >
-                          </v-list-item-content>
-                        </v-list-item>
-                      </v-list>
-                    </div>
-                  </v-expansion-panel-content>
-                </v-expansion-panel>
-              </v-expansion-panels>
             </div>
           </div>
         </div>
@@ -118,6 +70,7 @@ import BlobImage from "../components/BlobImage.vue";
 import Footer from "../components/Footer/Footer.vue";
 export default {
   name: "Message",
+
   components: {
     HeaderProfil,
     CardProfil,
@@ -127,9 +80,8 @@ export default {
   data() {
     return {
       user: "",
-
+      id: this.$route.params.id,
       allPublications: [],
-      comments: [],
       likes: 0,
       hasBeenLiked: false,
       props: {
@@ -138,13 +90,11 @@ export default {
       },
       picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
-        .substr(0, 10),
-
-      dataComment: {
-        content: ""
-      }
+        .substr(0, 10)
     };
   },
+
+  //création post
   created() {
     axios
       .get("http://localhost:3000/api/auth", {
