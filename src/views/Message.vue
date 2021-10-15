@@ -53,6 +53,56 @@
                   </v-btn>
                 </footer>
               </div>
+              <v-expansion-panels>
+                <v-expansion-panel>
+                  <v-expansion-panel-header color="grey lighten-1 black--text">
+                    Voir les commentaire
+                  </v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <textarea
+                      type="text"
+                      id="comment"
+                      name="comment"
+                      class="form-control"
+                      v-model="dataComment.content"
+                      placeholder="  Insérer votre commentaire..."
+                    ></textarea>
+                    <v-btn icon v-on:click="createComment(comment.id)"
+                      ><v-icon color="teal">mdi-send</v-icon>
+                    </v-btn>
+                    <v-divider></v-divider>
+                    <div class="container3">
+                      <v-list id="example-2"
+                        ><v-list-item class="com" v-for="comment in comments" :key="comment.id">
+                          <v-list-item-content>
+                            <v-list-item-title class="titlecom black--text"
+                              >john a dit:</v-list-item-title
+                            >
+                            <v-list-item-subtitle class="pcom black--text">
+                              oui charline JTM
+                            </v-list-item-subtitle>
+                            <v-list-item-subtitle class="pcom1 black--text">
+                              Publié le à
+
+                              <v-btn
+                                @click.prevent="DeleteComment(comment.id, comment.userId)"
+                                icon
+                                v-if="user.id == comments.userId || user.isAdmin == true"
+                                color="red"
+                                id="btn-sup"
+                                type="submit"
+                                class="btn"
+                              >
+                                <v-icon>mdi-delete-sweep</v-icon>
+                              </v-btn></v-list-item-subtitle
+                            >
+                          </v-list-item-content>
+                        </v-list-item>
+                      </v-list>
+                    </div>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
             </div>
           </div>
         </div>
@@ -70,7 +120,6 @@ import BlobImage from "../components/BlobImage.vue";
 import Footer from "../components/Footer/Footer.vue";
 export default {
   name: "Message",
-
   components: {
     HeaderProfil,
     CardProfil,
@@ -80,8 +129,11 @@ export default {
   data() {
     return {
       user: "",
-      id: this.$route.params.id,
+      newCom: {
+        comments: ""
+      },
       allPublications: [],
+      comments: [],
       likes: 0,
       hasBeenLiked: false,
       props: {
@@ -90,11 +142,12 @@ export default {
       },
       picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
-        .substr(0, 10)
+        .substr(0, 10),
+      dataComment: {
+        content: ""
+      }
     };
   },
-
-  //création post
   created() {
     axios
       .get("http://localhost:3000/api/auth", {
@@ -125,7 +178,6 @@ export default {
     onSubmit() {
       this.loadPosts();
     },
-
     deletePost(id) {
       const post_id = this.allPublications.findIndex(publication => publication.id === id);
       if (post_id !== -1) {
@@ -138,9 +190,57 @@ export default {
           })
           .catch(error => console.log(error));
       }
+    },
+    getCom(id) {
+      fetch(`http://localhost:3000/api/publications/${id}/comments`, {
+        method: "GET",
+        headers: { Authorization: authHeader() }
+      })
+        .then(function(res) {
+          if (res.ok) {
+            return res.json();
+          }
+        })
+        .then(response => {
+          this.messages = response.message;
+          console.log(response.message);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     }
+    // postCom(id) {
+    //   axios
+    //     .post(
+    //       `http://localhost:3000/api/publications/${id}/comment`,
+    //       this.newCom,
+    //       {
+    //         headers: { Authorization: authHeader() },
+    //       }
+    //     )
+    //     .then(
+    //       (response) => console.log(response),
+    //       alert("Message envoyé"),
+    //       window.location.reload()
+    //     )
+    //     .catch((error) => console.log(error));
+    // },
+    // DeleteComment(id, userIdOrder) {
+    //   //'jenvoie l'id du commentaire selectionné ainsi que l'id de la personne qui a créé le commentaire
+    //   if (window.confirm("Voulez vous vraiment supprimer le commentaire?"))
+    //     axios
+    //       .delete("http://localhost:3000/api/publications/comments/" + id, {
+    //         data: { userIdOrder }, //je récupère les éléments que je souhaite poster
+    //         headers: {
+    //           Authorization: "Bearer " + window.localStorage.getItem("token"), //je récupère la clé présent dans le local storage
+    //         },
+    //       })
+    //       .then(() => {
+    //         window.location.reload();
+    //       })
+    //       .catch((error) => console.log(error));
+    // },
   },
-
   mounted() {
     this.loadPosts();
   }
@@ -151,7 +251,6 @@ export default {
 .titre {
   font-weight: bold;
   color: #00796b;
-
   @media screen and (max-width: 1000px) {
     font-size: 10px;
   }
@@ -162,7 +261,6 @@ export default {
   height: 750px;
   padding: 10px;
   overflow-y: scroll;
-
   @media screen and (max-width: 1000px) {
     margin-top: 50px;
   }
@@ -172,12 +270,10 @@ h1 {
   justify-content: center;
   margin-bottom: 0px;
 }
-
 .card {
   margin-top: 15px;
   margin-bottom: 20px;
 }
-
 h4 {
   font-size: 20px;
   display: flex;
@@ -186,7 +282,6 @@ h4 {
   padding-top: 10px;
   margin-bottom: 20px;
 }
-
 .pcontent {
   padding: 5px;
   overflow-wrap: break-word;
@@ -197,26 +292,22 @@ h4 {
   margin-top: 10px;
   color: white;
 }
-
 .Imgpost {
   max-width: 300px;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
-
 .ContentPost {
   background-color: #00796b;
   width: 100%;
   height: auto;
 }
-
 .FooterPost {
   color: white;
   font-size: 12px;
   margin-left: 20px;
 }
-
 textarea {
   width: 90%;
   border: 2px solid none;
@@ -226,30 +317,25 @@ textarea {
   margin-top: 7px;
   box-shadow: 1px 2px 2px 2px #00796b;
 }
-
 .com {
   border: #00796b 3px solid;
   border-radius: 10px;
   background-color: #bdbdbd;
 }
-
 .titlecom {
   font-weight: 500;
   font-size: 14px;
   margin-bottom: 5px;
 }
-
 .pcom {
   font-weight: 500;
   font-size: 15px;
   margin-bottom: 5px;
 }
-
 .pcom1 {
   font-weight: 900;
   font-size: 9px;
 }
-
 footer {
   margin-left: 10px;
 }
