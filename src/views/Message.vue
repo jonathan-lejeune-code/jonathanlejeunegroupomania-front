@@ -47,7 +47,6 @@
                   >
                     <v-icon>mdi-delete-sweep</v-icon>
                   </v-btn>
-
                   <v-btn class="mx-1" icon dark color="pink">
                     <v-icon dark> mdi-heart </v-icon> : {{ publication.likes }}
                   </v-btn>
@@ -59,32 +58,33 @@
                     Voir les commentaire
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <textarea
-                      type="text"
-                      id="comment"
-                      name="comment"
-                      class="form-control"
-                      v-model="dataComment.content"
-                      placeholder="  Insérer votre commentaire..."
-                    ></textarea>
-                    <v-btn icon v-on:click="createComment(comment.id)"
-                      ><v-icon color="teal">mdi-send</v-icon>
-                    </v-btn>
+                    <form>
+                      <textarea
+                        type="text"
+                        id="comment"
+                        name="comments"
+                        class="form-control"
+                        v-model="newCom.comments"
+                        placeholder="  Ecrivez votre commentaire..."
+                      ></textarea>
+                      <v-btn icon type="button"><v-icon color="teal">mdi-send</v-icon> </v-btn>
+                    </form>
                     <v-divider></v-divider>
                     <div class="container3">
-                      <v-list id="example-2"
-                        ><v-list-item class="com" v-for="comment in comments" :key="comment.id">
+                      <v-list id="example-2">
+                        <v-list-item class="com" v-for="Comment in allComments" :key="Comment.id">
                           <v-list-item-content>
                             <v-list-item-title class="titlecom black--text"
-                              >john a dit:</v-list-item-title
+                              >{{ Comment.User.username }} a dit:</v-list-item-title
                             >
                             <v-list-item-subtitle class="pcom black--text">
-                              oui charline JTM
+                              {{ Comment.comments }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle class="pcom1 black--text">
-                              Publié le à
+                              Publié le {{ Comment.createdAt.split(" ")[0] }} à
+                              {{ Comment.updateAt }}
 
-                              <v-btn
+                              <!-- <v-btn
                                 @click.prevent="DeleteComment(comment.id, comment.userId)"
                                 icon
                                 v-if="user.id == comments.userId || user.isAdmin == true"
@@ -94,8 +94,8 @@
                                 class="btn"
                               >
                                 <v-icon>mdi-delete-sweep</v-icon>
-                              </v-btn></v-list-item-subtitle
-                            >
+                              </v-btn> -->
+                            </v-list-item-subtitle>
                           </v-list-item-content>
                         </v-list-item>
                       </v-list>
@@ -133,18 +133,12 @@ export default {
         comments: ""
       },
       allPublications: [],
-      comments: [],
+      allComments: [],
       likes: 0,
       hasBeenLiked: false,
       props: {
         default: true,
         publication: route => ({ search: route.query.q })
-      },
-      picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-        .toISOString()
-        .substr(0, 10),
-      dataComment: {
-        content: ""
       }
     };
   },
@@ -190,56 +184,7 @@ export default {
           })
           .catch(error => console.log(error));
       }
-    },
-    getCom(id) {
-      fetch(`http://localhost:3000/api/publications/${id}/comments`, {
-        method: "GET",
-        headers: { Authorization: authHeader() }
-      })
-        .then(function(res) {
-          if (res.ok) {
-            return res.json();
-          }
-        })
-        .then(response => {
-          this.messages = response.message;
-          console.log(response.message);
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
     }
-    // postCom(id) {
-    //   axios
-    //     .post(
-    //       `http://localhost:3000/api/publications/${id}/comment`,
-    //       this.newCom,
-    //       {
-    //         headers: { Authorization: authHeader() },
-    //       }
-    //     )
-    //     .then(
-    //       (response) => console.log(response),
-    //       alert("Message envoyé"),
-    //       window.location.reload()
-    //     )
-    //     .catch((error) => console.log(error));
-    // },
-    // DeleteComment(id, userIdOrder) {
-    //   //'jenvoie l'id du commentaire selectionné ainsi que l'id de la personne qui a créé le commentaire
-    //   if (window.confirm("Voulez vous vraiment supprimer le commentaire?"))
-    //     axios
-    //       .delete("http://localhost:3000/api/publications/comments/" + id, {
-    //         data: { userIdOrder }, //je récupère les éléments que je souhaite poster
-    //         headers: {
-    //           Authorization: "Bearer " + window.localStorage.getItem("token"), //je récupère la clé présent dans le local storage
-    //         },
-    //       })
-    //       .then(() => {
-    //         window.location.reload();
-    //       })
-    //       .catch((error) => console.log(error));
-    // },
   },
   mounted() {
     this.loadPosts();
@@ -258,7 +203,7 @@ export default {
 .wall {
   width: 700px;
   background-color: #e0e0e0;
-  height: 750px;
+  height: 880px;
   padding: 10px;
   overflow-y: scroll;
   @media screen and (max-width: 1000px) {
