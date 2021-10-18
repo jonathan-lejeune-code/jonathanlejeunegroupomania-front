@@ -71,8 +71,8 @@
                     </form>
                     <v-divider></v-divider>
                     <div class="container3">
-                      <v-list id="example-2">
-                        <v-list-item class="com" v-for="Comment in allComments" :key="Comment.id">
+                      <v-list id="example-2" v-for="Comment in allComments" :key="Comment.id">
+                        <v-list-item class="com">
                           <v-list-item-content>
                             <v-list-item-title class="titlecom black--text"
                               >{{ Comment.User.username }} a dit:</v-list-item-title
@@ -169,9 +169,7 @@ export default {
           console.log(error);
         });
     },
-    onSubmit() {
-      this.loadPosts();
-    },
+
     deletePost(id) {
       const post_id = this.allPublications.findIndex(publication => publication.id === id);
       if (post_id !== -1) {
@@ -184,10 +182,38 @@ export default {
           })
           .catch(error => console.log(error));
       }
+    },
+
+    //Récupération d'un commentaire
+    getAllCom(postId) {
+      axios
+        .get("http://localhost:3000/api/publications/" + postId + "/comments", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+          }
+        })
+        .then(function(res) {
+          if (res.ok) {
+            return res.json();
+          }
+        })
+        .then(response => {
+          console.log("Comment", response.Comment);
+          this.allComments = response.Comment;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    },
+
+    onSubmit() {
+      this.loadPosts();
+      this.getAllCom();
     }
   },
   mounted() {
     this.loadPosts();
+    this.getAllCom();
   }
 };
 </script>
