@@ -182,7 +182,6 @@ export default {
 
     // Fonction pour récupère tout les commentaires
     getComments(postId) {
-      // const postId = this.$route.params.id;
       console.log(postId);
       axios
         .get(`http://localhost:3000/api/publications/${postId}/comments`, {
