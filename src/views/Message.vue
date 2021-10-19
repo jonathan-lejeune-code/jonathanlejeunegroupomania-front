@@ -65,13 +65,13 @@
                         name="comments"
                         class="form-control"
                         v-model="newCom.comments"
-                        placeholder="  Ecrivez votre commentaire..."
+                        placeholder="  Ecrivez votre commentaire ici"
                       ></textarea>
                       <v-btn icon type="button"><v-icon color="teal">mdi-send</v-icon> </v-btn>
                     </form>
                     <v-divider></v-divider>
                     <div class="container3">
-                      <v-list id="example-2" v-for="Comment in allComments" :key="Comment.id">
+                      <v-list id="example-2" v-for="Comment in allComments" :key="Comment.postId">
                         <v-list-item class="com">
                           <v-list-item-content>
                             <v-list-item-title class="titlecom black--text"
@@ -136,10 +136,7 @@ export default {
       allComments: [],
       likes: 0,
       hasBeenLiked: false,
-      props: {
-        default: true,
-        publication: route => ({ search: route.query.q })
-      }
+      props: {}
     };
   },
   created() {
@@ -149,11 +146,10 @@ export default {
       })
       .then(response => (this.user = response.data.user))
       .catch(err => console.log(err));
+
+    this.getComments(Comment.id);
   },
   methods: {
-    setInfos(payload) {
-      this.publication = payload.publication;
-    },
     loadPosts() {
       axios
         .get("http://localhost:3000/api/publications", {
@@ -184,36 +180,28 @@ export default {
       }
     },
 
-    //Récupération d'un commentaire
-    getAllCom(postId) {
+    // Fonction pour récupère tout les commentaires
+    getComments(postId) {
+      // const postId = this.$route.params.id;
+      console.log(postId);
       axios
-        .get("http://localhost:3000/api/publications/" + postId + "/comments", {
+        .get(`http://localhost:3000/api/publications/${postId}/comments`, {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
           }
         })
-        .then(function(res) {
-          if (res.ok) {
-            return res.json();
-          }
-        })
-        .then(response => {
-          console.log("Comment", response.Comment);
-          this.allComments = response.Comment;
-        })
-        .catch(function(err) {
-          console.log(err);
+        .then(res => {
+          console.log(res.data);
+          this.allComments = res.data;
         });
     },
 
     onSubmit() {
       this.loadPosts();
-      this.getAllCom();
     }
   },
   mounted() {
     this.loadPosts();
-    this.getAllCom();
   }
 };
 </script>
