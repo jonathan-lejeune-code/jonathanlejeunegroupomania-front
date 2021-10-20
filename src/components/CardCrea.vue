@@ -19,14 +19,7 @@
             </v-list-item-content>
           </v-list-item>
           <v-divider class="my-1"></v-divider>
-          <v-btn
-            class="button"
-            depressed
-            rounded
-            text
-            @click.prevent="Actual"
-            color="white"
-          >
+          <v-btn class="button" depressed rounded text @click.prevent="Actual" color="white">
             Fil d'actualité
           </v-btn>
           <v-divider class="my-1"></v-divider>
@@ -51,17 +44,17 @@ import axios from "axios";
 export default {
   data() {
     return {
-      user: "",
+      user: ""
     };
   },
 
   created() {
     axios
       .get("http://localhost:3000/api/auth/", {
-        headers: { Authorization: "Bearer " + localStorage.token },
+        headers: { Authorization: "Bearer " + localStorage.token }
       })
-      .then((response) => (this.user = response.data.user))
-      .catch((err) => console.log(err));
+      .then(response => (this.user = response.data.user))
+      .catch(err => console.log(err));
   },
 
   methods: {
@@ -71,8 +64,8 @@ export default {
     disconect() {
       localStorage.clear();
       document.location.href = "http://localhost:8080/";
-    },
-  },
+    }
+  }
 };
 </script>
 

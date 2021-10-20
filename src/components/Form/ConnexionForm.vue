@@ -1,38 +1,40 @@
 <template>
   <v-row justify="center">
-    <v-form ref="form" v-model="valid" lazy-validation>
-      <v-text-field
-        v-model="dataLogin.email"
-        :rules="[rules.required, rules.email]"
-        label="E-mail"
-        prepend-icon="mdi-email-edit-outline"
-        required
-      ></v-text-field>
+    <v-col cols="10">
+      <v-form ref="form" v-model="valid" lazy-validation>
+        <v-text-field
+          v-model="dataLogin.email"
+          :rules="[rules.required, rules.email]"
+          label="E-mail"
+          prepend-icon="mdi-email-edit-outline"
+          required
+        ></v-text-field>
 
-      <v-text-field
-        v-model="dataLogin.password"
-        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-        :rules="[rules.required, rules.min]"
-        :type="show1 ? 'text' : 'password'"
-        name="input-15-5"
-        label="Mot de passe"
-        hint="Minimum 8 caractére"
-        prepend-icon="mdi-form-textbox-password"
-        counter
-        @click:append="show1 = !show1"
-      ></v-text-field>
+        <v-text-field
+          v-model="dataLogin.password"
+          :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+          :rules="[rules.required, rules.min]"
+          :type="show1 ? 'text' : 'password'"
+          name="input-15-5"
+          label="Mot de passe"
+          hint="Minimum 8 caractére"
+          prepend-icon="mdi-form-textbox-password"
+          counter
+          @click:append="show1 = !show1"
+        ></v-text-field>
 
-      <v-btn color="teal darken-2" outlined class="mr-4" @click="Vlogin">
-        Connexion
-        <v-icon dark right> mdi-checkbox-marked-circle </v-icon>
-      </v-btn>
+        <v-btn color="teal darken-2" outlined class="mr-4" @click="Vlogin">
+          Connexion
+          <v-icon dark right> mdi-checkbox-marked-circle </v-icon>
+        </v-btn>
 
-      <v-btn color="indigo" class="mr-4" outlined @click="$refs.form.reset()">
-        Reset Formulaire
+        <v-btn color="indigo" class="mr-4" outlined @click="$refs.form.reset()">
+          Reset Formulaire
 
-        <v-icon> dark right mdi-reload </v-icon>
-      </v-btn>
-    </v-form>
+          <v-icon> dark right mdi-reload </v-icon>
+        </v-btn>
+      </v-form>
+    </v-col>
   </v-row>
 </template>
 
@@ -44,20 +46,19 @@ export default {
     return {
       dataLogin: {
         email: null,
-        password: null,
+        password: null
       },
       email: "",
       show1: false,
       password: "",
       rules: {
-        email: (value) => {
-          const pattern =
-            /^[a-z0-9!#$ %& '*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&' * +/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/g;
+        email: value => {
+          const pattern = /^[a-z0-9!#$ %& '*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&' * +/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/g;
           return pattern.test(value) || "E-Mail invalide.";
         },
-        required: (value) => !!value || "Obligatoire.",
-        min: (v) => v.length >= 8 || "Min 8 characters",
-      },
+        required: value => !!value || "Obligatoire.",
+        min: v => v.length >= 8 || "Min 8 characters"
+      }
     };
   },
 
@@ -66,16 +67,16 @@ export default {
       if (this.dataLogin.email !== null || this.dataLogin.password !== null) {
         axios
           .post("http://localhost:3000/api/auth/login", this.dataLogin)
-          .then((response) => {
+          .then(response => {
             localStorage.setItem("token", response.data.token);
             document.location.href = "http://localhost:8080/message";
           })
-          .catch((error) => console.log(error));
+          .catch(error => console.log(error));
       } else {
         console.log("Erreur est survenue !");
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

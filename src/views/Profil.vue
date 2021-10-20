@@ -4,37 +4,66 @@
     <v-main class="white">
       <v-container>
         <v-row>
-          <v-col>
+          <v-col cols="12" sm="10">
             <v-sheet color="teal darken-2" class="pa-5">
               <h2 class="H2 text-center subtitle pt-5 pb-4">Mon Profil</h2>
-              <v-card class="mx-auto pa-2" max-width="50%" min-height="600">
-                <v-img
-                  class="photoprofil ma-auto"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShL2QkLAbENIkAN3QthsNkPpeKXRAPSnigtEgzPjvzvGTS3TtjJXZryy891VgTNqrN8MI&usqp=CAU"
-                  alt="..."
-                  width="98%"
-                  height="350"
-                ></v-img>
+              <v-col cols="12" sm="12">
+                <v-card class="mx-auto pa-2" min-height="600">
+                  <v-img
+                    class="photoprofil ma-auto"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShL2QkLAbENIkAN3QthsNkPpeKXRAPSnigtEgzPjvzvGTS3TtjJXZryy891VgTNqrN8MI&usqp=CAU"
+                    alt="..."
+                    width="98%"
+                    height="350"
+                  ></v-img>
 
-                <v-card-title>
-                  <h3>{{ user.username }}</h3>
-                </v-card-title>
+                  <v-card-title>
+                    <h3>{{ user.username }}</h3>
+                  </v-card-title>
 
-                <v-card-subtitle class="text-center">
-                  <p>{{ user.email }}</p>
-                  <p>N°{{ user.id }}</p>
-                  <p>{{ user.amin }}</p>
-                </v-card-subtitle>
+                  <v-card-subtitle class="text-center">
+                    <p>{{ user.email }}</p>
+                    <p>N°{{ user.id }}</p>
+                    <p>{{ user.amin }}</p>
+                  </v-card-subtitle>
 
-                <v-card-actions>
-                  <v-btn class="btn" text @click.prevent="Actual">
-                    Fil d'actualité
-                  </v-btn>
-                  <v-btn @click="SupProfile" type="submit" class="mx-auto btn">
-                    Supprimer le compte
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
+                  <v-card-actions>
+                    <div class="hidden-sm-only hidden-xs-only">
+                      <v-btn class="btn" text @click.prevent="Actual">
+                        Fil d'actualité
+                      </v-btn>
+                      <v-btn @click="SupProfile" type="submit" class="mx-auto btn">
+                        Supprimer le compte
+                      </v-btn>
+                    </div>
+                    <div class="hidden-md-and-up ">
+                      <v-menu offset-y>
+                        <template v-slot:activator="{ on }">
+                          <v-btn color="teal darken-2" v-on="on">
+                            Menu
+                          </v-btn>
+                        </template>
+                        <v-list>
+                          <v-list-item>
+                            <v-list-item-title>
+                              <v-btn class="btn" text @click.prevent="Actual">
+                                Fil d'actualité
+                              </v-btn>
+                            </v-list-item-title>
+                          </v-list-item>
+                          <v-list-item>
+                            <v-list-item-title>
+                              <v-btn @click="SupProfile" type="submit" class="mx-auto btn">
+                                Supprimer le compte
+                              </v-btn></v-list-item-title
+                            >
+                          </v-list-item>
+                        </v-list>
+                      </v-menu>
+                    </div>
+                  </v-card-actions>
+                </v-card>
+              </v-col>
             </v-sheet>
           </v-col>
         </v-row>
@@ -52,20 +81,20 @@ export default {
   name: "HomeSignup",
   components: {
     HeaderProfil,
-    Footer,
+    Footer
   },
   data() {
     return {
-      user: "",
+      user: ""
     };
   },
   created() {
     axios
       .get("http://localhost:3000/api/auth/", {
-        headers: { Authorization: "Bearer " + localStorage.token },
+        headers: { Authorization: "Bearer " + localStorage.token }
       })
-      .then((response) => (this.user = response.data.user))
-      .catch((err) => console.log(err));
+      .then(response => (this.user = response.data.user))
+      .catch(err => console.log(err));
   },
 
   methods: {
@@ -75,8 +104,8 @@ export default {
         axios
           .delete("http://localhost:3000/api/auth/users/" + user.id, {
             headers: {
-              Authorization: "Bearer " + localStorage.getItem("token"),
-            },
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
           })
 
           .then(() => {
@@ -87,11 +116,10 @@ export default {
 
     Actual() {
       document.location.href = "http://localhost:8080/message";
-    },
-  },
+    }
+  }
 };
 </script>
-
 
 <style lang="scss" scoped>
 h3 {

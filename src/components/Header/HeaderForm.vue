@@ -1,15 +1,17 @@
 <template>
   <v-app-bar app color="teal darken-2" dark>
-    <div class="d-flex align-center">
-      <v-img
-        alt="logo groupomania"
-        class="logo"
-        contain
-        min-width="100"
-        src="../logo/icon-left-font-monochrome-white.png"
-        width="400"
-      />
-    </div>
+    <v-col cols="6" xs="8" md="6">
+      <div class="d-flex align-center">
+        <v-img
+          alt="logo groupomania"
+          class="logo"
+          contain
+          min-width="100"
+          src="../logo/icon-left-font-monochrome-white.png"
+          width="400"
+        />
+      </div>
+    </v-col>
     <div id="btn">
       <v-btn class="button">
         <router-link class="lien" to="/">Accueil</router-link>
@@ -21,10 +23,9 @@
 
 <script>
 export default {
-  name: "HeaderForm",
+  name: "HeaderForm"
 };
 </script>
-
 
 <style scoped lang="scss">
 .logo {
