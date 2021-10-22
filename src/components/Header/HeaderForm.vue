@@ -1,6 +1,6 @@
 <template>
   <v-app-bar app color="teal darken-2" dark>
-    <v-col cols="6" xs="8" md="6">
+    <v-col cols="6" xs="8" md="6" lg="4">
       <div class="d-flex align-center">
         <v-img
           alt="logo groupomania"

@@ -52,57 +52,7 @@
                   </v-btn>
                 </footer>
               </div>
-              <v-expansion-panels>
-                <v-expansion-panel>
-                  <v-expansion-panel-header color="grey lighten-1 black--text">
-                    Voir les commentaire
-                  </v-expansion-panel-header>
-                  <v-expansion-panel-content>
-                    <form>
-                      <textarea
-                        type="text"
-                        id="comment"
-                        name="comments"
-                        class="form-control"
-                        v-model="newCom.comments"
-                        placeholder="  Ecrivez votre commentaire ici"
-                      ></textarea>
-                      <v-btn icon type="button"><v-icon color="teal">mdi-send</v-icon> </v-btn>
-                    </form>
-                    <v-divider></v-divider>
-                    <div class="container3">
-                      <v-list id="example-2" v-for="Comment in allComments" :key="Comment.postId">
-                        <v-list-item class="com">
-                          <v-list-item-content>
-                            <v-list-item-title class="titlecom black--text"
-                              >{{ Comment.User.username }} a dit:</v-list-item-title
-                            >
-                            <v-list-item-subtitle class="pcom black--text">
-                              {{ Comment.comments }}
-                            </v-list-item-subtitle>
-                            <v-list-item-subtitle class="pcom1 black--text">
-                              Publié le {{ Comment.createdAt.split(" ")[0] }} à
-                              {{ Comment.updateAt }}
-
-                              <!-- <v-btn
-                                @click.prevent="DeleteComment(comment.id, comment.userId)"
-                                icon
-                                v-if="user.id == comments.userId || user.isAdmin == true"
-                                color="red"
-                                id="btn-sup"
-                                type="submit"
-                                class="btn"
-                              >
-                                <v-icon>mdi-delete-sweep</v-icon>
-                              </v-btn> -->
-                            </v-list-item-subtitle>
-                          </v-list-item-content>
-                        </v-list-item>
-                      </v-list>
-                    </div>
-                  </v-expansion-panel-content>
-                </v-expansion-panel>
-              </v-expansion-panels>
+              <commentaire v-bind:postId="publication.id" />
             </div>
           </div>
         </div>
@@ -117,6 +67,7 @@ import axios from "axios";
 import HeaderProfil from "../components/Header/HeaderProfil.vue";
 import CardProfil from "../components/CardProfil.vue";
 import BlobImage from "../components/BlobImage.vue";
+import commentaire from "../components/Comment.vue";
 import Footer from "../components/Footer/Footer.vue";
 export default {
   name: "Message",
@@ -124,16 +75,15 @@ export default {
     HeaderProfil,
     CardProfil,
     BlobImage,
+    commentaire,
     Footer
   },
   data() {
     return {
       user: "",
-      newCom: {
-        comments: ""
-      },
+
       allPublications: [],
-      allComments: [],
+
       likes: 0,
       hasBeenLiked: false,
       props: {}
@@ -178,21 +128,6 @@ export default {
           })
           .catch(error => console.log(error));
       }
-    },
-
-    // Fonction pour récupère tout les commentaires
-    getComments(postId) {
-      console.log(postId);
-      axios
-        .get(`http://localhost:3000/api/publications/${postId}/comments`, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token")
-          }
-        })
-        .then(res => {
-          console.log(res.data);
-          this.allComments = res.data;
-        });
     },
 
     onSubmit() {

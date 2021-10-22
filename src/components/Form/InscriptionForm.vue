@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-col cols="10">
+    <v-col cols="10" md="6" lg="4">
       <v-form ref="form" v-model="valid" lazy-validation>
         <v-text-field
           v-model="dataSignup.username"

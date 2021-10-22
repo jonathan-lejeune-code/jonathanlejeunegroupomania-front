@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-col cols="10">
+    <v-col cols="4" xs="8" md="6" lg="4">
       <v-form ref="form" v-model="valid" lazy-validation>
         <v-text-field
           v-model="dataLogin.email"
@@ -15,7 +15,6 @@
           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
           :rules="[rules.required, rules.min]"
           :type="show1 ? 'text' : 'password'"
-          name="input-15-5"
           label="Mot de passe"
           hint="Minimum 8 caractére"
           prepend-icon="mdi-form-textbox-password"
