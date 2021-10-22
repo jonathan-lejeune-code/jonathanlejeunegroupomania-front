@@ -81,12 +81,9 @@ export default {
   data() {
     return {
       user: "",
-
       allPublications: [],
-
       likes: 0,
-      hasBeenLiked: false,
-      props: {}
+      hasBeenLiked: false
     };
   },
   created() {
@@ -96,8 +93,6 @@ export default {
       })
       .then(response => (this.user = response.data.user))
       .catch(err => console.log(err));
-
-    this.getComments(Comment.id);
   },
   methods: {
     loadPosts() {

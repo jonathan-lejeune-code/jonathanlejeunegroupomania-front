@@ -18,30 +18,34 @@
                     envoyé
                   </button>
                 </form> -->
-
-                <button v-on:click="getCom(postId)" type="button" class="btn burgundy">
-                  get
-                </button>
+                <v-btn v-on:click="getCom(postId)" color="teal" class="btn white--text">
+                  commentaire
+                </v-btn>
               </div>
 
-              <div class="card-body" v-for="comments in AllComment" :key="comments.id">
-                <div class="color">
-                  <div class="pink container white">
-                    <div class="d-flex row">
-                      <div class="d-flex justify-content-start flex-wrap">
-                        <p class="author">{{ comments.User.username }}</p>
-                      </div>
-                      <div class="">
-                        <p class="card-text">{{ comments.comments }}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="reply px-4" v-if="isAdmin">
-                    <small @click="deleteCom(postId, comments.id)">supprimer</small
-                    ><span class="dots"></span>
-                  </div>
-                </div>
-              </div>
+              <v-card
+                class="mx-auto"
+                max-width="544"
+                v-for="comments in AllComment"
+                :key="comments.id"
+              >
+                <v-card-text>
+                  <div>Commentaire de: {{ comments.User.username }}</div>
+                  <p class="text-h6 text--primary">
+                    {{ comments.comments }}
+                  </p>
+                </v-card-text>
+                <v-card-actions>
+                  <v-btn
+                    text
+                    @click="deleteCom(postId, comments.id)"
+                    v-if="comments.UserId == user.id || user.isAdmin == true"
+                    color="deep-purple accent-4"
+                  >
+                    supprimer
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
             </div>
           </div>
         </form>
@@ -64,6 +68,15 @@ export default {
       }
     };
   },
+  created() {
+    axios
+      .get("http://localhost:3000/api/auth", {
+        headers: { Authorization: "Bearer " + localStorage.token }
+      })
+      .then(response => (this.user = response.data.user))
+      .catch(err => console.log(err));
+  },
+
   methods: {
     //Récupération d'un commentaire
     getCom(postId) {
@@ -74,7 +87,7 @@ export default {
 
         .then(response => {
           console.log(response);
-          this.AllComment = response.comments;
+          this.AllComment = response.data;
         })
         .catch(function(err) {
           console.log(err);
@@ -156,10 +169,7 @@ export default {
   margin-bottom: 4px;
   object-fit: contain;
 }
-.burgundy {
-  background-color: rgb(209, 81, 90);
-  color: white;
-}
+
 .white {
   background-color: white;
 }
