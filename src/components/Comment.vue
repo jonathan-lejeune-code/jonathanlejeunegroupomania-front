@@ -5,47 +5,62 @@
         <form action="">
           <div>
             <div class="card text-center">
-              <div>
-                <!-- <form @submit.prevent="postCom(postId)" action="" class="cote">
-                  <input
-                    v-model="newCom.comments"
-                    type="text"
-                    name="comments"
-                    class="container-fluid p-3"
-                    placeholder="Ecrire un commentaire.."
-                  />
-                  <button type="submit" class="plane m-2">
-                    envoyé
-                  </button>
-                </form> -->
-                <v-btn v-on:click="getCom(postId)" color="teal" class="btn white--text">
-                  commentaire
-                </v-btn>
-              </div>
-
-              <v-card
-                class="mx-auto"
-                max-width="544"
-                v-for="comments in AllComment"
-                :key="comments.id"
-              >
-                <v-card-text>
-                  <div>Commentaire de: {{ comments.User.username }}</div>
-                  <p class="text-h6 text--primary">
-                    {{ comments.comments }}
-                  </p>
-                </v-card-text>
-                <v-card-actions>
-                  <v-btn
-                    text
-                    @click="deleteCom(postId, comments.id)"
-                    v-if="comments.UserId == user.id || user.isAdmin == true"
-                    color="deep-purple accent-4"
+              <v-expansion-panels>
+                <v-expansion-panel>
+                  <v-expansion-panel-header
+                    color="teal darken-2"
+                    class="white--text"
+                    v-on:click="getCom(postId)"
                   >
-                    supprimer
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
+                    commentaire
+                  </v-expansion-panel-header>
+                  <v-expansion-panel-content color="grey lighten-2">
+                    <div>
+                      <form @submit.prevent="postCom(postId)" action="" class="cote">
+                        <input
+                          v-model="newCom.comments"
+                          type="text"
+                          name="comments"
+                          class="container-fluid p-3"
+                          placeholder="Ecrire un commentaire.."
+                        />
+                        <button type="submit" class="plane m-2">
+                          envoyé
+                        </button>
+                      </form>
+                      <!-- <v-btn v-on:click="getCom(postId)" color="teal" class="btn white--text">
+                        Affichez les commentaire
+                      </v-btn> -->
+                    </div>
+
+                    <v-card
+                      class="mx-auto my-2 "
+                      height="auto"
+                      width="60%"
+                      max-width="544"
+                      v-for="comments in AllComment"
+                      :key="comments.id"
+                    >
+                      <v-card-text class="pa-0">
+                        <div>Commentaire de: {{ comments.User.username }}</div>
+                        <p class="text-subtitle-1 mb-0 text--primary">
+                          {{ comments.comments }}
+                        </p>
+                      </v-card-text>
+                      <v-card-actions>
+                        <v-btn
+                          icon
+                          @click="deleteCom(postId, comments.id)"
+                          v-if="comments.userId == user.id || user.isAdmin == true"
+                          color="teal darken-2"
+                        >
+                          <v-icon>mdi-delete</v-icon>
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
             </div>
           </div>
         </form>
@@ -92,30 +107,30 @@ export default {
         .catch(function(err) {
           console.log(err);
         });
+    },
+    //Envoie d'un commentaire
+    postCom(id) {
+      axios
+        .post(`http://localhost:3000/api/publications/${id}/comment`, this.newCom, {
+          headers: { Authorization: "Bearer " + localStorage.token }
+        })
+        .then(response => console.log(response), alert("Message envoyé"), window.location.reload())
+        .catch(error => console.log(error));
+    },
+    //Supression d'un commentaire
+    deleteCom(postId, id) {
+      axios
+        .delete(`http://localhost:3000/api/publications/${postId}/comments/${id}`, {
+          headers: { Authorization: "Bearer " + localStorage.token }
+        })
+        .then(result => {
+          alert("Votre commentaire a bien été supprimé"),
+            result.json().then(response => {
+              console.warn(response), window.location.reload();
+            });
+        })
+        .catch(error => console.log(error));
     }
-    // //Envoie d'un commentaire
-    // postCom(id) {
-    //   axios
-    //     .post(`http://localhost:3000/api/publications/${id}/comment`, this.newCom, {
-    //       headers: { Authorization: "Bearer " + localStorage.token }
-    //     })
-    //     .then(response => console.log(response), alert("Message envoyé"), window.location.reload())
-    //     .catch(error => console.log(error));
-    // },
-    // //Supression d'un commentaire
-    // deleteCom(PostId, id) {
-    //   fetch(`http://localhost:3000/api/publications/${PostId}/comment/${id}`, {
-    //     method: "DELETE",
-    //     headers: { Authorization: "Bearer " + localStorage.token }
-    //   })
-    //     .then(result => {
-    //       alert("Votre commentaire a bien été supprimé"),
-    //         result.json().then(response => {
-    //           console.warn(response), window.location.reload();
-    //         });
-    //     })
-    //     .catch(error => console.log(error));
-    // }
   }
 };
 </script>
@@ -146,7 +161,7 @@ export default {
 }
 .card {
   border-radius: 4px;
-  background-color: orange;
+  background-color: #e0e0e0;
   object-fit: contain;
 }
 .center {
