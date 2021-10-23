@@ -21,7 +21,7 @@
                           v-model="newCom.comments"
                           type="text"
                           name="comments"
-                          class="container-fluid p-3"
+                          class="container-fluid form"
                           placeholder="Ecrire un commentaire.."
                         />
                         <button type="submit" class="plane m-2">
@@ -124,10 +124,10 @@ export default {
           headers: { Authorization: "Bearer " + localStorage.token }
         })
         .then(result => {
-          alert("Votre commentaire a bien été supprimé"),
-            result.json().then(response => {
-              console.warn(response), window.location.reload();
-            });
+          alert("Votre commentaire a bien été supprimé"), window.location.reload();
+          result.json().then(response => {
+            console.warn(response);
+          });
         })
         .catch(error => console.log(error));
     }
@@ -150,6 +150,13 @@ export default {
 .card-text {
   padding-bottom: 5px;
   color: black;
+}
+
+.form {
+  width: 50%;
+  border: teal solid 2px;
+  background-color: white;
+  margin: 5px 5px;
 }
 
 .container {
@@ -189,8 +196,9 @@ export default {
   background-color: white;
 }
 .plane {
-  background-color: rgb(18, 36, 65);
+  background-color: teal;
   color: white;
+  margin-top: 5px;
   border-style: none;
   font-size: 1em;
   border-radius: 15px;
