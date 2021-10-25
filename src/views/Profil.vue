@@ -143,6 +143,7 @@ p {
 }
 
 .btn {
+  width: 250px;
   font-size: 16px;
   border: solid #00796b 5px;
   border-radius: 30px;

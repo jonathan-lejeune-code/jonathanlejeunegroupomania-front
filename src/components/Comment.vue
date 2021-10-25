@@ -25,16 +25,13 @@
                           placeholder="Ecrire un commentaire.."
                         />
                         <button type="submit" class="plane m-2">
-                          envoyé
+                          <v-icon color="white">mdi-send</v-icon>
                         </button>
                       </form>
-                      <!-- <v-btn v-on:click="getCom(postId)" color="teal" class="btn white--text">
-                        Affichez les commentaire
-                      </v-btn> -->
                     </div>
 
                     <v-card
-                      class="mx-auto my-2 "
+                      class="mx-auto my-2 rounded-xl "
                       height="auto"
                       width="60%"
                       max-width="544"
@@ -197,7 +194,7 @@ export default {
 }
 .plane {
   background-color: teal;
-  color: white;
+
   margin-top: 5px;
   border-style: none;
   font-size: 1em;

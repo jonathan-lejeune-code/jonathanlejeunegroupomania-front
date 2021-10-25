@@ -1,4 +1,3 @@
-  
 <template>
   <div class="field">
     <div class="content">
@@ -8,9 +7,7 @@
       <div class="card" v-for="user in users" :key="user.id">
         <p class="title font-weight-bold">Id utilisateur: {{ user.id }}</p>
         <p class="title font-weight-bold">Créé le :{{ user.createdAt }}</p>
-        <span class="title font-weight-bold"
-          >username : {{ user.username }}</span
-        >
+        <span class="title font-weight-bold">username : {{ user.username }}</span>
         <p class="title font-weight-bold">Email : {{ user.email }}</p>
         <br />
       </div>
@@ -24,17 +21,17 @@ export default {
     return {
       user: "",
       users: [],
-      error: "",
+      error: ""
     };
   },
   created() {
     axios
       .get("http://localhost:3000/api/admin/users", {
-        headers: { Authorization: "Bearer " + localStorage.token },
+        headers: { Authorization: "Bearer " + localStorage.token }
       })
-      .then((response) => (this.users = response.data.users))
-      .catch((err) => console.log(err));
-  },
+      .then(response => (this.users = response.data.users))
+      .catch(err => console.log(err));
+  }
 };
 </script>
 <style scoped>

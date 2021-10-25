@@ -18,7 +18,7 @@
                 <p class="pcontent">{{ publication.content }}</p>
                 <div class="FooterPost">
                   Publié par <em>{{ publication.User.username }}</em> le
-                  <em>{{ publication.createdAt.split(" ")[0] }}</em> à
+                  <em>{{ dateFormat(publication.createdAt) }}</em> à
                   <em>{{ publication.updatedAt }}</em>
                 </div>
                 <footer class="card-footer">
@@ -46,9 +46,6 @@
                     @click.prevent="() => deletePost(publication.id)"
                   >
                     <v-icon>mdi-delete-sweep</v-icon>
-                  </v-btn>
-                  <v-btn class="mx-1" icon dark color="pink">
-                    <v-icon dark> mdi-heart </v-icon> : {{ publication.likes }}
                   </v-btn>
                 </footer>
               </div>
@@ -127,6 +124,17 @@ export default {
 
     onSubmit() {
       this.loadPosts();
+    },
+
+    // Fonction pour mettre en format FR la date
+    dateFormat(date) {
+      const event = new Date(date);
+      const options = {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      };
+      return event.toLocaleDateString("fr-FR", options);
     }
   },
   mounted() {
@@ -146,7 +154,7 @@ export default {
 .wall {
   width: 700px;
   background-color: #e0e0e0;
-  height: 880px;
+  height: 860px;
   padding: 10px;
   overflow-y: scroll;
   @media screen and (max-width: 1000px) {
