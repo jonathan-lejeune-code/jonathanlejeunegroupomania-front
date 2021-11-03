@@ -1,19 +1,18 @@
 <template>
   <v-app>
     <HeaderProfil />
-    <v-main class="pt-4 ml-4">
+    <v-main class="pt-4 mb-10 ml-4">
       <v-row class="">
         <v-col md="5">
           <CardCrea />
         </v-col>
-        <createM class="mt-15" />
+        <createM class="mt-10" />
       </v-row>
     </v-main>
 
     <Footer />
   </v-app>
 </template>
-
 
 <script>
 import axios from "axios";
@@ -27,10 +26,9 @@ export default {
     HeaderProfil,
     CardCrea,
     createM,
-    Footer,
-  },
+    Footer
+  }
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

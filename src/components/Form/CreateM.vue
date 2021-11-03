@@ -2,7 +2,7 @@
   <div>
     <h3>Ecrivez quelque chose :</h3>
     <br />
-    <container class="field">
+    <container class="field mx-auto">
       <form @submit.prevent="createPublication">
         <div class="control">
           <v-textarea
