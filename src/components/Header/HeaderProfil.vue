@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app color="teal darken-2" dark flat>
+  <v-app-bar app color="#D3676F" dark flat>
     <v-img
       alt="logo groupomania"
       class="logo"
@@ -17,10 +17,9 @@
 export default {
   name: "Headerprofil",
 
-  data: () => ({}),
+  data: () => ({})
 };
 </script>
-
 
 <style scoped lang="scss">
 .logo {

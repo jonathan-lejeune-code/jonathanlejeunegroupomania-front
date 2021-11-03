@@ -4,7 +4,7 @@
       <h3>Groupomania Users</h3>
       <hr />
 
-      <div class="card" v-for="user in users" :key="user.id">
+      <div class="card mb-5" v-for="user in users" :key="user.id">
         <p class="title font-weight-bold">Id utilisateur: {{ user.id }}</p>
         <p class="title font-weight-bold">Créé le :{{ user.createdAt }}</p>
         <span class="title font-weight-bold">username : {{ user.username }}</span>
@@ -37,11 +37,11 @@ export default {
 <style scoped>
 h3 {
   font-size: 35px;
-  color: #00796b;
+  color: #d3676f;
 }
 
 .card {
-  border: #00796b solid 5px;
+  border: #091f43 solid 5px;
   margin-bottom: 10px;
   margin-top: 10px;
   padding: 10px;

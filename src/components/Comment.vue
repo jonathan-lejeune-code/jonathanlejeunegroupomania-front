@@ -8,19 +8,21 @@
               <v-expansion-panels>
                 <v-expansion-panel>
                   <v-expansion-panel-header
-                    color="teal darken-2"
-                    class="white--text"
+                    color="#D3676F"
+                    class="#091F43--text"
                     v-on:click="getCom(postId)"
                   >
                     commentaire
                   </v-expansion-panel-header>
-                  <v-expansion-panel-content color="grey lighten-2">
+                  <v-expansion-panel-content color="white">
                     <div>
                       <form @submit.prevent="postCom(postId)" action="" class="cote">
                         <input
+                          id="comments"
                           v-model="newCom.comments"
                           type="text"
                           name="comments"
+                          label="commentaire"
                           class="container-fluid form"
                           placeholder="Ecrire un commentaire.."
                         />
@@ -31,7 +33,7 @@
                     </div>
 
                     <v-card
-                      class="mx-auto my-2 rounded-xl "
+                      class="mx-auto my-2 card rounded-xl "
                       height="auto"
                       width="60%"
                       max-width="544"
@@ -49,7 +51,7 @@
                           icon
                           @click="deleteCom(postId, comments.id)"
                           v-if="comments.userId == user.id || user.isAdmin == true"
-                          color="teal darken-2"
+                          color="#091F43"
                         >
                           <v-icon>mdi-delete</v-icon>
                         </v-btn>
@@ -133,12 +135,6 @@ export default {
 </script>
 
 <style scoped>
-.card-body {
-  padding: 10px;
-  background-color: orchid;
-  width: 200px;
-  height: auto;
-}
 .author {
   display: flex;
   justify-content: flex-end;
@@ -151,18 +147,16 @@ export default {
 
 .form {
   width: 50%;
-  border: teal solid 2px;
+  border: #091f43 solid 2px;
   background-color: white;
   margin: 5px 5px;
 }
 
 .container {
-  border: teal solid 5px;
+  border: #091f43 solid 5px;
   margin-top: 10px;
 }
-.icon {
-  color: white;
-}
+
 .card {
   border-radius: 4px;
   background-color: #e0e0e0;
@@ -176,10 +170,7 @@ export default {
 .textarea {
   margin-right: 10px;
 }
-.pink {
-  background-color: rgb(255, 215, 215);
-  border-radius: 15px;
-}
+
 .cote {
   display: flex;
   flex-direction: row;
@@ -189,11 +180,8 @@ export default {
   object-fit: contain;
 }
 
-.white {
-  background-color: white;
-}
 .plane {
-  background-color: teal;
+  background-color: #091f43;
 
   margin-top: 5px;
   border-style: none;

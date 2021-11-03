@@ -11,7 +11,7 @@
             cols="55"
             rows="5"
             outlined
-            color="teal darken-2"
+            color="#d3676f"
             counter
             v-model="editedPost.content"
             label="Modifiez votre message"
@@ -46,14 +46,14 @@ export default {
       editedPost: {
         id: "",
         content: "",
-        attachment: "",
+        attachment: ""
       },
       message: "",
       allPublications: [],
       props: {
         default: true,
-        publication: (route) => ({ search: route.query.q }),
-      },
+        publication: route => ({ search: route.query.q })
+      }
     };
   },
   methods: {
@@ -72,12 +72,12 @@ export default {
             {
               content: this.editedPost.content,
               attachment: this.editedPost.attachment,
-              postId: this.editedPost.id,
+              postId: this.editedPost.id
             },
             {
               headers: {
-                authorization: "Bearer " + localStorage.getItem("token"),
-              },
+                authorization: "Bearer " + localStorage.getItem("token")
+              }
             }
           )
           .then(() => {
@@ -96,11 +96,11 @@ export default {
       if (!files.length) return;
       const reader = new FileReader();
       reader.readAsDataURL(files[0]);
-      reader.onload = (evt) => {
+      reader.onload = evt => {
         this.editedPost.attachment = evt.target.result;
       };
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>
@@ -108,12 +108,12 @@ h3 {
   font-weight: bold;
   display: flex;
   justify-content: center;
-  color: #00796b;
+  color: #d3676f;
   font-size: 30px;
 }
 
 .button {
-  background-color: #00796b;
+  background-color: #091f43;
   color: #ffff;
   margin-top: 10px;
   width: 100px;

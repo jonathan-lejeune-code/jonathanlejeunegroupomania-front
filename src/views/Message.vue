@@ -13,8 +13,8 @@
           <div class="field" id="pubForm">
             <div class="card" v-for="publication in allPublications" :key="publication.id">
               <div class="ContentPost">
-                <H4>{{ publication.title }} </H4>
-                <BlobImage class="Imgpost" :blob="publication.attachment.data" />
+                <h2>{{ publication.title }}</h2>
+                <BlobImage alt="" class="Imgpost" :blob="publication.attachment.data" />
                 <p class="pcontent">{{ publication.content }}</p>
                 <div class="FooterPost">
                   Publié par <em>{{ publication.User.username }}</em> le
@@ -146,14 +146,14 @@ export default {
 <style lang="scss" scoped>
 .titre {
   font-weight: bold;
-  color: #00796b;
+  color: #091f43;
   @media screen and (max-width: 1000px) {
     font-size: 10px;
   }
 }
 .wall {
   width: 700px;
-  background-color: #e0e0e0;
+  background-color: #d3676f;
   height: 860px;
   padding: 10px;
   overflow-y: scroll;
@@ -161,6 +161,7 @@ export default {
     margin-top: 50px;
   }
 }
+
 h1 {
   display: flex;
   justify-content: center;
@@ -170,7 +171,7 @@ h1 {
   margin-top: 15px;
   margin-bottom: 20px;
 }
-h4 {
+h2 {
   font-size: 20px;
   display: flex;
   justify-content: center;
@@ -195,7 +196,7 @@ h4 {
   margin-right: auto;
 }
 .ContentPost {
-  background-color: #00796b;
+  background-color: #091f43;
   width: 100%;
   height: auto;
 }
@@ -211,10 +212,10 @@ textarea {
   border: none;
   outline: none;
   margin-top: 7px;
-  box-shadow: 1px 2px 2px 2px #00796b;
+  box-shadow: 1px 2px 2px 2px #091f43;
 }
 .com {
-  border: #00796b 3px solid;
+  border: #091f43 3px solid;
   border-radius: 10px;
   background-color: #bdbdbd;
 }

@@ -35,7 +35,7 @@
         <v-btn
           :loading="loading"
           :disabled="loading"
-          color="teal"
+          color="#091F43"
           outlined
           class="mr-4"
           @click="sendSignup"
@@ -44,7 +44,7 @@
           <v-icon dark right> mdi-checkbox-marked-circle </v-icon>
         </v-btn>
 
-        <v-btn color="indigo" class="mr-4" outlined @click="$refs.form.reset()">
+        <v-btn color="#D3676F" class="mr-4" outlined @click="$refs.form.reset()">
           Reset Formulaire
 
           <v-icon> dark right mdi-reload </v-icon>

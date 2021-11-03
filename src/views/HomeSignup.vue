@@ -33,20 +33,19 @@ export default {
   components: {
     HeaderForm,
     InscriptionForm,
-    Footer,
+    Footer
   },
   data() {},
 
-  methods: {},
+  methods: {}
 };
 </script>
-
 
 <style scoped lang="scss">
 .subtitle {
   font-size: 2rem;
   font-weight: bold;
-  color: #00796b;
+  color: #d3676f;
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 

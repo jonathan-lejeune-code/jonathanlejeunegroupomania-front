@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app color="teal darken-2" dark>
+  <v-app-bar app color="#D3676F" dark>
     <v-col cols="4" xs="8" md="6" lg="4">
       <div class="d-flex align-center">
         <v-img

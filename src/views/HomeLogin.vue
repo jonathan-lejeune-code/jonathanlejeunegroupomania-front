@@ -33,20 +33,19 @@ export default {
   components: {
     HeaderForm,
     ConnexionForm,
-    Footer,
+    Footer
   },
   data() {
     return {};
-  },
+  }
 };
 </script>
-
 
 <style scoped lang="scss">
 .subtitle {
   font-size: 2rem;
   font-weight: bold;
-  color: #00796b;
+  color: #091f43;
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 

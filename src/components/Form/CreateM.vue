@@ -9,7 +9,7 @@
             class="textarea"
             cols="55"
             outlined
-            color="teal darken-2"
+            color="#D3676F"
             rows="1"
             v-model="contentPublication.title"
             label="titre"
@@ -19,7 +19,7 @@
           <v-textarea
             class="textarea"
             outlined
-            color="teal darken-2"
+            color="#D3676F"
             counter
             cols="55"
             rows="5"
@@ -39,9 +39,7 @@
               accept=".png, .jpg, .jpeg"
               @change="uploadImage"
             />
-            <p class="browse">
-              <strong>Formats supportés : .png, .jpg, .jpeg</strong>.
-            </p>
+            <p class="browse"><strong>Formats supportés : .png, .jpg, .jpeg</strong>.</p>
           </label>
         </div>
 
@@ -65,7 +63,7 @@ import axios from "axios";
 export default {
   name: "CreatePublication",
   props: {
-    submit: Function,
+    submit: Function
   },
   data() {
     return {
@@ -74,9 +72,9 @@ export default {
       contentPublication: {
         title: "",
         content: "",
-        attachment: "",
+        attachment: ""
       },
-      msgError: "",
+      msgError: ""
     };
   },
   methods: {
@@ -90,16 +88,16 @@ export default {
         axios
           .post("http://localhost:3000/api/publications", fd, {
             headers: {
-              Authorization: "Bearer " + window.localStorage.getItem("token"),
-            },
+              Authorization: "Bearer " + window.localStorage.getItem("token")
+            }
           })
           .then(() => this.submit())
-          .catch((error) => (this.msgError = error));
+          .catch(error => (this.msgError = error));
         this.contentPublications.unshift({
           id: this.wallCount,
           title: this.contentPublication.title,
           content: this.contentPublication.content,
-          attachment: this.contentPublication.attachment,
+          attachment: this.contentPublication.attachment
         });
         this.contentPublication.content = "";
         this.contentPublication.attachment = "";
@@ -111,11 +109,11 @@ export default {
       if (!files.length) return;
       const reader = new FileReader();
       reader.readAsDataURL(files[0]);
-      reader.onload = (evt) => {
+      reader.onload = evt => {
         this.contentPublication.attachment = evt.target.result;
       };
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -124,7 +122,7 @@ h3 {
   font-weight: bold;
   display: flex;
   justify-content: center;
-  color: #00796b;
+  color: #091f43;
   font-size: 30px;
 }
 .field {
@@ -156,7 +154,7 @@ h3 {
   width: 150px;
 }
 .btnS {
-  background-color: #00796b;
+  background-color: #d3676f;
   color: #ffff;
   margin-top: 10px;
   width: 100px;

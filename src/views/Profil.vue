@@ -5,7 +5,7 @@
       <v-container>
         <v-row>
           <v-col cols="12" sm="10">
-            <v-sheet color="teal darken-2" class="pa-5">
+            <v-sheet color="#091F43" class="pa-5">
               <h2 class="H2 text-center subtitle pt-5 pb-4">Mon Profil</h2>
               <v-col cols="12" sm="12">
                 <v-card class="mx-auto pa-2" min-height="600">
@@ -28,7 +28,7 @@
                   </v-card-subtitle>
 
                   <v-card-actions>
-                    <div class="hidden-sm-only hidden-xs-only">
+                    <div class="hidden-sm-only hidden-xs-only mx-auto">
                       <v-btn class="btn" text @click.prevent="Actual">
                         Fil d'actualité
                       </v-btn>
@@ -39,7 +39,7 @@
                     <div class="hidden-md-and-up ">
                       <v-menu offset-y>
                         <template v-slot:activator="{ on }">
-                          <v-btn color="teal darken-2" v-on="on">
+                          <v-btn color="#D3676F" v-on="on">
                             Menu
                           </v-btn>
                         </template>
@@ -132,7 +132,7 @@ p {
   padding-bottom: 5px;
   font-size: 20px;
   margin: 0;
-  color: #00796b;
+  color: #d3676f;
 }
 
 .subtitle {
@@ -145,7 +145,7 @@ p {
 .btn {
   width: 250px;
   font-size: 16px;
-  border: solid #00796b 5px;
+  border: solid #091f43 5px;
   border-radius: 30px;
   margin-left: auto;
   margin-right: auto;
